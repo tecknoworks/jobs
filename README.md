@@ -1,4 +1,4 @@
-Tecknoworks Rails Template App
+Tecknoworks Rails TecknoworksJobs App
 ==============================
 
 How to use:
