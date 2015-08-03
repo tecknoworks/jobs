@@ -5,7 +5,7 @@ gem 'rails', '4.2.2'
 
 gem 'capistrano-rvm'
 
-gem 'whenever', :require => false
+gem 'whenever', require: false
 
 gem 'apipie-rails'
 # Use sqlite3 as the database for Active Record
@@ -66,7 +66,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  gem "factory_girl_rails", "~> 4.0"
+  gem 'factory_girl_rails', '~> 4.0'
 
   gem 'rspec-rails', '~> 3.0'
 

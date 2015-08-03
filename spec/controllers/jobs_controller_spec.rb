@@ -22,7 +22,6 @@ RSpec.describe JobsController, type: :controller do
   end
 
   it 'get by id' do
-
     job = create :job, title: 'test'
     job2 = create :job, title: 'foo', description: 'description'
 
@@ -34,6 +33,5 @@ RSpec.describe JobsController, type: :controller do
     expect(json['code']).to eq(200)
     expect(json['body']['title']).to eq('foo')
     expect(json['body']['description']).to eq('description')
-
   end
 end
