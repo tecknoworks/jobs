@@ -1,12 +1,9 @@
 Tecknoworks Rails TecknoworksJobs App
-==============================
+=====================================
 
-How to use:
+To compile the webapp see [this](webapp/README.md).
 
-1. Fork
-2. Enjoy
-3. After
-4. Rename
+It would be nice if we would use a template for the angular app instead of this custom mini app.
 
 What is inside?
 
@@ -23,9 +20,3 @@ What is inside?
 * [apipie-rails](https://github.com/Apipie/apipie-rails) for documentation.
 * [lol_dba](https://github.com/plentz/lol_dba)
 * [whenever](https://github.com/javan/whenever)
-
-To rename the app, we are using 'rename' gem.
-
-```
-rails g rename:app_to name_of_app
-```
