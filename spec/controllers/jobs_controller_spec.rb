@@ -34,4 +34,16 @@ RSpec.describe JobsController, type: :controller do
     expect(json['body']['title']).to eq('foo')
     expect(json['body']['description']).to eq('description')
   end
+
+  it 'create' do
+
+    expect do
+      post :create, job: {title: 'foo', description: 'description for foo'}, format: :json
+    end.to change {Job.count}.by 1
+
+    expect(json[:code]).to eq(200)
+    expect(json[:body][:title].to_s).to eq('foo')
+
+  end
+
 end

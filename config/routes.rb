@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :jobs, only: [:index, :show]
+  resources :jobs, only: [:index, :show, :create]
 
   apipie
   devise_for :users, ActiveAdmin::Devise.config

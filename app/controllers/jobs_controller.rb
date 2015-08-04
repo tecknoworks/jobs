@@ -6,4 +6,10 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
   end
+
+  def create
+    pp params[:job]
+    @job = Job.create!(title: params[:job][:title], description: params[:job][:description])
+  end
+
 end
