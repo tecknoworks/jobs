@@ -19,6 +19,11 @@ app.config(['$routeProvider',
       controller: 'JobController'
     })
 
+    .when('/new_job', {
+      templateUrl: 'partials/jobs/new.html',
+      controller: 'CreateJobController'
+    })
+
     .otherwise({
       redirectTo: '/jobs'
     });
