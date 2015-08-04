@@ -1,4 +1,4 @@
-app.controller('IndexPageController', function ($scope, $http) {
+app.controller('JobsController', function ($scope, $http) {
 
 	$scope.jobs = 'asd';
 

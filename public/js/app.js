@@ -5,7 +5,22 @@ app.config(['$routeProvider',
     $routeProvider
 
     .when('/', {
-      controller: "IndexPageController"
+      templateUrl: 'partials/jobs/jobs.html',
+      controller: "JobsController"
     })
+
+    .when('/jobs', {
+      templateUrl: 'partials/jobs/jobs.html',
+      controller: 'JobsController'
+    })
+
+    .when('/jobs/:id', {
+      templateUrl: 'partials/jobs/job.html',
+      controller: 'JobController'
+    })
+
+    .otherwise({
+      redirectTo: '/jobs'
+    });
 
   }]);

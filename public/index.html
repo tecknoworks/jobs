@@ -6,22 +6,12 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
    </head>
 
-	<body ng-app = "jobApp" ng-controller="IndexPageController">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div  class="col-md-10">
-          <h2><b>JOBS</b></h2>
-          <ul class="list-group" >
-             <div ng-repeat="job in jobs">
-               <li class="list-group-item ul" >
-                 <h4><b>{{job.title}}</b></h4>
-               </li>
-             </div>
-          </ul>
-        </div>
-        </div>
-      </div>
+	<body>
+
+    <div ng-view></div>
+    <!-- <textarea id="text-input" oninput="this.editor.update()"
+              rows="10" cols="100">Type **Markdown** here.</textarea>
+    <div id="markout"> </div> -->
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-route.js"></script>
@@ -30,8 +20,12 @@
 
     <!-- my js -->
     <script src="/js/app.js"></script>
-    <script src="/js/controllers/IndexPageController.js"></script>
-    <script src="/js/controllers/JobPageController.js"></script>
+    <script src="/js/controllers/JobsController.js"></script>
+    <script src="/js/controllers/JobController.js"></script>
+
+    <script src="./js/markdown/lib/markdown.js"></script>
+    <script src='./js/markdown/functie.js'></script>
+
 	</body>
 
 </html>
