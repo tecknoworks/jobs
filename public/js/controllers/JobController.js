@@ -1,12 +1,19 @@
 app.controller('JobController', function ($scope, $http, $routeParams) {
 
+	var $ = function (id) { return document.getElementById(id); };
+
 	$scope.job = '';
-	$scope.get_job = function(){
+
+	get_job = function(){
 			$http.get('jobs/'+$routeParams.id).success(function(data){
 				$scope.job = data['body'];
+				md_content = $scope.job.description
+				$scope.html_content = markdown.toHTML( md_content );
+				$("markout").innerHTML = $scope.html_content
 			});
 	}
 
-	$scope.get_job()
+
+	get_job()
 
 });
