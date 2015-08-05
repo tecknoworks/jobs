@@ -8,8 +8,7 @@ class Job < ActiveRecord::Base
   private
 
   def set_title
-    data = self.description.split("\n")
+    data = description.split("\n")
     self.title = data[0].strip
   end
-
 end

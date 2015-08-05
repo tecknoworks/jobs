@@ -5,7 +5,7 @@ Devise.setup do |config|
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` on Rails 4+ applications as its
-  #`secret_key` by default. You can change it below and use your own secret key.
+  # `secret_key` by default. You can change it below and use your own secret key.
   # config.secret_key = '52eb08c6dd8541e01caa8f32a96492a6c3ee34ff743aadb4bbdc52
   # 84db06c4aac3d8afced7ef8fc675de27668c0130220bacc33af25ac9c357979e6d2db77b9a'
 
@@ -97,7 +97,7 @@ Devise.setup do |config|
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
   # using other encryptors, it sets how many times you want the password
   # re-encrypted.
-  #s
+  # s
   # Limiting the stretches to just one in testing will increase the performance
   # of your test suite dramatically. However, it is STRONGLY RECOMMENDED to not
   # use a value less than 10 in other environments. Note that, for bcrypt (the

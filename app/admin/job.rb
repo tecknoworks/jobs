@@ -26,5 +26,4 @@ ActiveAdmin.register Job do
     end
     f.actions
   end
-
 end

@@ -26,7 +26,6 @@ RSpec.describe JobsController, type: :controller do
     job2 = create :job, description: 'description'
     job3 = create :job, description: "Ruby\n here is description for ruby...\n test"
 
-
     get :show, id: job.id, format: :json
     expect(json['code']).to eq(200)
     expect(json['body']['title']).to eq('test')
@@ -41,14 +40,4 @@ RSpec.describe JobsController, type: :controller do
     expect(json['body']['title']).to eq('Ruby')
     expect(json['body']['description']).to eq("Ruby\n here is description for ruby...\n test")
   end
-
-  it 'create' do
-    expect do
-      post :create, job: { title: 'foo', description: 'description for foo' }, format: :json
-    end.to change { Job.count }.by 1
-
-    expect(json[:code]).to eq(200)
-    expect(json[:body][:title].to_s).to eq('foo')
-  end
-
 end

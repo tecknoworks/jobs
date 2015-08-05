@@ -28,11 +28,11 @@ ActiveRecord::Schema.define(version: 20_150_803_091_304) do
   add_index 'active_admin_comments', %w(resource_type resource_id), name: 'index_active_admin_comments_on_resource_type_and_resource_id'
 
   create_table 'attachments', force: :cascade do |t|
-    t.integer 'job_id',     null: false
-    t.integer 'status',     null: false
-    t.string 'file',       null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+    t.integer 'job_id',                             null: false
+    t.integer 'status',                             null: false
+    t.string 'file',       default: 'default.txt', null: false
+    t.datetime 'created_at',                         null: false
+    t.datetime 'updated_at',                         null: false
   end
 
   create_table 'jobs', force: :cascade do |t|
