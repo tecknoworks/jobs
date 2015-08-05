@@ -1,5 +1,15 @@
 app.controller('CreateJobController', function ($scope, $http, $routeParams) {
 
-  $scope.asd = 'asd'
+  function Editor(input, preview) {
+    this.update = function () {
+      preview.innerHTML = markdown.toHTML(input.value);
+    };
+    input.editor = this;
+    this.update();
+  }
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  new Editor($("text-input"), $("markout"));
 
 });

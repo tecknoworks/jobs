@@ -1,9 +1,9 @@
 app.controller('JobsController', function ($scope, $http) {
 
-	$scope.jobs = 'asd';
+	$scope.jobs = [];
 
 	$scope.get_jobs = function(){
-			$http.get('jobs').success(function(data){
+			$http.get('api/jobs').success(function(data){
 				$scope.jobs = data['body'];
 				$scope.number_of_jobs = $scope.jobs.length;
 			});
