@@ -1,19 +1,11 @@
 class JobsController < ApplicationController
-  # CODE: document api
+  api :GET, '/jobs', 'Return all jobs'
   def index
     @jobs = Job.all
   end
 
-  # CODE: document api
+  api :GET, '/jobs/:id', 'Return one job by id'
   def show
     @job = Job.find(params[:id])
-  end
-
-  # CODE: document api
-  def create
-    # CODE:
-    # use strong params
-    # what if error?
-    @job = Job.create!(title: params[:job][:title], description: params[:job][:description])
   end
 end
