@@ -8,8 +8,6 @@ app.controller('CreateJobController', function ($scope, $http, $routeParams) {
     this.update();
   }
 
-  var $ = function (id) { return document.getElementById(id); };
-
   new Editor($("text-input"), $("markout"));
 
 });

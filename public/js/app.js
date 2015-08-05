@@ -1,5 +1,7 @@
 var app = angular.module('app', ['ngRoute', 'ngResource']);
 
+var $ = function (id) { return document.getElementById(id); };
+
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider

@@ -49,6 +49,10 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :test do
+  gem 'shoulda-matchers'
+end
+
 group :development, :test do
   gem 'rails-erd'
 

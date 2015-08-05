@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   scope 'api' do
     resources :jobs, only: [:index, :show, :create]
   end
