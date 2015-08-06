@@ -8,4 +8,20 @@ RSpec.describe Job, type: :model do
     job = Job.create!(description: "test \n for set \n #title")
     expect(job.title).to eq('test')
   end
+
+  it 'the first line is null' do
+    job = Job.create!(description: "\n for set \n #title")
+    expect(job.title).to eq('')
+  end
+
+  it 'the description is null' do
+    begin
+      job = Job.create!(description: "")
+      expect(job.title).to eq('')
+      assert false
+    rescue
+      assert true
+    end
+  end
+
 end

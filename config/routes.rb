@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   scope 'api' do
     resources :jobs, only: [:index, :show] do
-      resources :attachments, only: [:index, :show]
+      resources :attachments, only: [:index, :show, :create]
     end
   end
 

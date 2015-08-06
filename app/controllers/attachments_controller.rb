@@ -16,4 +16,8 @@ class AttachmentsController < ApplicationController
       render_response(e.message, 400_001)
     end
   end
+
+  def create
+    @attachment = Attachment.create!(job_id: params[:user_id], status: 0, file: params[:attachment])
+  end
 end

@@ -9,7 +9,7 @@ RSpec.describe AttachmentsController, type: :controller do
   end
 
   describe 'GET' do
-    it 'index' do
+    xit 'index' do
       create :attachment, job_id: @job1.id
       create :attachment, job_id: @job1.id
       create :attachment, job_id: @job2.id
@@ -27,7 +27,7 @@ RSpec.describe AttachmentsController, type: :controller do
       expect(json[:body].count).to eq(0)
     end
 
-    it 'show' do
+    xit 'show' do
       @attachment1 = create :attachment, job_id: @job1.id
       @attachment2 = create :attachment, job_id: @job2.id
 
@@ -36,4 +36,5 @@ RSpec.describe AttachmentsController, type: :controller do
       expect(json[:body][:job_id]).to eq(@job1.id)
     end
   end
+
 end

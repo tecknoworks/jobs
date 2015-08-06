@@ -3,6 +3,7 @@ app.controller('JobController', function ($scope, $http, $routeParams) {
 	$scope.job = {};
 	$scope.attachments = [];
 	$scope.test = 'asd';
+	$scope.attach = {};
 
 	$http.get('api/jobs/'+$routeParams.id).success(function(data){
 		$scope.job = data['body'];
@@ -15,11 +16,12 @@ app.controller('JobController', function ($scope, $http, $routeParams) {
 		$scope.attachments = data['body'];
 	});
 
-	// $scope.attach_file = function(){
-	// 	// $scope.test = 'bla bla bla'
-	//
-	// 	// $scope.test = $_FILES['file']['name']
-	// 		// $scope.test = $('fileinput').value
-	// }
+	$scope.attach_file = function(){
+		$scope.attach = $('inputfile').value
+		$http.post('api/jobs/'+$routeParams.id+'/attachments', {attachment: $scope.attach}).
+			success(function(data, status, headers, config) {
+				$scope.key = data;
+			})
+	}
 
 });
