@@ -6,5 +6,6 @@ class Attachment < ActiveRecord::Base
 
   validates :job, presence: true
   validates :status, presence: true
+  # TODO: re-enable validation
   # validates :file, presence: true
 end

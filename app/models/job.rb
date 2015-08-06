@@ -7,6 +7,8 @@ class Job < ActiveRecord::Base
 
   private
 
+  # TODO:
+  # * update should also be affected
   def set_title
     data = description.split("\n")
     self.title = data[0].strip

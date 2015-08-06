@@ -5,7 +5,7 @@ class AttachmentsController < ApplicationController
       'created_at >= :days and job_id == :job_id',
       :days  => Time.now - 30.days,
       :job_id => params[:job_id]
-    ).all
+    )
   end
 
   api :GET, '/attachments/:id', 'Return attachment by id'

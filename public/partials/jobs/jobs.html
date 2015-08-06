@@ -1,28 +1,25 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div  class="col-md-10">
-      <div class='row'>
-        <div  class="col-md-12">
-          <h2><b>JOBS</b></h2>
+<div class='row'>
+  <div  class="col-md-12">
+    <h2><b>JOBS</b></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div  class="col-md-12">
+    <ul class="list-group" >
+      <div ng-repeat="job in jobs">
+        <li class="list-group-item ul" >
+          <a href="#/jobs/{{job.id}}">
+            <div class='row'>
+              <div class='col-md-8'>
+                <b>{{job.title}}</b>
+              </div>
+              <div class='col-md-4' align='right'>
+                {{job.created_at}}
+              </div>
+            </a>
+          </li>
         </div>
-      </div>
-      <ul class="list-group" >
-         <div ng-repeat="job in jobs">
-           <li class="list-group-item ul" >
-             <a href="#/jobs/{{job.id}}">
-               <div class='row'>
-
-               <div class='col-md-8'>
-                 <b>{{job.title}}</b>
-               </div>
-
-               <div class='col-md-4' align='right'>
-                 {{job.created_at}}
-               </div>
-             </a>
-           </li>
-         </div>
       </ul>
     </div>
   </div>
