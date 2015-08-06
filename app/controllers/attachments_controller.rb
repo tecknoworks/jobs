@@ -6,6 +6,10 @@ class AttachmentsController < ApplicationController
 
   api :GET, '/attachments/:id', 'Return all jobs'
   def show
-    @attachment = Attachment.find(params[:id])
+    begin
+      @attachment = Attachment.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render_response(e.message, 400_001)
+    end
   end
 end
