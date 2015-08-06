@@ -16,11 +16,6 @@ app.config(['$routeProvider',
       controller: 'JobsController'
     })
 
-    .when('/jobs/new', {
-      templateUrl: 'partials/jobs/new.html',
-      controller: 'CreateJobController'
-    })
-
     .when('/jobs/:id', {
       templateUrl: 'partials/jobs/job.html',
       controller: 'JobController'
