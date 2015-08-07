@@ -5,7 +5,7 @@ RSpec.describe JobsController, type: :controller do
 
   before(:each) do
     Job.delete_all
-    create :job
+    create :job, status: 1
   end
 
   it 'works' do
@@ -19,11 +19,12 @@ RSpec.describe JobsController, type: :controller do
     expect(json['body']).to_not be_empty
 
     create :job
-    create :job
+    create :job, status: 2
+    create :job, status: 0
 
     get :index, format: :json
     expect(json['code']).to eq(200)
-    expect(json['body'].count).to eq(3)
+    expect(json['body'].count).to eq(2)
   end
 
   it 'get by id' do
