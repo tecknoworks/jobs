@@ -1,4 +1,4 @@
-app.controller('JobController', function ($scope, $http, $routeParams) {
+app.controller('JobController', function ($scope, $http, $routeParams, FileUploader) {
 
 	$scope.job = {};
 	$scope.attachments = [];
@@ -17,11 +17,16 @@ app.controller('JobController', function ($scope, $http, $routeParams) {
 	});
 
 	$scope.attach_file = function(){
-		$scope.attach = $('inputfile').value
-		$http.post('api/jobs/'+$routeParams.id+'/attachments', {attachment: $scope.attach}).
-			success(function(data, status, headers, config) {
-				$scope.key = data;
-			})
+
+
+
+		$scope.uploader = new FileUploader({url: 'AttachmentController'});
+
+		// $scope.attach = $('inputfile').value
+		// $http.post('api/jobs/'+$routeParams.id+'/attachments', {attachment: $scope.attach}).
+		// 	success(function(data, status, headers, config) {
+		// 		$scope.key = data;
+		// 	})
 	}
 
 });

@@ -10,14 +10,14 @@ class AttachmentsController < ApplicationController
 
   api :GET, '/attachments/:id', 'Return attachment by id'
   def show
-    begin
-      @attachment = Attachment.find(params[:id])
-    rescue ActiveRecord::RecordNotFound => e
-      render_response(e.message, 400_001)
-    end
+    @attachment = Attachment.find(params[:id])
   end
 
   def create
-    @attachment = Attachment.create!(job_id: params[:user_id], status: 0, file: params[:attachment])
+    # CODE: test this
+    @attachment = Attachment.new(job_id: params[:job_id], status: 0, file: params[:attachment])
+    unless @attachment.save
+      return render json: @attachment.errors, status: :unprocessable_entity
+    end
   end
 end

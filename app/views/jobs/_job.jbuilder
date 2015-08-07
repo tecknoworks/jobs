@@ -1,3 +1,4 @@
+# CODE: similar to _attachment.jbuilder
 json.id job.id.to_s
 json.call(job, :title)
 json.call(job, :description)

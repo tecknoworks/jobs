@@ -1,8 +1,7 @@
 class Job < ActiveRecord::Base
   has_many :attachments
 
-  before_create :set_title
-  before_update :set_title
+  before_save :set_title
 
   validates :description, presence: true
 

@@ -15,6 +15,7 @@ class FileUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  # CODE remove this
   def default_url
     'inexisting_file.txt'
   end

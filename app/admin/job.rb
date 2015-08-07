@@ -14,16 +14,27 @@ ActiveAdmin.register Job do
   #   permitted
   # end
 
-  # form do |f|
-  #   f.semantic_errors
-  #   f.inputs
-  #   f.actions         # adds the 'Submit' and 'Cancel' buttons
-  # end
+  show do |f|
+    h3 f.description
+
+    # TODO: render markdown output
+    render 'markdown_editor'
+  end
 
   form do |f|
-    f.inputs 'Admin Details' do
-      f.input :description
+    columns do
+      column do
+        f.inputs 'Admin Details' do
+          f.input :description
+        end
+
+        f.actions
+      end
+
+      column do
+        render 'markdown_editor'
+      end
     end
-    f.actions
+
   end
 end
