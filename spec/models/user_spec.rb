@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  # CODE: use let
+
   it { expect(subject).to validate_presence_of :email }
   it { expect(subject).to validate_presence_of :password }
 

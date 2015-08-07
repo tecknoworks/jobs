@@ -1,0 +1,17 @@
+<div id="markout"> </div>
+
+<script src="/js/vendor/markdown.js"></script>
+<script>
+  function Editor(input, preview) {
+    this.update = function () {
+      preview.innerHTML = markdown.toHTML(input.value);
+    };
+    input.editor = this;
+    this.update();
+  }
+  var $ = function (id) { return document.getElementById(id); };
+  $("job_description").oninput = function () {
+    this.editor.update();
+  }
+  new Editor($("job_description"), $("markout"));
+</script>

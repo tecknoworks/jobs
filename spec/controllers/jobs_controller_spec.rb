@@ -8,10 +8,15 @@ RSpec.describe JobsController, type: :controller do
     create :job
   end
 
+  it 'works' do
+    get :index, format: :json
+    expect(response).to have_http_status :ok
+  end
+
   it 'get all jobs' do
     get :index, format: :json
     expect(json['code']).to eq(200)
-    expect(json['body'].count).to eq(1)
+    expect(json['body']).to_not be_empty
 
     create :job
     create :job
