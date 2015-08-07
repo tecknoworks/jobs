@@ -14,16 +14,22 @@ RSpec.describe Job, type: :model do
   it 'the first line is null' do
     job.update(description: "\n for set \n #title")
     expect(job.title).to eq('')
+    expect(job.status).to eq(1)
+  end
+
+  it 'default status' do
+    job = Job.create!(description: 'test')
+    expect(job.status).to eq(0)
+    expect(job.description).to eq('test')
   end
 
   it 'the description is null' do
     begin
-      job = Job.create!(description: "")
+      job = Job.create!(description: '')
       expect(job.title).to eq('')
       assert false
     rescue
       assert true
     end
   end
-
 end
