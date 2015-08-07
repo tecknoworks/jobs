@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
+  scope 'api' do
+    resources :jobs, only: [:index, :show] do
+      resources :attachments, only: [:index, :show, :create]
+    end
+  end
+
   apipie
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-
-  get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'jobs#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

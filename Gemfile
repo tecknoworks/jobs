@@ -5,7 +5,9 @@ gem 'rails', '4.2.2'
 
 gem 'capistrano-rvm'
 
-gem 'whenever', :require => false
+gem 'whenever', require: false
+
+gem 'travis'
 
 gem 'apipie-rails'
 # Use sqlite3 as the database for Active Record
@@ -18,6 +20,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
+gem 'carrierwave'
 
 gem 'hirb' # pretty formatting in rails console
 
@@ -45,6 +49,10 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :test do
+  gem 'shoulda-matchers'
+end
+
 group :development, :test do
   gem 'rails-erd'
 
@@ -64,7 +72,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  gem "factory_girl_rails", "~> 4.0"
+  gem 'factory_girl_rails', '~> 4.0'
 
   gem 'rspec-rails', '~> 3.0'
 

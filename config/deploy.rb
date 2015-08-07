@@ -13,7 +13,7 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 
 set :deploy_to, '/var/www/my_app_name'
 
-set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -40,7 +40,6 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 # set :keep_releases, 5
 
 namespace :deploy do
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -49,5 +48,4 @@ namespace :deploy do
       # end
     end
   end
-
 end
