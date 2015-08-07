@@ -7,3 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password', admin: true)
+
+Dir['db/jobs/*.md'].each do |path|
+  file = File.read(path).strip
+  Job.create!(description: file)
+end
