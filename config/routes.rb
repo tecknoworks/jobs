@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   end
 
   post 'test_ldap_auth', to: 'tkw_auth_tests#create' if Rails.env.test?
+
+  get "/*path" => redirect("/?goto=%{path}")
 end

@@ -9,7 +9,7 @@
     <ul class="list-group" >
       <div ng-repeat="job in jobs">
         <li class="list-group-item ul" >
-          <a href="#/jobs/{{job.id}}">
+          <a ng-href="/jobs/{{job.id}}">
             <div class='row'>
               <div class='col-md-8'>
                 <b>{{job.title}}</b>
