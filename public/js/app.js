@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'ngResource', 'angularFileUpload']);
+var app = angular.module('app', ['ngRoute', 'ngResource']);
 
 var $ = function (id) { return document.getElementById(id); };
 

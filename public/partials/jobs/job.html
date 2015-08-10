@@ -10,11 +10,6 @@
   </div>
   <div class='col-md-4' align='center'>
     <br>
-    {{test}}
-    <input type="file" nv-file-select uploader="uploader"/><br/>
-    {{uploader}}
-    <!-- <input type="file" fileread="vm.uploadme" id='inputfile'/> -->
-    <button ng-click='attach_file()' class='btn btn-default' type='button' >Test</button>
     <table class="table table-condensed">
       <caption align='center'> List of attachments </caption>
       <tr>
@@ -30,3 +25,13 @@
 
   </div>
 </div>
+
+<!-- auto-align -->
+<form id        =  "uploadForm"
+     enctype   =  "multipart/form-data"
+     action    =  "/api/jobs/2/attachments"
+     method    =  "post"
+>
+<input type="file" name="attachment" />
+<input type="submit" value="Upload Image" name="submit">
+</form>

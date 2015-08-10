@@ -1,4 +1,0 @@
-json.code 200
-json.body do |json|
-  json.partial! 'attachment', attachment: @attachment
-end
