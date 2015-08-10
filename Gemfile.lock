@@ -262,6 +262,7 @@ GEM
     nenv (0.2.0)
     net-http-persistent (2.9.4)
     net-http-pipeline (1.0.1)
+    net-ldap (0.11)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
@@ -482,6 +483,7 @@ DEPENDENCIES
   jquery-rails
   lol_dba
   metric_fu
+  net-ldap
   rails (= 4.2.2)
   rails-erd
   rename

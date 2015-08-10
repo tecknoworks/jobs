@@ -36,6 +36,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Used for authentication
 gem 'devise'
+gem 'net-ldap'
 
 # Admin interface
 gem 'activeadmin', github: 'activeadmin/activeadmin'
