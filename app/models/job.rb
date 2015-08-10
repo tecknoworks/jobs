@@ -4,6 +4,12 @@ class Job < ActiveRecord::Base
   before_save :set_title
 
   validates :description, presence: true
+  validates :status, presence: true
+
+  DRAFT = 0
+  PUBLISHED = 1
+  FILLED = 2
+  EXPIRED = 3
 
   private
 
@@ -11,5 +17,4 @@ class Job < ActiveRecord::Base
     data = description.split("\n")
     self.title = data[0].strip
   end
-
 end

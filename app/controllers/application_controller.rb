@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   protect_from_forgery with: :null_session                 # modification
 
-  def render_response body, code=200
+  def render_response(body, code = 200)
     body = {
       code: code,
       body: body
@@ -12,5 +12,4 @@ class ApplicationController < ActionController::Base
 
     render json: body, status: code
   end
-
 end
