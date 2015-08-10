@@ -27,6 +27,6 @@ class Job < ActiveRecord::Base
 
   def set_title
     data = description.split("\n")
-    self.title = data[0].gsub(/[^0-9a-z \-\_]/i, '').strip.lstrip
+    self.title = data[0].gsub(/[^0-9a-z \-\_\.\,]/i, '').strip.lstrip
   end
 end
