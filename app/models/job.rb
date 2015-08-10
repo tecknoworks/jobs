@@ -12,5 +12,4 @@ class Job < ActiveRecord::Base
     data = description.split("\n")
     self.title = data[0].strip
   end
-
 end

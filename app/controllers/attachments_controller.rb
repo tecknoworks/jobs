@@ -3,8 +3,8 @@ class AttachmentsController < ApplicationController
   def index
     @attachments = Attachment.where(
       'created_at >= :days and job_id == :job_id',
-      :days  => Time.now - 30.days,
-      :job_id => params[:job_id]
+      days: Time.now - 30.days,
+      job_id: params[:job_id]
     )
   end
 

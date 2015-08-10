@@ -16,6 +16,5 @@ ActiveAdmin.register Job do
         render 'markdown_editor'
       end
     end
-
   end
 end

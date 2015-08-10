@@ -37,5 +37,4 @@ RSpec.describe AttachmentsController, type: :controller do
       expect(json[:body][:job_id]).to eq(@job1.id)
     end
   end
-
 end
