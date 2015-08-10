@@ -1,8 +1,9 @@
 FactoryGirl.define do
   factory :candidate do
-    full_name "MyString"
-phone_number "MyString"
-email "MyString"
+    job
+    full_name "Full Name"
+    phone_number "0755555555"
+    email "email@example.com"
   end
 
 end
