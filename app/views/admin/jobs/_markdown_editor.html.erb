@@ -2,6 +2,7 @@
 
 <script src="/js/vendor/markdown.js"></script>
 <script>
+(function() {
   function Editor(input, preview) {
     this.update = function () {
       preview.innerHTML = markdown.toHTML(input.value);
@@ -14,4 +15,5 @@
     this.editor.update();
   }
   new Editor($("job_description"), $("markout"));
+})();
 </script>

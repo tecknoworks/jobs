@@ -7,6 +7,8 @@ RSpec.describe Job, type: :model do
 
   it { expect(subject).to validate_presence_of :description }
 
+  # CODE: tests for valid status
+
   it 'create job' do
     expect(job.title).to eq('Test')
   end
@@ -41,5 +43,16 @@ RSpec.describe Job, type: :model do
   it 'only saves alpha numeric characters to the title' do
     job.update(description: "# Hello world\nHello")
     expect(job.title).to eq 'Hello world'
+  end
+
+  context '#dashboard_description' do
+    it 'returns the description for the first dashboard job' do
+      create :job, status: Job::DASHBOARD, description: 'foo'
+      expect(Job.dashboard_description).to eq 'foo'
+    end
+
+    it 'returns a blank string if no dashboard job exists' do
+      expect(Job.dashboard_description).to eq ''
+    end
   end
 end

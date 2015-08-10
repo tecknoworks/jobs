@@ -8,5 +8,7 @@
 
 Dir['db/jobs/*.md'].each do |path|
   file = File.read(path).strip
-  Job.create!(description: file, status: Job::PUBLISHED)
+  status = Job::PUBLISHED
+  status = Job::DASHBOARD if path.starts_with?('db/jobs/00_')
+  Job.create!(description: file, status: status)
 end

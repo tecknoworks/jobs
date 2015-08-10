@@ -3,6 +3,7 @@ class Job < ActiveRecord::Base
   PUBLISHED = 1
   FILLED = 2
   EXPIRED = 3
+  DASHBOARD = 4
 
   has_many :attachments
 
@@ -10,6 +11,17 @@ class Job < ActiveRecord::Base
 
   validates :description, presence: true
   validates :status, presence: true
+
+  # Each instance of the application has a job with status DASHBOARD created
+  # from the seed.
+  #
+  # ==== Returns
+  #
+  # * +:String:+ - the description of the job or ''
+  #
+  def self.dashboard_description
+    Job.where(status: DASHBOARD).try(:first).try(:description) || ''
+  end
 
   private
 
