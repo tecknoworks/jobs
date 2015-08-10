@@ -4,8 +4,8 @@ ActiveAdmin.register Job do
   form do |f|
     columns do
       column do
-        f.inputs :status
         f.inputs 'Admin Details' do
+          f.input :status, as: :select, collection: job_status_select_values
           f.input :description
         end
 
