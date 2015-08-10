@@ -1,4 +1,8 @@
 class Attachment < ActiveRecord::Base
+  PENDING = 0
+  FAIL = 1
+  PASS = 2
+
   belongs_to :job
 
   # mount_uploader :file
@@ -7,8 +11,4 @@ class Attachment < ActiveRecord::Base
   validates :job, presence: true
   validates :status, presence: true
   validates :file, presence: true
-
-  PENDING = 0
-  FAIL = 1
-  PASS = 2
 end

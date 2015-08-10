@@ -18,12 +18,17 @@ RSpec.describe Job, type: :model do
     expect(job.status).to eq(Job::PUBLISHED)
   end
 
+  # CODE: please use a factory and improve spec description
   it 'default status' do
     job = Job.create!(description: 'test')
     expect(job.status).to eq(Job::DRAFT)
     expect(job.description).to eq('test')
   end
 
+  # CODE: I am not sure what this test is supposed to do
+  #
+  # 1. Please improve the spec description
+  # 2. Use a factory
   it 'the description is null' do
     begin
       job = Job.create!(description: '')
@@ -31,5 +36,10 @@ RSpec.describe Job, type: :model do
     rescue
       assert true
     end
+  end
+
+  it 'only saves alpha numeric characters to the title' do
+    job.update(description: "# Hello world\nHello")
+    expect(job.title).to eq 'Hello world'
   end
 end
