@@ -12,12 +12,4 @@ class AttachmentsController < ApplicationController
   def show
     @attachment = Attachment.find(params[:id])
   end
-
-  def create
-    # CODE: test this
-    @attachment = Attachment.create(job_id: params[:job_id], status: 0, file: params[:attachment])
-    unless @attachment.save
-      return render json: @attachment.errors, status: :unprocessable_entity
-    end
-  end
 end
