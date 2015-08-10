@@ -1,0 +1,97 @@
+AllCops:
+  Exclude:
+    - 'scripts/**/**'
+    - 'db/schema.rb'
+    - 'public/**/**'
+    - 'spec/support/query_counter.rb'
+  RunRailsCops: true
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 172
+  Enabled: false
+
+# Configuration parameters: CountComments.
+Metrics/ClassLength:
+  Max: 140
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 20
+  Enabled: false
+
+# TODO: Disable this and fix.
+# We are using more params for the moment.
+# This should be converted to an option hash
+Metrics/ParameterLists:
+  Enabled: false
+
+# Configuration parameters: CountComments.
+Metrics/MethodLength:
+  Max: 150
+  Enabled: true
+
+Metrics/PerceivedComplexity:
+  Max: 21
+  Enabled: false
+
+Style/Documentation:
+  Enabled: true
+  Exclude:
+    - 'db/migrate/**'
+    - 'app/controllers/**/**_controller.rb'
+    - 'config/application.rb'
+    - 'app/helpers/**/**_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'lib/**/**.rb'
+
+# Configuration parameters: MinBodyLength.
+Style/GuardClause:
+  MinBodyLength: 60
+  Enabled: true
+
+# Configuration parameters: SupportedStyles.
+Style/LambdaCall:
+  EnforcedStyle: braces
+
+Style/RaiseArgs:
+  EnforcedStyle: compact
+
+Style/RegexpLiteral:
+  MaxSlashes: 0
+
+# meh
+# Configuration parameters: AllowURI, URISchemes.
+Metrics/LineLength:
+  Enabled: false
+  Max: 240
+
+# meh - signle line also works with ->
+Style/Lambda:
+  Enabled: false
+
+# meh
+Style/SingleLineBlockParams:
+  Enabled: false
+
+# meh
+Style/FormatString:
+  Enabled: false
+
+# meh
+Style/IfUnlessModifier:
+  Enabled: false
+
+# meh
+Style/Blocks:
+  Enabled: false
+
+# meh - it crashes in jbuilders
+Style/MultilineOperationIndentation:
+  Enabled: false
+
+# meh - we are currently using it in abilities
+Lint/Eval:
+  Enabled: false
