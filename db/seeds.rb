@@ -8,5 +8,5 @@
 
 Dir['db/jobs/*.md'].each do |path|
   file = File.read(path).strip
-  Job.create!(description: file)
+  Job.create!(description: file, status: Job::PUBLISHED)
 end
