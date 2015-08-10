@@ -8,8 +8,7 @@ RSpec.describe AttachmentsController, type: :controller do
     @job2 = create :job
   end
 
-  # CODE: no skipz plz
-  xdescribe 'GET' do
+  describe 'GET' do
     it 'index' do
       create :attachment, job_id: @job1.id
       create :attachment, job_id: @job1.id
