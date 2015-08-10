@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe Job, type: :model do
   let(:job) { create :job }
 
-  it { expect(subject).to have_many :attachments }
+  it { expect(subject).to have_many :candidate }
 
   it { expect(subject).to validate_presence_of :description }
+  it { expect(subject).to validate_presence_of :status }
 
   it 'create job' do
     expect(job.title).to eq('Test')
