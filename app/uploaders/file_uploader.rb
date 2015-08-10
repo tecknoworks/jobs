@@ -16,6 +16,7 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   # CODE remove this
+  # CODE remove this pls
   def default_url
     'inexisting_file.txt'
   end

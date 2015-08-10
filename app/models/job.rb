@@ -4,6 +4,7 @@ class Job < ActiveRecord::Base
   before_save :set_title
 
   validates :description, presence: true
+  validates :status, presence: true
 
   private
 
