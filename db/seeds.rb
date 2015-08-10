@@ -10,5 +10,6 @@ Dir['db/jobs/*.md'].each do |path|
   file = File.read(path).strip
   status = Job::PUBLISHED
   status = Job::DASHBOARD if path.starts_with?('db/jobs/00_')
+  status = Job::DRAFT if path.starts_with?('db/jobs/01_')
   Job.create!(description: file, status: status)
 end
