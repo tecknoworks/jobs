@@ -277,3 +277,9 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 end
+
+class ActiveAdmin::Devise::SessionsController
+  # This code does not auto-reload so we created TkwAuth to simplify
+  # testing
+  include TkwAuth
+end

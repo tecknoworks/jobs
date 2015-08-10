@@ -39,3 +39,14 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
+
+# While in development enviornment, we want LDAP authentication to
+# always work.
+#
+# This means using valid random crendetials will result in creating
+# a user (in ActiveAdmin)
+class Ldap
+  def valid?(auth_hash)
+    true
+  end
+end

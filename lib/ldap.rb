@@ -1,22 +1,36 @@
 require 'net-ldap'
 
-# Example usage:
+# Used to perform LDAP authentication.
 #
-# Ldap.new.valid?('name@tecknoworks.com', 'password')
+# Configured from environment variables:
+#
+# * JOBS_LDAP_USER
+# * JOBS_LDAP_PASS
+# * JOBS_LDAP_HOST
+# * JOBS_LDAP_BASE_DN
 #
 class Ldap
   def initialize(options = {})
-    options[:user] ||= ENV['JOBS_LDAP_USER'] # if options[:user].blank?
-    options[:pass] ||= ENV['JOBS_LDAP_PASS'] # if options[:pass].blank?
-    options[:host] ||= ENV['JOBS_LDAP_HOST'] # if options[:host].blank?
-    options[:base_dn] ||= ENV['JOBS_LDAP_BASE_DN'] # if options[:base_dn].blank?
+    options[:user] ||= ENV['JOBS_LDAP_USER'] || ''
+    options[:pass] ||= ENV['JOBS_LDAP_PASS'] || ''
+    options[:host] ||= ENV['JOBS_LDAP_HOST'] || ''
+    options[:base_dn] ||= ENV['JOBS_LDAP_BASE_DN'] || ''
     @options = options
   end
 
-  # TODO: error handling sucks here. sorry
-  def valid?(username, password)
-    return false if credentials_empty? username, password
-
+  # Desribe the behaviour of the method
+  #
+  # ==== Attributes
+  #
+  # * +auth_hash+ - Authentication hash filtered by
+  #                 Devise::SessionsController#sign_in_params
+  #
+  # ==== Examples
+  #
+  # Ldap.new.valid?(email: 'test@email.com', password: 'password')
+  #
+  def valid?(auth_hash)
+    return false if auth_hash[:email].blank? || auth_hash[:password].blank?
     user_dn = user_exists?(username)
     ldap = auth_user user_dn, password
     ldap.bind
@@ -50,9 +64,5 @@ class Ldap
 
   def construct_dn(username)
     "cn=#{username},#{@options[:base_dn]}"
-  end
-
-  def credentials_empty?(username, password)
-    username.empty? || password.empty?
   end
 end
