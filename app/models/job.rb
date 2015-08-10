@@ -6,6 +6,11 @@ class Job < ActiveRecord::Base
   validates :description, presence: true
   validates :status, presence: true
 
+  DRAFT = 0
+  PUBLISHED = 1
+  FILLED = 2
+  EXPIRED = 3
+
   private
 
   def set_title
