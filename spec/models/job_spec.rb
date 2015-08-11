@@ -19,11 +19,9 @@ RSpec.describe Job, type: :model do
     expect(job.status).to eq(Job::PUBLISHED)
   end
 
-  it 'default status' do
-    # CODE: use factory
-    job = Job.create!(description: 'test')
+  it 'has a default status' do
+    job = create :job_without_status
     expect(job.status).to eq(Job::DRAFT)
-    expect(job.description).to eq('test')
   end
 
   it 'does not allow a null description' do

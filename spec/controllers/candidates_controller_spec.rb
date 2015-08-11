@@ -41,5 +41,11 @@ RSpec.describe CandidatesController, type: :controller do
       expect(json[:code]).to eq(200)
       expect(json[:body][:job_id]).to eq(@job2.id)
     end
+
+    it 'returns 404 if record not found' do
+      expect {
+        get :show, job_id: -1, id: -1
+      }.to raise_error ActiveRecord::RecordNotFound
+    end
   end
 end

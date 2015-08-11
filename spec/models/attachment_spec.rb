@@ -29,8 +29,7 @@ RSpec.describe Attachment, type: :model do
   it 'attachment by default = 0' do
     candidate = create :candidate
     user = create :user
-    # CODE: use factory
-    attachment = Attachment.create!(candidate_id: candidate.id, user_id: user.id, file: Rack::Test::UploadedFile.new('spec/erd.pdf'))
+    attachment = create :attachment, candidate_id: candidate.id, user_id: user.id, file: Rack::Test::UploadedFile.new('spec/erd.pdf')
     expect(attachment.status).to eq(Attachment::PENDING)
   end
 
