@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150807120745) do
+ActiveRecord::Schema.define(version: 20150810130118) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -29,11 +29,21 @@ ActiveRecord::Schema.define(version: 20150807120745) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
   create_table "attachments", force: :cascade do |t|
-    t.integer  "job_id",                             null: false
-    t.integer  "status",     default: 0
-    t.string   "file",       default: "default.txt", null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.integer  "candidate_id",             null: false
+    t.integer  "user_id",                  null: false
+    t.integer  "status",       default: 0
+    t.string   "file",                     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "candidates", force: :cascade do |t|
+    t.string   "full_name"
+    t.string   "phone_number"
+    t.string   "email"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "job_id"
   end
 
   create_table "jobs", force: :cascade do |t|

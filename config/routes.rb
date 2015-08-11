@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  scope 'api' do
+  scope :api, defaults: { format: :json } do
     resources :jobs, only: [:index, :show] do
-      resources :attachments, only: [:index, :show]
+      resources :candidates, only: [:index, :show] do
+        resources :attachments, only: [:index, :show]
+      end
     end
   end
 

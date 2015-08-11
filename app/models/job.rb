@@ -5,7 +5,7 @@ class Job < ActiveRecord::Base
   EXPIRED = 3
   DASHBOARD = 4
 
-  has_many :attachments
+  has_many :candidates
 
   before_save :set_title
 

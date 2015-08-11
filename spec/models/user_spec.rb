@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { create :user }
 
+  it { expect(subject).to have_many :attachments }
+
   it { expect(subject).to validate_presence_of :email }
   it { expect(subject).to validate_presence_of :password }
 
