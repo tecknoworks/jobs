@@ -1,37 +1,9 @@
 <div class="row">
-  <div class='col-md-8'>
+  <div class='col-md-12'>
     <a ng-href='/jobs'> Back to all jobs </a>
     <br><br>
     <b>Posted at {{job.created_at}}</b>
     <br><br>
-
     <div id="markout"> </div>
-
-  </div>
-  <div class='col-md-4' align='center'>
-    <br>
-    <table class="table table-condensed">
-      <caption align='center'> List of attachments </caption>
-      <tr>
-        <th>Status</th>
-        <th>Download Link</th>
-      </tr>
-
-      <tr ng-repeat='attachment in attachments'>
-        <td>{{attachment.status}}</td>
-        <td><a href="{{attachment.file.file.url}}" download>download</a></td>
-      </tr>
-    </table>
-
   </div>
 </div>
-
-<!-- auto-align -->
-<form id        =  "uploadForm"
-     enctype   =  "multipart/form-data"
-     action    =  "/api/jobs/2/attachments"
-     method    =  "post"
->
-<input type="file" name="attachment" />
-<input type="submit" value="Upload Image" name="submit">
-</form>
