@@ -36,6 +36,18 @@ ActiveAdmin.register_page 'Dashboard' do
               end
             end
           end
+          form do
+            fieldset class: :actions do
+              ul do
+                li class: :cancel do
+                  link_to 'Add an interview', new_admin_interview_path
+                end
+                li class: :cancel do
+                  link_to 'View interviews', admin_interviews_path
+                end
+              end
+            end
+          end
         end
       end
       column do
