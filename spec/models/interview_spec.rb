@@ -14,6 +14,12 @@ RSpec.describe Interview, type: :model do
     expect(interview).to be_valid
   end
 
+  it 'status is not included in the list' do
+    expect do
+      create :interview, status: 2
+    end.to raise_error ActiveRecord::RecordInvalid
+  end
+
   it 'create interview' do
     candidate = create :candidate
     user = create :user

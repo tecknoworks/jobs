@@ -8,4 +8,5 @@ class Interview < ActiveRecord::Base
   validates :candidate, presence: true
   validates :user, presence: true
   validates :status, presence: true
+  validates :status, inclusion: { in: [FAIL, PASS] }
 end
