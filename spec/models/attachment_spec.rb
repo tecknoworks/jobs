@@ -23,10 +23,4 @@ RSpec.describe Attachment, type: :model do
     expect(attachment.candidate_id).to eq(candidate.id)
     expect(attachment.user_id).to eq(user.id)
   end
-
-  it 'attachment by default = 0' do
-    candidate = create :candidate
-    user = create :user
-    attachment = create :attachment, candidate_id: candidate.id, user_id: user.id, file: Rack::Test::UploadedFile.new('spec/erd.pdf')
-  end
 end
