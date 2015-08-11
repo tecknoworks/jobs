@@ -5,7 +5,6 @@ ActiveAdmin.register Attachment do
     f.inputs 'Admin Details' do
       f.input :user
       f.input :candidate
-      f.input :status
       f.input :file,  as: :file
     end
     f.actions
