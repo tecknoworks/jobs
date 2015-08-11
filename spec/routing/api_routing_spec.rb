@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe JobsController, type: :routing do
+RSpec.describe 'Api Routing', type: :routing do
   describe 'jobs' do
     it 'routes to #index' do
       expect(get: '/api/jobs').to route_to(controller: 'jobs', action: 'index', format: :json)
@@ -11,7 +11,7 @@ RSpec.describe JobsController, type: :routing do
     end
   end
 
-  describe 'candidate' do
+  describe 'candidates' do
     it 'routes to #index' do
       expect(get: '/api/jobs/1/candidates').to route_to(controller: 'candidates', action: 'index', format: :json, job_id: '1')
     end
