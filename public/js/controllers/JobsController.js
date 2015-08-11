@@ -1,4 +1,4 @@
-app.controller('JobsController', function ($scope, $http) {
+app.controller('JobsController', function ($scope, $http, $location) {
 
   $scope.jobs = [];
 
@@ -6,4 +6,8 @@ app.controller('JobsController', function ($scope, $http) {
     $scope.jobs = data['body'];
     $scope.numberOfJobs = $scope.jobs.length;
   });
+
+  $scope.goTo = function (job) {
+    $location.url('/jobs/' + job.id);
+  }
 });

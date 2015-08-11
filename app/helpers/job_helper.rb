@@ -4,7 +4,7 @@ module JobHelper
       ['draft', Job::DRAFT],
       ['published', Job::PUBLISHED],
       ['filled', Job::FILLED],
-      ['expired', Job::EXPIRED],
+      ['expired', Job::EXPIRED]
     ]
   end
 end

@@ -84,14 +84,14 @@ Style/FormatString:
 Style/IfUnlessModifier:
   Enabled: false
 
-# meh
-Style/Blocks:
-  Enabled: false
-
 # meh - it crashes in jbuilders
 Style/MultilineOperationIndentation:
   Enabled: false
 
 # meh - we are currently using it in abilities
 Lint/Eval:
+  Enabled: false
+
+# meh
+Style/BlockDelimiters:
   Enabled: false
