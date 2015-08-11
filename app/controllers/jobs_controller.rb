@@ -6,6 +6,6 @@ class JobsController < ApplicationController
 
   api :GET, '/jobs/:id', 'Return one job by id'
   def show
-    @job = Job.where(id: params[:id], status: Job::PUBLISHED).first
+    @job = Job.find(params[:id])
   end
 end

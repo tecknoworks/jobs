@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe Job, type: :model do
   let(:job) { create :job }
 
-  it { expect(subject).to have_many :attachments }
+  it { expect(subject).to have_many :candidates }
 
   it { expect(subject).to validate_presence_of :description }
+  it { expect(subject).to validate_presence_of :status }
 
   # CODE: tests for valid status
 
@@ -20,24 +21,15 @@ RSpec.describe Job, type: :model do
     expect(job.status).to eq(Job::PUBLISHED)
   end
 
-  # CODE: please use a factory and improve spec description
-  it 'default status' do
-    job = Job.create!(description: 'test')
+  it 'has a default status' do
+    job = create :job_without_status
     expect(job.status).to eq(Job::DRAFT)
-    expect(job.description).to eq('test')
   end
 
-  # CODE: I am not sure what this test is supposed to do
-  #
-  # 1. Please improve the spec description
-  # 2. Use a factory
-  it 'the description is null' do
-    begin
-      job = Job.create!(description: '')
-      assert false
-    rescue
-      assert true
-    end
+  it 'does not allow a null description' do
+    expect {
+      create :job, description: ''
+    }.to raise_error ActiveRecord::RecordInvalid
   end
 
   it 'only saves alpha numeric characters to the title' do

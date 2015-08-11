@@ -1,1 +1,1 @@
-json.call(job, :id, :title, :description, :created_at, :updated_at)
+json.(job, :id, :title, :description, :created_at, :updated_at)

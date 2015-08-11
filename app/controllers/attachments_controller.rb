@@ -2,9 +2,9 @@ class AttachmentsController < ApplicationController
   api :GET, '/attachments', 'Return all attachments'
   def index
     @attachments = Attachment.where(
-      'created_at >= :days and job_id == :job_id',
+      'created_at >= :days and candidate_id == :candidate_id',
       days: Time.zone.now - 30.days,
-      job_id: params[:job_id]
+      candidate_id: params[:candidate_id]
     )
   end
 
