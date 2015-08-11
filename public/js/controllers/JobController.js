@@ -12,8 +12,4 @@ app.controller('JobController', function ($scope, $http, $routeParams) {
 		$("markout").innerHTML = $scope.html_content
 	});
 
-	$http.get('api/jobs/'+$routeParams.id+'/attachments').success(function(data){
-		$scope.attachments = data['body'];
-	});
-
 });
