@@ -8,8 +8,6 @@ RSpec.describe Job, type: :model do
   it { expect(subject).to validate_presence_of :description }
   it { expect(subject).to validate_presence_of :status }
 
-  # CODE: tests for valid status
-
   it 'create job' do
     expect(job.title).to eq('Test')
   end
@@ -35,6 +33,16 @@ RSpec.describe Job, type: :model do
   it 'only saves alpha numeric characters to the title' do
     job.update(description: "# Hello world\nHello")
     expect(job.title).to eq 'Hello world'
+  end
+
+  it 'status is not included in the list' do
+    expect do
+      create :job, status: 5
+    end.to raise_error ActiveRecord::RecordInvalid
+
+    expect do
+      create :job, status: -1
+    end.to raise_error ActiveRecord::RecordInvalid
   end
 
   context '#dashboard_description' do
