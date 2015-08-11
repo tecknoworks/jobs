@@ -18,6 +18,7 @@ RSpec.describe Candidate, type: :model do
   end
 
   it 'create candidate' do
+    # CODE: use factory
     job = Job.create!(description: 'test')
     candidate = create :candidate, job_id: job.id
     expect(candidate.job_id).to eq(job.id)

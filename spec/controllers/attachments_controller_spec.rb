@@ -8,8 +8,8 @@ RSpec.describe AttachmentsController, type: :controller do
     @job2 = create :job
   end
 
-  describe 'GET' do
-    it 'index' do
+  describe 'GET index' do
+    it 'works' do
       create :attachment, job_id: @job1.id
       create :attachment, job_id: @job1.id
       create :attachment, job_id: @job2.id
@@ -26,8 +26,10 @@ RSpec.describe AttachmentsController, type: :controller do
       expect(json[:code]).to eq(200)
       expect(json[:body].count).to eq(0)
     end
+  end
 
-    it 'show' do
+  describe 'GET show' do
+    it 'works' do
       @attachment1 = create :attachment, job_id: @job1.id
       @attachment2 = create :attachment, job_id: @job2.id
 

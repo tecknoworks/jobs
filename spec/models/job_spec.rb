@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Job, type: :model do
   let(:job) { create :job }
 
-  it { expect(subject).to have_many :candidate }
+  it { expect(subject).to have_many :candidates }
 
   it { expect(subject).to validate_presence_of :description }
   it { expect(subject).to validate_presence_of :status }
@@ -20,17 +20,15 @@ RSpec.describe Job, type: :model do
   end
 
   it 'default status' do
+    # CODE: use factory
     job = Job.create!(description: 'test')
     expect(job.status).to eq(Job::DRAFT)
     expect(job.description).to eq('test')
   end
 
-  it 'the description is null' do
-    begin
-      job = Job.create!(description: '')
-      assert false
-    rescue
-      assert true
-    end
+  it 'does not allow a null description' do
+    expect {
+      create :job, description: ''
+    }.to raise_error ActiveRecord::RecordInvalid
   end
 end

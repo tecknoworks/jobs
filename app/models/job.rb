@@ -1,5 +1,5 @@
 class Job < ActiveRecord::Base
-  has_many :candidate
+  has_many :candidates
 
   before_save :set_title
 
