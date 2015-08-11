@@ -12,7 +12,7 @@ RSpec.describe Attachment, type: :model do
   it 'works' do
     expect do
       create :attachment
-    end.  to change{ Attachment.count }.by 1
+    end.to change { Attachment.count }.by 1
   end
 
   it 'works' do
@@ -27,5 +27,4 @@ RSpec.describe Attachment, type: :model do
     attachment = Attachment.create!(job_id: job.id, file: Rack::Test::UploadedFile.new('spec/erd.pdf'))
     expect(attachment.status).to eq(Attachment::PENDING)
   end
-
 end

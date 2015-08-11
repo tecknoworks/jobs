@@ -16,7 +16,7 @@ ActiveAdmin.register Job do
     end
     column :status do |job|
       begin
-        job_status_select_values.select { |e| e[1] == job.status }.first.first
+        job_status_select_values.find { |e| e[1] == job.status }.first
       rescue
         job.status
       end

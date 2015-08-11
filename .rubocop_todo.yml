@@ -4,6 +4,8 @@ AllCops:
     - 'db/schema.rb'
     - 'public/**/**'
     - 'spec/support/query_counter.rb'
+    - 'Guardfile'
+    - 'config/initializers/devise.rb'
   RunRailsCops: true
 
 Rails/HasAndBelongsToMany:
@@ -59,9 +61,6 @@ Style/LambdaCall:
 Style/RaiseArgs:
   EnforcedStyle: compact
 
-Style/RegexpLiteral:
-  MaxSlashes: 0
-
 # meh
 # Configuration parameters: AllowURI, URISchemes.
 Metrics/LineLength:
@@ -94,4 +93,8 @@ Lint/Eval:
 
 # meh
 Style/BlockDelimiters:
+  Enabled: false
+
+# meh
+Style/Documentation:
   Enabled: false
