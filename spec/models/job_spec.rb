@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Job, type: :model do
   let(:job) { create :job }
-
+  let(:job_with_invalid_status) { create :job_with_invalid_status }
   it { expect(subject).to have_many :candidates }
 
   it { expect(subject).to validate_presence_of :description }
@@ -37,11 +37,7 @@ RSpec.describe Job, type: :model do
 
   it 'status is not included in the list' do
     expect do
-      create :job, status: 5
-    end.to raise_error ActiveRecord::RecordInvalid
-
-    expect do
-      create :job, status: -1
+      job_with_invalid_status
     end.to raise_error ActiveRecord::RecordInvalid
   end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Interview, type: :model do
   let(:interview) { create :interview }
-
+  let(:interview_with_invalid_status) { create :interview_with_invalid_status }
   it { expect(subject).to belong_to :candidate }
   it { expect(subject).to belong_to :user }
 
@@ -16,7 +16,7 @@ RSpec.describe Interview, type: :model do
 
   it 'status is not included in the list' do
     expect do
-      create :interview, status: 2
+      interview_with_invalid_status
     end.to raise_error ActiveRecord::RecordInvalid
   end
 
