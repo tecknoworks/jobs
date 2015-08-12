@@ -5,7 +5,7 @@ gem 'rails', '4.2.2'
 
 gem 'capistrano-rvm'
 
-gem 'whenever', require: false
+#gem 'whenever', require: false
 
 gem 'travis'
 
