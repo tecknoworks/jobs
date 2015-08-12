@@ -37,4 +37,18 @@ RSpec.describe Candidate, type: :model do
       create :candidate, email: ''
     end.to raise_error { ActiveRecord::RecordInvalid }
   end
+
+  it 'validate phone number' do
+    expect do
+      create :candidate, phone_number: '07555a5555'
+    end.to raise_error { ActiveRecord::RecordInvalid }
+
+    expect do
+      create :candidate, phone_number: ''
+    end.to raise_error { ActiveRecord::RecordInvalid }
+
+    expect do
+      create :candidate, phone_number: '12231432'
+    end.to raise_error { ActiveRecord::RecordInvalid }
+  end
 end

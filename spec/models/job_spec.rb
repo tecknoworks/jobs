@@ -27,9 +27,9 @@ RSpec.describe Job, type: :model do
   end
 
   it 'does not allow a null description' do
-    expect {
+    expect do
       create :job, description: ''
-    }.to raise_error ActiveRecord::RecordInvalid
+    end.to raise_error ActiveRecord::RecordInvalid
   end
 
   it 'only saves alpha numeric characters to the title' do
