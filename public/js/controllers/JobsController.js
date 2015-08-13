@@ -10,7 +10,7 @@ app.controller('JobsController', function ($scope, $http, $location) {
   $scope.goTo = function (job) {
     $location.url('/jobs/' + job.id);
   }
-  
+
   images_name = ['career-business-analyst',
   'career-business-domain-expert',
   'career-data-modeller',
@@ -25,11 +25,14 @@ app.controller('JobsController', function ($scope, $http, $location) {
   'career-tester',
   'career-ux-designer']
 
-  var randomNumber = Math.floor(Math.random() * 12);
-  var imgName = images_name[randomNumber] + '.jpg';
-  $scope.number = imgName
-  document.getElementById("imageid").src = '/img/' + imgName ;
+  function change_image(){
+      var randomNumber = Math.floor(Math.random() * 12);
+      var imgName = images_name[randomNumber] + '.jpg';
+      $scope.number = imgName
+      document.getElementById("imageid").src = '/img/' + imgName ;
+      setTimeout(change_image, 5000);
+  }
 
-
+  change_image();
 
 });
