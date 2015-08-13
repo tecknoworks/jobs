@@ -25,12 +25,18 @@ app.controller('JobsController', function ($scope, $http, $location) {
   'career-tester',
   'career-ux-designer']
 
+  last_number = -1
+
   function change_image(){
+    var randomNumber = Math.floor(Math.random() * 12);
+    while (randomNumber == last_number){
       var randomNumber = Math.floor(Math.random() * 12);
-      var imgName = images_name[randomNumber] + '.jpg';
-      $scope.number = imgName
-      document.getElementById("imageid").src = '/img/' + imgName ;
-      setTimeout(change_image, 5000);
+    }
+    last_number = randomNumber
+    var imgName = images_name[randomNumber] + '.jpg';
+    $scope.number = imgName
+    document.getElementById("imageid").src = '/img/' + imgName ;
+    setTimeout(change_image, 5000);
   }
 
   change_image();
