@@ -27,18 +27,21 @@ app.controller('JobsController', function ($scope, $http, $location) {
 
   last_number = -1
 
-  function change_image(){
-    var randomNumber = Math.floor(Math.random() * 12);
-    while (randomNumber == last_number){
+  function rec (){
+    $scope.change_image = function (){
       var randomNumber = Math.floor(Math.random() * 12);
+      while (randomNumber == last_number){
+        var randomNumber = Math.floor(Math.random() * 12);
+      }
+      last_number = randomNumber
+      var imgName = images_name[randomNumber] + '.jpg';
+      $scope.number = imgName
+      document.getElementById("imageid").src = '/img/' + imgName ;
     }
-    last_number = randomNumber
-    var imgName = images_name[randomNumber] + '.jpg';
-    $scope.number = imgName
-    document.getElementById("imageid").src = '/img/' + imgName ;
-    setTimeout(change_image, 5000);
+    $scope.change_image()
+    setTimeout(rec, 5000);
   }
 
-  change_image();
+  rec()
 
 });
