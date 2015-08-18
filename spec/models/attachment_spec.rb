@@ -5,7 +5,6 @@ RSpec.describe Attachment, type: :model do
   it { expect(subject).to belong_to :user }
 
   it { expect(subject).to validate_presence_of :user }
-  it { expect(subject).to validate_presence_of :status }
   it { expect(subject).to validate_presence_of :file }
   it { expect(subject).to validate_presence_of :candidate }
 
@@ -20,16 +19,8 @@ RSpec.describe Attachment, type: :model do
   it 'works' do
     candidate = create :candidate
     user = create :user
-    attachment = create :attachment, candidate_id: candidate.id, user_id: user.id, status: Attachment::FAIL
-    expect(attachment.status).to eq(Attachment::FAIL)
+    attachment = create :attachment, candidate_id: candidate.id, user_id: user.id
     expect(attachment.candidate_id).to eq(candidate.id)
     expect(attachment.user_id).to eq(user.id)
-  end
-
-  it 'attachment by default = 0' do
-    candidate = create :candidate
-    user = create :user
-    attachment = create :attachment, candidate_id: candidate.id, user_id: user.id, file: Rack::Test::UploadedFile.new('spec/erd.pdf')
-    expect(attachment.status).to eq(Attachment::PENDING)
   end
 end

@@ -43,9 +43,9 @@ RSpec.describe CandidatesController, type: :controller do
     end
 
     it 'returns 404 if record not found' do
-      expect {
+      expect do
         get :show, job_id: -1, id: -1
-      }.to raise_error ActiveRecord::RecordNotFound
+      end.to raise_error ActiveRecord::RecordNotFound
     end
   end
 end

@@ -2,13 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Job, type: :model do
   let(:job) { create :job }
-
+  let(:job_with_invalid_status) { create :job_with_invalid_status }
   it { expect(subject).to have_many :candidates }
 
   it { expect(subject).to validate_presence_of :description }
   it { expect(subject).to validate_presence_of :status }
-
-  # CODE: tests for valid status
 
   it 'create job' do
     expect(job.title).to eq('Test')
@@ -35,6 +33,12 @@ RSpec.describe Job, type: :model do
   it 'only saves alpha numeric characters to the title' do
     job.update(description: "# Hello world\nHello")
     expect(job.title).to eq 'Hello world'
+  end
+
+  it 'status is not included in the list' do
+    expect do
+      job_with_invalid_status
+    end.to raise_error ActiveRecord::RecordInvalid
   end
 
   context '#dashboard_description' do
