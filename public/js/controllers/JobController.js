@@ -2,7 +2,6 @@ app.controller('JobController', function ($scope, $http, $routeParams) {
 
 	$scope.job = {};
 	$scope.attachments = [];
-	$scope.test = 'asd';
 	$scope.attach = {};
 
 	$http.get('api/jobs/'+$routeParams.id).success(function(data){
