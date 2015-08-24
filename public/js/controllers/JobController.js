@@ -8,6 +8,7 @@ app.controller('JobController', function ($scope, $http, $routeParams) {
 		$scope.job = data['body'];
 		md_content = $scope.job.description
 		$scope.html_content = markdown.toHTML( md_content );
+		$scope.posted = moment($scope.job.posted_at, "YYYYMMDD").fromNow();
 		$("markout").innerHTML = $scope.html_content
 	});
 

@@ -7,6 +7,10 @@ app.controller('JobsController', function ($scope, $http, $location) {
     $scope.numberOfJobs = $scope.jobs.length;
   });
 
+  $scope.posted = function(time){
+    return moment(time, "YYYYMMDD").fromNow();
+  }
+
   $scope.goTo = function (job) {
     $location.url('/jobs/' + job.id);
   }
