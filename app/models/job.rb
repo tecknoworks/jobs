@@ -11,6 +11,8 @@ class Job < ActiveRecord::Base
 
   validates :description, presence: true
   validates :status, presence: true
+  validates :status, inclusion: { in: [DRAFT, PUBLISHED, FILLED,
+                                       EXPIRED, DASHBOARD] }
 
   # Each instance of the application has a job with status DASHBOARD created
   # from the seed.

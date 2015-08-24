@@ -1,1 +1,1 @@
-json.(attachment, :id, :candidate_id, :status, :file, :created_at, :updated_at)
+json.(attachment, :id, :candidate_id, :file, :created_at, :updated_at)

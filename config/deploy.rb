@@ -1,9 +1,10 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'my_app_name'
+set :application, 'tecknoworks-jobs'
 
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :repo_url, 'https://github.com/Catalin1995/tecknoworks-jobs.git'
+
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -11,9 +12,9 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'
 
-set :deploy_to, '/var/www/my_app_name'
+set :deploy_to, '/home/internship/tecknoworks-jobs'
 
-set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
+#set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for :scm is :git
 # set :scm, :git

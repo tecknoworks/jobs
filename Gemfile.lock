@@ -461,8 +461,6 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     websocket (1.2.2)
-    whenever (0.9.4)
-      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -502,4 +500,3 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   validates_phone_number (~> 2.0.1)
   web-console (~> 2.0)
-  whenever
