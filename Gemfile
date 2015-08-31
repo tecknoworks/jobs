@@ -11,6 +11,8 @@ gem 'capistrano-rvm'
 
 #gem 'whenever', require: false
 
+gem 'config'
+
 gem 'travis'
 
 gem 'apipie-rails'
