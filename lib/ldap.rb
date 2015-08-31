@@ -31,9 +31,11 @@ class Ldap
   #
   def valid?(auth_hash)
     return false if auth_hash[:email].blank? || auth_hash[:password].blank?
-    user_dn = user_exists?(username)
-    ldap = auth_user user_dn, password
+    user_dn = user_exists?(auth_hash[:email])
+    ldap = auth_user user_dn, auth_hash[:password]
     ldap.bind
+  rescue Net::LDAP::BindingInformationInvalidError
+    false
   rescue Net::LDAP::LdapError
     false
   end
