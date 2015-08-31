@@ -49,4 +49,14 @@ namespace :deploy do
       # end
     end
   end
+
+  task :bower_and_npm_install do
+    on roles(:app), in: :sequence, wait: 5 do
+      within release_path do
+        execute :bower, "install"
+      end
+    end
+  end
+  after :published, :bower_and_npm_install
+
 end
