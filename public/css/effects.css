@@ -1,4 +1,5 @@
-li { cursor: pointer; }
+li .list-jobs { cursor: pointer; }
+
 .job_description {
   text-align: justify;
 }
