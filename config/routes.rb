@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   scope :api, defaults: { format: :json } do
     resources :jobs, only: [:index, :show, :create, :destroy, :update] do
       resources :candidates, only: [:index, :show, :create, :destroy, :update] do
+        resources :interviews, only: [:index]
         resources :attachments, only: [:index, :show]
       end
     end
