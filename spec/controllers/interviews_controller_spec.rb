@@ -18,9 +18,9 @@ RSpec.describe InterviewsController, type: :controller do
       candidate1 = create :candidate
       candidate2 = create :candidate
       user = create :user
-      interview1 = create :interview, candidate_id: candidate1.id, user_id: user.id
-      interview1 = create :interview, candidate_id: candidate1.id, user_id: user.id
-      interview1 = create :interview, candidate_id: candidate2.id, user_id: user.id
+      create :interview, candidate_id: candidate1.id, user_id: user.id
+      create :interview, candidate_id: candidate1.id, user_id: user.id
+      create :interview, candidate_id: candidate2.id, user_id: user.id
       get :index, job_id: 1, candidate_id: candidate1.id, format: :json
       expect(json[:code]).to eq(200)
       expect(json[:body].count).to eq(2)
@@ -57,6 +57,37 @@ RSpec.describe InterviewsController, type: :controller do
       expect do
         get :show, job_id: 1, candidate_id: -1, id: -1, format: :json
       end.to raise_error ActiveRecord::RecordNotFound
+    end
+  end
+
+  describe 'POST create' do
+    it 'works' do
+      candidate = create :candidate
+      user = create :user
+      expect do
+        post :create, job_id: 1, candidate_id: candidate.id, interview: { user_id: user.id, status: 1 }, format: :json
+      end.to change { Interview.count }.to 1
+      expect(json[:code]).to eq(200)
+      expect(json[:body][:user_id]).to eq(user.id)
+      expect(json[:body][:status]).to eq(1)
+      expect(json[:body][:candidate_id]).to eq(candidate.id)
+    end
+
+    it 'when status/user_id/candidate_id is invalid' do
+      candidate = create :candidate
+      user = create :user
+
+      expect do
+        post :create, job_id: 1, candidate_id: -1, interview: { user_id: user.id, status: 1 }, format: :json
+      end.to raise_error ActiveRecord::RecordInvalid
+
+      expect do
+        post :create, job_id: 1, candidate_id: candidate.id, interview: { user_id: user.id, status: -1 }, format: :json
+      end.to raise_error ActiveRecord::RecordInvalid
+
+      expect do
+        post :create, job_id: 1, candidate_id: candidate.id, interview: { user_id: -1, status: 1 }, format: :json
+      end.to raise_error ActiveRecord::RecordInvalid
     end
   end
 end

@@ -8,4 +8,17 @@ class InterviewsController < ApplicationController
   def show
     @interview = Interview.find(params[:id])
   end
+
+  api :POST, '/api/jobs/:id/candidates/:id/interviews', 'Create an interview'
+  def create
+    @interview = Interview.create!(interview_params)
+  end
+
+  private
+
+  def interview_params
+    para = params.require(:interview).permit(:user_id, :status)
+    para[:candidate_id] = params[:candidate_id]
+    para
+  end
 end
