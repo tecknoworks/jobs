@@ -16,16 +16,16 @@ RSpec.describe JobsController, type: :controller do
 
     it 'get all jobs' do
       get :index, format: :json
-      expect(json['code']).to eq(200)
-      expect(json['body']).to_not be_empty
+      expect(json[:code]).to eq(200)
+      expect(json[:body]).to_not be_empty
 
       create :job
       create :job, status: 2
       create :job, status: 0
 
       get :index, format: :json
-      expect(json['code']).to eq(200)
-      expect(json['body'].count).to eq(2)
+      expect(json[:code]).to eq(200)
+      expect(json[:body].count).to eq(2)
     end
   end
 
@@ -36,18 +36,19 @@ RSpec.describe JobsController, type: :controller do
       job3 = create :job, description: "Ruby\n here is description for ruby...\n test"
 
       get :show, id: job.id, format: :json
-      expect(json['code']).to eq(200)
-      expect(json['body']['title']).to eq('test')
+      expect(json[:code]).to eq(200)
+      expect(json[:body][:title]).to eq('test')
+      expect(json[:body][:status]).to eq(job.status)
 
       get :show, id: job2.id, format: :json
-      expect(json['code']).to eq(200)
-      expect(json['body']['title']).to eq('description')
-      expect(json['body']['description']).to eq('description')
+      expect(json[:code]).to eq(200)
+      expect(json[:body][:title]).to eq('description')
+      expect(json[:body][:description]).to eq('description')
 
       get :show, id: job3.id, format: :json
-      expect(json['code']).to eq(200)
-      expect(json['body']['title']).to eq('Ruby')
-      expect(json['body']['description']).to eq("Ruby\n here is description for ruby...\n test")
+      expect(json[:code]).to eq(200)
+      expect(json[:body][:title]).to eq('Ruby')
+      expect(json[:body][:description]).to eq("Ruby\n here is description for ruby...\n test")
     end
 
     it 'returns 404 if record not found' do
@@ -90,6 +91,31 @@ RSpec.describe JobsController, type: :controller do
       expect do
         delete :destroy, id: -1, format: :json
       end.to raise_error ActiveRecord::RecordNotFound
+    end
+  end
+
+  describe 'PATCH update' do
+    it 'work' do
+      job = create :job
+      patch :update, id: job.id, job: { description: 'desc', status: 2 }, format: :json
+      expect(json[:code]).to eq(200)
+      expect(json[:body][:id]).to eq(job.id)
+      expect(json[:body][:description]).to eq('desc')
+      expect(json[:body][:status]).to eq(2)
+    end
+
+    it 'desciption is nil' do
+      job = create :job
+      expect do
+        patch :update, id: job.id, job: { description: '', status: 2 }, format: :json
+      end.to raise_error ActiveRecord::RecordInvalid
+    end
+
+    it 'status not exist' do
+      job = create :job
+      expect do
+        patch :update, id: job.id, job: { description: 'desc', status: -1 }, format: :json
+      end.to raise_error ActiveRecord::RecordInvalid
     end
   end
 end

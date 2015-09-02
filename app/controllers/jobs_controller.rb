@@ -20,6 +20,12 @@ class JobsController < ApplicationController
     @job.delete
   end
 
+  api :PATCH, '/job/:id', 'Update an job'
+  def update
+    @job = Job.find(params[:id])
+    @job.update_attributes!(job_params)
+  end
+
   private
 
   def job_params

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   scope :api, defaults: { format: :json } do
-    resources :jobs, only: [:index, :show, :create, :destroy] do
+    resources :jobs, only: [:index, :show, :create, :destroy, :update] do
       resources :candidates, only: [:index, :show] do
         resources :attachments, only: [:index, :show]
       end
