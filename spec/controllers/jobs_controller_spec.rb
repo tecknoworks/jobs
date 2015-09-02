@@ -56,4 +56,24 @@ RSpec.describe JobsController, type: :controller do
       end.to raise_error ActiveRecord::RecordNotFound
     end
   end
+
+  describe 'POST create' do
+    it 'work' do
+      expect do
+        post :create, job: { description: 'test...', status: 1 }, format: :json
+      end.to change { Job.count }.by (1)
+    end
+
+    it 'description is nil' do
+      expect do
+        post :create, job: { description: '', status: 1 }, format: :json
+      end.to raise_error ActiveRecord::RecordInvalid
+    end
+
+    it 'status not exist' do
+      expect do
+        post :create, job: { description: 'test...', status: -1 }, format: :json
+      end.to raise_error ActiveRecord::RecordInvalid
+    end
+  end
 end
