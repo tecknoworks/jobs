@@ -67,4 +67,28 @@ RSpec.describe CandidatesController, type: :controller do
       end.to raise_error ActiveRecord::RecordInvalid
     end
   end
+
+  describe 'DELETE destroy' do
+    it 'works' do
+      job = create :job
+      candidate = create :candidate, job_id: job.id
+      expect do
+        delete :destroy, job_id: job.id, id: candidate.id, format: :json
+      end.to change { Candidate.count }.by(-1)
+    end
+
+    it 'job not exist' do
+      candidate = create :candidate
+      expect do
+        delete :destroy, job_id: -2, id: candidate.id, format: :json
+      end.to change { Candidate.count }.by(-1)
+    end
+
+    it 'candidate not exist' do
+      job = create :job
+      expect do
+        delete :destroy, job_id: job.id, id: -1, format: :json
+      end.to raise_error ActiveRecord::RecordNotFound
+    end
+  end
 end

@@ -9,9 +9,15 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
   end
 
-  api :POST, '/api/jobs/:id/candidates/Lid', 'Create an candidate'
+  api :POST, '/api/jobs/:id/candidates', 'Create an candidate'
   def create
     @candidate = Candidate.create!(candidate_params)
+  end
+
+  api :DELETE, '/api/jobs/:id/candidates/:id', 'Delete an candidate'
+  def destroy
+    @candidate = Candidate.find(params[:id])
+    @candidate.delete
   end
 
   private
