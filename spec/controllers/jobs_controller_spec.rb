@@ -61,7 +61,7 @@ RSpec.describe JobsController, type: :controller do
     it 'work' do
       expect do
         post :create, job: { description: 'test...', status: 1 }, format: :json
-      end.to change { Job.count }.by (1)
+      end.to change { Job.count }.by 1
     end
 
     it 'description is nil' do
@@ -74,6 +74,22 @@ RSpec.describe JobsController, type: :controller do
       expect do
         post :create, job: { description: 'test...', status: -1 }, format: :json
       end.to raise_error ActiveRecord::RecordInvalid
+    end
+  end
+
+  describe 'DELETE destroy' do
+    it 'work' do
+      create :job
+      job = create :job
+      expect do
+        delete :destroy, id: job.id, format: :json
+      end.to change { Job.count }.by(-1)
+    end
+
+    it 'job not exist' do
+      expect do
+        delete :destroy, id: -1, format: :json
+      end.to raise_error ActiveRecord::RecordNotFound
     end
   end
 end

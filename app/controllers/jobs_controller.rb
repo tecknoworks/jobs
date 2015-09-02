@@ -9,9 +9,15 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
   end
 
-  api :POST, '/jobs', 'Create jobs'
+  api :POST, '/jobs', 'Create an job'
   def create
     @job = Job.create!(job_params)
+  end
+
+  api :DELETE, '/jobs/:id', 'Delete an job'
+  def destroy
+    @job = Job.find(params[:id])
+    @job.delete
   end
 
   private
