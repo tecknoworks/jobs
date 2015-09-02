@@ -20,6 +20,12 @@ class CandidatesController < ApplicationController
     @candidate.delete
   end
 
+  api :UPDATE, 'api/jobs/:id/candidates/:id', 'Update an candidate'
+  def update
+    @candidate = Candidate.find(params[:id])
+    @candidate.update_attributes!(params.require(:candidate).permit(:full_name, :phone_number, :email))
+  end
+
   private
 
   def candidate_params

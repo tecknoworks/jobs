@@ -91,4 +91,39 @@ RSpec.describe CandidatesController, type: :controller do
       end.to raise_error ActiveRecord::RecordNotFound
     end
   end
+
+  describe 'PATCH update' do
+    it 'update a single field' do
+      job = create :job
+      candidate = create :candidate, job_id: job.id
+      patch :update, job_id: job.id, candidate: { full_name: 'cata' }, id: candidate.id, format: :json
+      expect(json[:code]).to eq(200)
+      expect(json[:body][:full_name]).to eq('cata')
+      expect(json[:body][:phone_number]).to eq(candidate.phone_number)
+      expect(json[:body][:email]).to eq(candidate.email)
+      expect(json[:body][:job_id]).to eq(candidate.job_id)
+    end
+
+    it 'update all fields' do
+      job = create :job
+      candidate = create :candidate, job_id: job.id
+      patch :update, job_id: job.id, candidate: { full_name: 'cata', phone_number: '0777777777', email: 'test@test.com' }, id: candidate.id, format: :json
+      expect(json[:code]).to eq(200)
+      expect(json[:body][:full_name]).to eq('cata')
+      expect(json[:body][:phone_number]).to eq('0777777777')
+      expect(json[:body][:email]).to eq('test@test.com')
+      expect(json[:body][:job_id]).to eq(candidate.job_id)
+    end
+
+    it 'job not exist' do
+      job = create :job
+      candidate = create :candidate, job_id: job.id
+      patch :update, job_id: -1, candidate: { full_name: 'cata', phone_number: '0777777777', email: 'test@test.com' }, id: candidate.id, format: :json
+      expect(json[:code]).to eq(200)
+      expect(json[:body][:full_name]).to eq('cata')
+      expect(json[:body][:phone_number]).to eq('0777777777')
+      expect(json[:body][:email]).to eq('test@test.com')
+      expect(json[:body][:job_id]).to eq(candidate.job_id)
+    end
+  end
 end
