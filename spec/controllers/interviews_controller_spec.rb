@@ -66,7 +66,7 @@ RSpec.describe InterviewsController, type: :controller do
       user = create :user
       expect do
         post :create, job_id: 1, candidate_id: candidate.id, interview: { user_id: user.id, status: 1 }, format: :json
-      end.to change { Interview.count }.to 1
+      end.to change { Interview.count }.by 1
       expect(json[:code]).to eq(200)
       expect(json[:body][:user_id]).to eq(user.id)
       expect(json[:body][:status]).to eq(1)
@@ -88,6 +88,26 @@ RSpec.describe InterviewsController, type: :controller do
       expect do
         post :create, job_id: 1, candidate_id: candidate.id, interview: { user_id: -1, status: 1 }, format: :json
       end.to raise_error ActiveRecord::RecordInvalid
+    end
+  end
+
+  describe 'DELETE destroy' do
+    it 'works' do
+      candidate = create :candidate
+      user = create :user
+      interview = create :interview, candidate_id: candidate.id, user_id: user.id
+      expect do
+        delete :destroy, job_id: 1, candidate_id: candidate.id, id: interview.id, format: :json
+      end.to change { Interview.count }.by (-1)
+    end
+
+    it 'when interview not exist' do
+      candidate = create :candidate
+      user = create :user
+      interview = create :interview, candidate_id: candidate.id, user_id: user.id
+      expect do
+        delete :destroy, job_id: 1, candidate_id: candidate.id, id: -1, format: :json
+      end.to raise_error ActiveRecord::RecordNotFound
     end
   end
 end

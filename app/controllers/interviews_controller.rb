@@ -14,6 +14,12 @@ class InterviewsController < ApplicationController
     @interview = Interview.create!(interview_params)
   end
 
+  api :DELETE, '/api/jobs/:id/candidates/:id/interviews/:id', 'Delete an interview'
+  def destroy
+    @interview = Interview.find(params[:id])
+    @interview.delete
+  end
+
   private
 
   def interview_params
