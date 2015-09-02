@@ -5,7 +5,6 @@ set :application, 'tecknoworks-jobs'
 
 set :repo_url, 'https://github.com/Catalin1995/tecknoworks-jobs.git'
 
-
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -14,7 +13,7 @@ set :repo_url, 'https://github.com/Catalin1995/tecknoworks-jobs.git'
 
 set :deploy_to, '/home/internship/tecknoworks-jobs'
 
-#set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
+# set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -53,10 +52,9 @@ namespace :deploy do
   task :bower_and_npm_install do
     on roles(:app), in: :sequence, wait: 5 do
       within release_path do
-        execute :bower, "install"
+        execute :bower, 'install'
       end
     end
   end
   after :published, :bower_and_npm_install
-
 end
