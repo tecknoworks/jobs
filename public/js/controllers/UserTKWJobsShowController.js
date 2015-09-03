@@ -20,16 +20,24 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   get_candidates()
 
   $scope.create_candidate = function(){
-    console.log($scope.candidate)
     $http.post('/api/jobs/' + $scope.job.id + '/candidates', {candidate: $scope.candidate}).
     success(function(data, status, headers, config) {
       $scope.rezultat = data;
+      $scope.candidate = {};
       get_candidates();
-  }).
+    }).
     error(function(data, status, headers, config) {
-      $scope.rezultat = data;
+      // $scope.msg = "Name/Email/Phone can't be nil"
     });
   }
+
+  $scope.delete_candidate = function(id){
+    $scope.id = id;
+    $http.delete('/api/jobs/' + $routeParams.id + '/candidates/' + id).
+    success(function(data){
+      get_candidates()
+    });
+  };
 
   $scope.delete_job = function(id){
     $http.delete('/api/jobs/' + $routeParams.id).success(function(data){
