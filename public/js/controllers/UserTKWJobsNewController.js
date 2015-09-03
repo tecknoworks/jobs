@@ -10,10 +10,9 @@ app.controller('UserTKWJobsNewController', function ($scope, $http, $routeParams
   new Editor($("text-input"), $("markout"));
 
   $scope.status = 0;
-  $scope.asd = $("text-input").value
 
   $scope.create = function(){
-    $http.post('/api/jobs', {job: {description: $scope.asd, status: $scope.status}}).
+    $http.post('/api/jobs', {job: {description: $("text-input").value, status: $scope.status}}).
       success(function(data, status, headers, config) {
         $scope.rezultat = data;
         window.location.replace("/user_tkw/jobs/"+data['body']['id']);
