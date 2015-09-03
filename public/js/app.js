@@ -27,8 +27,23 @@ app.config(['$routeProvider',
     })
 
     .when('/user_tkw/jobs', {
-      templateUrl: 'partials/user_tkw/jobs.html',
+      templateUrl: 'partials/user_tkw/jobs/jobs.html',
       controller: 'UserTKWJobsController',
+    })
+
+    .when('/user_tkw/jobs/new', {
+      templateUrl: 'partials/user_tkw/jobs/new.html',
+      controller: 'UserTKWJobsNewController',
+    })
+
+    .when('/user_tkw/jobs/:id', {
+      templateUrl: 'partials/user_tkw/jobs/job.html',
+      controller: 'UserTKWJobsShowController',
+    })
+
+    .when('/user_tkw/jobs/:id/edit', {
+      templateUrl: 'partials/user_tkw/jobs/edit.html',
+      controller: 'UserTKWJobsEditController',
     })
 
     .otherwise({
