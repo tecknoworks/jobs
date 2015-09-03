@@ -21,6 +21,16 @@ app.config(['$routeProvider',
       controller: 'JobController',
     })
 
+    .when('/user_tkw/login', {
+      templateUrl: 'partials/user_tkw/login.html',
+      controller: 'LoginController',
+    })
+
+    .when('/user_tkw/jobs', {
+      templateUrl: 'partials/user_tkw/jobs.html',
+      controller: 'UserTKWJobsController',
+    })
+
     .otherwise({
       redirectTo: function(current, path, search) {
         if(search.goto) {
