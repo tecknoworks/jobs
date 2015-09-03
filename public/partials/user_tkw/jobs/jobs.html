@@ -5,7 +5,7 @@
 </div>
 <div class='row'>
   <div class='col-md-12'>
-    <button type='button' class='btn btn-success pull-right'>Create new job</button>
+    <a type='button' ng-href='/user_tkw/jobs/new' class='btn btn-success pull-right'>Create new job</a>
   </div>
 </div>
 <div class="row">
@@ -21,7 +21,7 @@
         <td><a ng-href='/user_tkw/jobs/{{job.id}}'>{{job.title}}</a></td>
         <td>
           <button type='button' ng-click='delete_job(job.id)' class='btn btn-danger '> Delete </button>
-          <button type='button' ng-href='/user_tkw/jobs/:id/edit' class='btn btn-warning'> Edit </button>
+          <a class='btn btn-warning' ng-href='/user_tkw/jobs/{{job.id}}/edit'>Edit</a>
         </td>
       </tr>
     </table>
