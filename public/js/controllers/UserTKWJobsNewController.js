@@ -1,4 +1,15 @@
 app.controller('UserTKWJobsNewController', function ($scope, $http, $routeParams) {
+
+  $scope.status_hash = {
+    'DRAFT': 0,
+    'PUBLISHED': 1,
+    'FILLED': 2,
+    'EXPIRED': 3,
+    'DASHBOARD': 4
+  };
+
+  $scope.keys = Object.keys($scope.status_hash)
+  // console.log($scope.keys)
   function Editor(title, input, preview) {
     this.update = function () {
       var title_description = input.value.split('\n')[0]
@@ -24,7 +35,7 @@ app.controller('UserTKWJobsNewController', function ($scope, $http, $routeParams
   }
 
   $scope.create = function(){
-    $http.post('/api/jobs', {job: {description: $("text-input").value, status: $scope.status}}).
+    $http.post('/api/jobs', {job: {description: $("text-input").value, status: $scope.status_hash[$scope.select]}}).
     success(function(data, status, headers, config) {
       $scope.rezultat = data;
       window.location.replace("/user_tkw/jobs/"+data['body']['id']);

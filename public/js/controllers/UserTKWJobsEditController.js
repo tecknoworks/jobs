@@ -1,6 +1,6 @@
 app.controller('UserTKWJobsEditController', function ($scope, $http, $routeParams) {
 
-  $scope.status_array = {
+  $scope.status_hash = {
     'DRAFT': 0,
     'PUBLISHED': 1,
     'FILLED': 2,
@@ -8,7 +8,7 @@ app.controller('UserTKWJobsEditController', function ($scope, $http, $routeParam
     'DASHBOARD': 4
   };
 
-  $scope.keys = Object.keys($scope.status_array)
+  $scope.keys = Object.keys($scope.status_hash)
 
   function Editor(title, input, preview) {
     this.update = function () {
@@ -29,16 +29,14 @@ app.controller('UserTKWJobsEditController', function ($scope, $http, $routeParam
   $http.get('/api/jobs/'+$routeParams.id).
   success(function(data,status,headers, config){
     $scope.job = data['body']
-    //select status
     $scope.select = $scope.keys[$scope.job.status]
     $scope.status = $scope.job.status
-    //put the description in texture
     $("text-input").value = $scope.job.description
     new Editor($("title-output"), $("text-input"), $("markout"));
   });
 
   $scope.save = function(){
-    $http.put('/api/jobs/' + $scope.job.id, {job: {description: $("text-input").value, status: $scope.status_array[$scope.select]}}).
+    $http.put('/api/jobs/' + $scope.job.id, {job: {description: $("text-input").value, status: $scope.status_hash[$scope.select]}}).
     success(function(data, status, headers, config) {
       $scope.rezultat = data;
       window.location.replace("/user_tkw/jobs/"+data['body']['id']);
