@@ -1,0 +1,36 @@
+<div class='row'>
+  <div class='col-md-6'>
+    <h3> Edit candidate </h3>
+    <form>
+      <div class='form-group'>
+        <label>Name</label>
+        <input class='form-control' ng-model='candidate.full_name'>
+      </div>
+      <div class='form-group'>
+        <label>Phone Number</label>
+        <input class='form-control' ng-model='candidate.phone_number'>
+      </div>
+      <div class='form-group'>
+        <label>Email</label>
+        <input class='form-control' ng-model='candidate.email'>
+      </div>
+      <div class='form-group'>
+        <label>Job</label>
+        <input class='form-control' ng-model='candidate.job_id'>
+      </div>
+    </form>
+  </div>
+  <div class='col-md-6'>
+    <table class='table table-striped'>
+      <caption> List with interviews </caption>
+      <tr align='center'>
+        <td>Status</td>
+        <td>Voted By</td>
+      </tr>
+      <tr align='center' ng-repeat='interview in interviews'>
+        <td>{{status_hash[interview.status]}}</td>
+        <td>{{interview.user_id}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
