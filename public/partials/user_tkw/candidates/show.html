@@ -1,0 +1,27 @@
+<div class='row'>
+  <div class='col-md-6'>
+    <h3> Name: {{candidate.full_name}} </h3>
+    <h3> Phone number: {{candidate.phone_number}} </h3>
+    <h3> Email: {{candidate.email}} </h3>
+    <h3> Project: {{candidate.job_id}} </h3>
+  </div>
+  <div class='col-md-6'>
+    <div class='row'>
+      <div class='col-md-6'>
+        <button type='button' class='btn btn-danger btn-block' ng-click='create_interview(0)'>Fail</button>
+      </div>
+      <div class='col-md-6'>
+        <button type='button' class='btn btn-success btn-block' ng-click='create_interview(1)'>Pass</button>
+      </div>
+    </div>
+    <table class='table table-striped'>
+      <caption> List with interviews <cation>
+      <tr align='center'>
+        <td>Status</td>
+      </tr>
+      <tr align='center' ng-repeat='interview in interviews'>
+        <td>{{interview.status}}</td>
+      </tr>
+    </table>
+    </div>
+  </div>

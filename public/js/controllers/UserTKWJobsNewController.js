@@ -9,7 +9,6 @@ app.controller('UserTKWJobsNewController', function ($scope, $http, $routeParams
   };
 
   $scope.keys = Object.keys($scope.status_hash)
-  // console.log($scope.keys)
   function Editor(title, input, preview) {
     this.update = function () {
       var title_description = input.value.split('\n')[0]

@@ -5,9 +5,9 @@ ActiveAdmin.register Interview do
     selectable_column
     column :status do |job|
       begin
-        interview_status_select_values.find { |e| e[1] == job.status }.first
+        # interview_status_select_values.find { |e| e[1] == job.status }.first
       rescue
-        interview.status
+        # interview.status
       end
     end
     column :candidate
@@ -21,7 +21,7 @@ ActiveAdmin.register Interview do
     f.inputs 'Interview' do
       f.input :candidate
       f.input :user
-      f.input :status, as: :select, collection: interview_status_select_values
+      f.input :status
     end
     f.actions
   end

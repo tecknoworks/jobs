@@ -42,7 +42,7 @@
         <td>#</td>
       </tr>
       <tr align='center' ng-repeat='candidate in candidates'>
-        <td>{{candidate.full_name}}</td>
+        <td><a ng-href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}'>{{candidate.full_name}}</a></td>
         <td>{{candidate.email}}</td>
         <td>{{candidate.phone_number}}</td>
         <td><div class="dropup">

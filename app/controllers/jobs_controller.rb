@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
   api :GET, '/jobs', 'Return all jobs'
   def index
-    @jobs = Job.where(status: Job::PUBLISHED)
+    @jobs = Job.all
   end
 
   api :GET, '/jobs/:id', 'Return one job by id'
