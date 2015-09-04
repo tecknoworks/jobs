@@ -8,7 +8,9 @@
           <input class="form-control" type='text' id='title-output' class='form-control' disabled>
         </div>
         <div class='col-md-6'>
-          <input class="form-control" type='text' class='form-control' ng-model='status'>
+          <select class="selectpicker form-control" ng-model='select'>
+            <option ng-repeat='key in keys'>{{key}}</option>
+          </select>
         </div>
       </div>
       Markdown<br>
