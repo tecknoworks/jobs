@@ -1,5 +1,13 @@
-li .list-jobs { cursor: pointer; }
+.list-jobs { cursor: pointer; }
 
 .job_description {
   text-align: justify;
 }
+
+/*.job-box {
+  display: block;
+  width: auto;
+  height: 800px;
+  overflow: auto;
+  color: green;
+}*/
