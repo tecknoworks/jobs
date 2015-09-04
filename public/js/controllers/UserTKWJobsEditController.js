@@ -1,6 +1,14 @@
 app.controller('UserTKWJobsEditController', function ($scope, $http, $routeParams) {
-  function Editor(input, preview) {
+  function Editor(title, input, preview) {
     this.update = function () {
+      var title_description = input.value.split('\n')[0]
+      last = title_description.replace(/[^0-9a-z \-\_\.\,]/i, '')
+      while(last != title_description){
+        title_description = last
+        last = title_description.replace(/[^0-9a-z \-\_\.\,]/i, '');
+      };
+      title.value = title_description;
+
       preview.innerHTML = markdown.toHTML(input.value);
     };
     input.editor = this;
@@ -12,7 +20,7 @@ app.controller('UserTKWJobsEditController', function ($scope, $http, $routeParam
     $scope.job = data['body']
     $scope.status = $scope.job.status
     $("text-input").value = $scope.job.description
-    new Editor($("text-input"), $("markout"));
+    new Editor($("title-output"), $("text-input"), $("markout"));
   });
 
   $scope.save = function(){
