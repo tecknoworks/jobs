@@ -5,6 +5,11 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   $scope.candidate = {}
   $scope.interviews = []
 
+  $scope.status_hash = {
+    '0': 'PASS',
+    '1': 'FAIl'
+  }
+
   $http.get('api/jobs/'+$scope.job_id).success(function(data){
     $scope.job = data['body'];
   }).
