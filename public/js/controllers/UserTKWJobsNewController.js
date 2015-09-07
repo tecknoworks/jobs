@@ -34,7 +34,7 @@ app.controller('UserTKWJobsNewController', function ($scope, $http, $routeParams
   }
 
   $scope.create = function(){
-    $http.post('/api/jobs', {job: {description: $("text-input").value, status: $scope.status_hash[$scope.select]}}).
+    $http.post('/api/jobs?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key'), {job: {description: $("text-input").value, status: $scope.status_hash[$scope.select]}}).
     success(function(data, status, headers, config) {
       $scope.rezultat = data;
       window.location.replace("/user_tkw/jobs/"+data['body']['id']);

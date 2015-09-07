@@ -4,7 +4,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   $scope.attach = {};
   $scope.candidate = {};
 
-  $http.get('api/jobs/'+$routeParams.id).success(function(data){
+  $http.get('api/jobs/'+$routeParams.id + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')).success(function(data){
     $scope.job = data['body'];
     md_content = $scope.job.description
     $scope.html_content = markdown.toHTML( md_content );
@@ -40,7 +40,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   };
 
   $scope.delete_job = function(id){
-    $http.delete('/api/jobs/' + $routeParams.id).success(function(data){
+    $http.delete('/api/jobs/' + $routeParams.id + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')).success(function(data){
       window.location.replace("/user_tkw/jobs");
     });
   };
