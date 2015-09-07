@@ -46,6 +46,13 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     });
   };
 
+  $scope.delete_candidate = function(){
+    $http.delete('/api/jobs/' + $scope.job_id + '/candidates/' + $scope.candidate_id).
+    success(function(data){
+      window.location.replace("/user_tkw/jobs/" + $scope.job_id);
+    });
+  };
+
   $scope.get_interviews();
 
 });

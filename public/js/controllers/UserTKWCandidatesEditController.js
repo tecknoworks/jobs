@@ -39,7 +39,6 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   $scope.get_jobs = function() {
     $http.get('/api/jobs').success(function(data){
       $scope.jobs = data['body'];
-      console.log($scope.jobs)
     }).
     error(function(data, status, headers, config) {
       $scope.rezultat = data;
@@ -63,6 +62,13 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     }).
     error(function(data, status, headers, config){
       $scope.rezultat = data;
+    });
+  };
+
+  $scope.delete_candidate = function(){
+    $http.delete('/api/jobs/' + $scope.job_id + '/candidates/' + $scope.candidate_id).
+    success(function(data){
+      window.location.replace("/user_tkw/jobs/" + $scope.job_id);
     });
   };
 
