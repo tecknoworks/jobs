@@ -1,10 +1,11 @@
 app.controller('UserTKWCandidatesShowController', function ($scope, $http, $routeParams) {
+  var FAIL = 0
+  var PASS = 1
   $scope.job_id = window.location.href.split('/')[5]
   $scope.candidate_id = $routeParams.id
   $scope.job = {}
   $scope.candidate = {}
   $scope.interviews = []
-
   $scope.status_hash = {
     '0': 'PASS',
     '1': 'FAIl'
@@ -24,11 +25,25 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     $scope.rezultat = data;
   });
 
+  create_statistics = function(){
+    $scope.fail_interviews = 0;
+    $scope.pass_interviews = 0;
+    for(var i=0; i<$scope.interviews.length; i++){
+      if( $scope.interviews[i].status == FAIL ){
+        $scope.fail_interviews += 1;
+      } else{
+        $scope.pass_interviews += 1;
+      };
+    };
+  };
+
   $scope.get_interviews = function() {
     $http.get('api/jobs/'+$scope.job_id + '/candidates/' + $scope.candidate_id + '/interviews').success(function(data){
       $scope.interviews = data['body'];
       if( $scope.interviews.length == 0 ){
         $scope.interviews.push("Nu exista nici un interview");
+      } else {
+        create_statistics();
       }
     }).
     error(function(data, status, headers, config) {
