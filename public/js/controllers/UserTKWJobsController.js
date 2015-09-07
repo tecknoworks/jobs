@@ -1,7 +1,6 @@
 app.controller('UserTKWJobsController', function ($scope, $http, $routeParams) {
-  console.log(Cookies.get('consumer_key'))
-  console.log(Cookies.get('secret_key'))
   $scope.jobs = [];
+
   $scope.delete_job = function(id){
     $http.delete('/api/jobs/' + id).success(function(data){
       get_jobs();
@@ -16,8 +15,15 @@ app.controller('UserTKWJobsController', function ($scope, $http, $routeParams) {
     '4': 'DASHBOARD'
   };
 
+  $scope.logout = function(){
+    Cookies.remove('consumer_key');
+    Cookies.remove('secret_key');
+    console.log(Cookies.get('consumer_key'))
+    console.log(Cookies.get('secret_key'))
+  }
+
   get_jobs = function(){
-    $http.get('api/jobs').success(function(data){
+    $http.get('api/jobs?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')).success(function(data){
       $scope.jobs = data['body'];
       $scope.numberOfJobs = $scope.jobs.length;
     });

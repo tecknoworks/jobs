@@ -1,34 +1,62 @@
 class JobsController < ApplicationController
   api :GET, '/jobs', 'Return all jobs'
   def index
-    @jobs = Job.all
+    if logged(params)
+      @jobs = Job.all
+    else
+      render_response('You are not login', 400_001)
+    end
   end
 
   api :GET, '/jobs/:id', 'Return one job by id'
   def show
-    @job = Job.find(params[:id])
+    if logged(params)
+      @job = Job.find(params[:id])
+    else
+      render_response('You are not login', 400_001)
+    end
   end
 
   api :POST, '/jobs', 'Create an job'
   def create
-    @job = Job.create!(job_params)
+    if logged(params)
+      @job = Job.create!(job_params)
+    else
+      render_response('You are not login', 400_001)
+    end
   end
 
   api :DELETE, '/jobs/:id', 'Delete an job'
   def destroy
-    @job = Job.find(params[:id])
-    @job.delete
+    if logged(params)
+      @job = Job.find(params[:id])
+      @job.delete
+    else
+      render_response('You are not login', 400_001)
+    end
   end
 
   api :PATCH, '/job/:id', 'Update an job'
   def update
-    @job = Job.find(params[:id])
-    @job.update_attributes!(job_params)
+    if logged(params)
+      @job = Job.find(params[:id])
+      @job.update_attributes!(job_params)
+    else
+      render_response('You are not login', 400_001)
+    end
   end
 
   private
 
   def job_params
     params.require(:job).permit(:status, :description)
+  end
+
+  def logged(params)
+    if Key.where(consumer_key: params[:consumer_key], secret_key: params[:secret_key]) == []
+      return false
+    else
+      return true
+    end
   end
 end
