@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def login
-    user = authenticate(params[:email], params[:password])
+    user = authenticate(params[:user][:email], params[:user][:password])
     unless user.nil?
       @key = Key.create!(user_id: user.id)
     else

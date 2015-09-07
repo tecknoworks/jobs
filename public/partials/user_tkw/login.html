@@ -7,13 +7,14 @@
     <form>
       <div class='form-group form-group-lg'>
         <label>Email</label>
-        <input type="email" class="form-control" placeholder="Email"/>
+        <input type="email" class="form-control" ng-model='user.email' placeholder="Email"/>
       </div>
       <div class='form-group form-group-lg'>
         <label>Password</label>
-        <input type="password" class="form-control" placeholder="Password"/>
+        <input type="password" class="form-control" ng-model='user.password' placeholder="Password"/>
       </div>
-      <button type="button" class="btn btn-success btn-block btn-lg">Login</button>
+      <button type="button" class="btn btn-success btn-block btn-lg" ng-click='login()'>Login</button> <br>
+      <p align='center'>{{message}}</p>
     </form>
   </div>
   <div class='col-md-4'></div>
