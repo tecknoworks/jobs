@@ -56,6 +56,16 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     });
   };
 
+  $scope.save = function(){
+    $http.patch('api/jobs/' + $scope.job_id + '/candidates/' + $scope.candidate_id, {candidate: $scope.candidate}).
+    success(function(data, status, headers, config){
+      window.location.replace("/user_tkw/jobs/" + $scope.job.id + '/candidates/' + $scope.candidate.id);
+    }).
+    error(function(data, status, headers, config){
+      $scope.rezultat = data;
+    });
+  };
+
   $scope.get_interviews();
   $scope.get_jobs();
 
