@@ -72,6 +72,13 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     });
   };
 
+  $scope.delete_interview = function(id){
+    $http.delete('/api/jobs/' + $scope.job_id + '/candidates/' + $scope.candidate_id + '/interviews/' + id).
+    success(function(data){
+      $scope.get_interviews();
+    });
+  }
+
   $scope.get_interviews();
   $scope.get_jobs();
 
