@@ -11,14 +11,14 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     '1': 'FAIl'
   }
 
-  $http.get('api/jobs/'+$scope.job_id).success(function(data){
+  $http.get('api/jobs/' + $scope.job_id  + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')).success(function(data){
     $scope.job = data['body'];
   }).
   error(function(data, status, headers, config) {
     $scope.rezultat = data;
   });
 
-  $http.get('api/jobs/'+$scope.job_id + '/candidates/'+$scope.candidate_id).success(function(data){
+  $http.get('api/jobs/'+$scope.job_id + '/candidates/'+$scope.candidate_id  + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')).success(function(data){
     $scope.candidate = data['body'];
   }).
   error(function(data, status, headers, config) {
@@ -38,7 +38,7 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   };
 
   $scope.get_interviews = function() {
-    $http.get('api/jobs/'+$scope.job_id + '/candidates/' + $scope.candidate_id + '/interviews').success(function(data){
+    $http.get('api/jobs/'+$scope.job_id + '/candidates/' + $scope.candidate_id + '/interviews'  + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')).success(function(data){
       $scope.interviews = data['body'];
       if( $scope.interviews.length == 0 ){
         $scope.interviews.push("Nu exista nici un interview");
@@ -52,7 +52,7 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   }
 
   $scope.create_interview = function(id){
-    $http.post('api/jobs/'+$scope.job_id + '/candidates/' + $scope.candidate_id + '/interviews', {interview: {user_id: 1, status: id, candidate: $scope.candidate_id}}).success(function(data){
+    $http.post('api/jobs/'+$scope.job_id + '/candidates/' + $scope.candidate_id + '/interviews'  + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key'), {interview: {user_id: 1, status: id, candidate: $scope.candidate_id}}).success(function(data){
       $scope.interview = data['body'];
       $scope.get_interviews();
     }).
@@ -62,7 +62,7 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   };
 
   $scope.delete_candidate = function(){
-    $http.delete('/api/jobs/' + $scope.job_id + '/candidates/' + $scope.candidate_id).
+    $http.delete('/api/jobs/' + $scope.job_id + '/candidates/' + $scope.candidate_id  + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')).
     success(function(data){
       window.location.replace("/user_tkw/jobs/" + $scope.job_id);
     });

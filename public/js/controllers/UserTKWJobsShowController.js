@@ -12,7 +12,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   });
 
   get_candidates = function(){
-    $http.get('api/jobs/' + $routeParams.id + '/candidates').success(function(data){
+    $http.get('api/jobs/' + $routeParams.id + '/candidates'  + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')).success(function(data){
       $scope.candidates = data['body'];
     });
   };
@@ -20,7 +20,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   get_candidates()
 
   $scope.create_candidate = function(){
-    $http.post('/api/jobs/' + $scope.job.id + '/candidates', {candidate: $scope.candidate}).
+    $http.post('/api/jobs/' + $scope.job.id + '/candidates'  + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key'), {candidate: $scope.candidate}).
     success(function(data, status, headers, config) {
       $scope.rezultat = data;
       $scope.candidate = {};
@@ -33,7 +33,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
 
   $scope.delete_candidate = function(id){
     $scope.id = id;
-    $http.delete('/api/jobs/' + $routeParams.id + '/candidates/' + id).
+    $http.delete('/api/jobs/' + $routeParams.id + '/candidates/' + id + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')).
     success(function(data){
       get_candidates()
     });
