@@ -1,4 +1,6 @@
 app.controller('UserTKWJobsController', function ($scope, $http, $routeParams) {
+  console.log(Cookies.get('consumer_key'))
+  console.log(Cookies.get('secret_key'))
   $scope.jobs = [];
   $scope.delete_job = function(id){
     $http.delete('/api/jobs/' + id).success(function(data){

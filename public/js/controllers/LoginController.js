@@ -4,7 +4,10 @@ app.controller('LoginController', function ($scope, $http, $routeParams) {
 
   $scope.login = function(){
     $http.put('api/login', {user: $scope.user}).success(function(data){
-      $scope.candidate = data['body'];
+      $scope.key = data['body'];
+      console.log(data)
+      Cookies.set('consumer_key', $scope.key['consumer_key']);
+      Cookies.set('secret_key', $scope.key['secret_key']);
       window.location.replace("/user_tkw/jobs");
     }).
     error(function(data, status, headers, config) {
