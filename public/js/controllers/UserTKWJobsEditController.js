@@ -26,23 +26,26 @@ app.controller('UserTKWJobsEditController', function ($scope, $http, $routeParam
     this.update();
   }
 
-  $http.get('/api/jobs/'+$routeParams.id + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')).
+  $http.get('/api/jobs/' + $routeParams.id + generate_url_key()).
   success(function(data,status,headers, config){
     $scope.job = data['body']
     $scope.select = $scope.keys[$scope.job.status]
     $scope.status = $scope.job.status
     $("text-input").value = $scope.job.description
     new Editor($("title-output"), $("text-input"), $("markout"));
-  });
+  }).
+  error(function(data){
+    logged(data)
+  })
 
   $scope.save = function(){
-    $http.put('/api/jobs/' + $scope.job.id + '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key'), {job: {description: $("text-input").value, status: $scope.status_hash[$scope.select]}}).
+    $http.put('/api/jobs/' + $scope.job.id + generate_url_key(), {job: {description: $("text-input").value, status: $scope.status_hash[$scope.select]}}).
     success(function(data, status, headers, config) {
       $scope.rezultat = data;
       window.location.replace("/user_tkw/jobs/"+data['body']['id']);
     }).
     error(function(data, status, headers, config) {
-      $scope.rezultat = data;
+      logged(data)
     });
   }
 });

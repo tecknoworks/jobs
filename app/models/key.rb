@@ -8,7 +8,7 @@ class Key < ActiveRecord::Base
   private
 
   def set_keys
-    self.consumer_key = SecureRandom.base64(20)
-    self.secret_key = SecureRandom.base64(20)
+    self.consumer_key = SecureRandom.urlsafe_base64(20)
+    self.secret_key = SecureRandom.urlsafe_base64(20)
   end
 end

@@ -29,18 +29,14 @@ app.controller('UserTKWJobsNewController', function ($scope, $http, $routeParams
 
   $scope.status = 0;
 
-  $scope.testee = function(){
-    $scope.title += 1
-  }
-
   $scope.create = function(){
-    $http.post('/api/jobs?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key'), {job: {description: $("text-input").value, status: $scope.status_hash[$scope.select]}}).
+    $http.post('/api/jobs' + generate_url_key(), {job: {description: $("text-input").value, status: $scope.status_hash[$scope.select]}}).
     success(function(data, status, headers, config) {
       $scope.rezultat = data;
       window.location.replace("/user_tkw/jobs/"+data['body']['id']);
     }).
     error(function(data, status, headers, config) {
-      $scope.rezultat = data;
+      logged(data);
     });
   }
 
