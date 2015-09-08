@@ -56,6 +56,25 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     });
   }
 
+  $scope.file_name = function(name){
+    var array = name.split('/')
+    return array[array.length-1]
+  }
+
+  $scope.get_attachments = function() {
+    $http.get('api/attachments' + generate_url_key() + '&candidate_id=3').
+    success(function(data){
+      $scope.attachments = data['body'];
+      console.log($scope.attachments)
+      if( $scope.attachments.length == 0 ){
+        $scope.attachments.push("Nu exista nici un atasament");
+      }
+    }).
+    error(function(data, status, headers, config) {
+      logged(data)
+    });
+  }
+
   $scope.create_interview = function(id){
     $http.post('api/jobs/'+$scope.job_id + '/candidates/' + $scope.candidate_id + '/interviews'  + generate_url_key(), {interview: {user_id: 1, status: id, candidate: $scope.candidate_id}}).
     success(function(data){
@@ -78,5 +97,6 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   };
 
   $scope.get_interviews();
+  $scope.get_attachments();
 
 });

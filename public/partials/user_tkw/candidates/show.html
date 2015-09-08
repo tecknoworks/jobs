@@ -8,6 +8,7 @@
     <h3> Job: {{job.title}} </h3>
   </div>
   <div class='col-md-6'>
+    <h3> Vote </h3>
     <div class='row'>
       <div class='col-md-6'>
         <button type='button' class='btn btn-danger btn-block' ng-click='create_interview(0)'>Fail</button>
@@ -18,6 +19,36 @@
         Pass: {{pass_interviews}}
       </div>
     </div>
+    <hr style="border: 1px solid #D9D9D9 ;" />
+    <h3> Add an attachment </h3>
+    <form id        =  "uploadForm"
+    enctype   =  "multipart/form-data"
+    action    =  "/api/attachments"
+    method    =  "post"
+    >
+    <input type="file" name="attachment" />
+    <input type="submit" value="Upload Image" name="submit">
+  </form>
+
+</div>
+</div>
+<hr style="border: 1px solid #D9D9D9 ;" />
+<div class='row'>
+  <div class='col-md-6'>
+    <table class='table table-striped'>
+      <caption> List with attachments </caption>
+      <tr align='center'>
+        <td>Attachment</td>
+        <td>Added</td>
+      </tr>
+      <tr align='center' ng-repeat='attachment in attachments'>
+        <td><a href='{{attachment.file.file.url}}' download target="_blank">{{file_name(attachment.file.file.url)}}</a></td>
+        <td>{{attachment.user_id}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class = 'col-md-6'>
     <table class='table table-striped'>
       <caption> List with interviews </caption>
       <tr align='center'>
@@ -30,4 +61,5 @@
       </tr>
     </table>
   </div>
+</div>
 </div>
