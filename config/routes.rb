@@ -7,11 +7,12 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   scope :api, defaults: { format: :json } do
+    resources :attachments, only: [:index, :show, :create, :destroy, :update]
     put '/login', to: 'users#login'
     resources :jobs, only: [:index, :show, :create, :destroy, :update] do
+      # resources :attachments, only: [:index, :show, :create]
       resources :candidates, only: [:index, :show, :create, :destroy, :update] do
         resources :interviews, only: [:index, :show, :create, :destroy]
-        resources :attachments, only: [:index, :show]
       end
     end
   end
