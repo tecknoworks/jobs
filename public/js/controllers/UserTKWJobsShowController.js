@@ -16,9 +16,10 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   });
 
   get_candidates = function(){
-    $http.get('api/jobs/' + $routeParams.id + generate_url_key()).
+    $http.get('api/jobs/' + $routeParams.id + '/candidates' + generate_url_key()).
     success(function(data){
       $scope.candidates = data['body'];
+      console.log($scope.candidates)
     }).
     error(function(data){
       logged(data)
@@ -51,7 +52,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   };
 
   $scope.delete_job = function(id){
-    $http.delete('/api/jobs/' + $routeParams.id + generate_url_key)()).
+    $http.delete('/api/jobs/' + $routeParams.id + generate_url_key()).
     success(function(data){
       window.location.replace("/user_tkw/jobs");
     }).
