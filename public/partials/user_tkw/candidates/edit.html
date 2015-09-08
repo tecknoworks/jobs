@@ -23,6 +23,29 @@
     </form>
   </div>
   <div class='col-md-6'>
+  </div>
+</div>
+
+<hr style="border: 1px solid #D9D9D9 ;" />
+
+<div class='row'>
+  <div class='col-md-6'>
+    <table class='table table-striped'>
+      <caption> List with attachments </caption>
+      <tr align='center'>
+        <td>Attachment</td>
+        <td>Added</td>
+        <td>Options</td>
+      </tr>
+      <tr align='center' ng-repeat='attachment in attachments'>
+        <td>{{file_name(attachment.file.file.url)}}</td>
+        <td>{{attachment.user_id}}</td>
+        <td><button type='button' class='btn btn-danger btn-sm' ng-click='delete_attachment(attachment.id)'>Delete</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class='col-md-6'>
     <table class='table table-striped'>
       <caption> List with interviews </caption>
       <tr align='center'>

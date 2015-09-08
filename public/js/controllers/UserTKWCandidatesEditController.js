@@ -40,6 +40,25 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     });
   }
 
+  $scope.file_name = function(name){
+    var array = name.split('/')
+    return array[array.length-1]
+  }
+
+  $scope.get_attachments = function() {
+    $http.get('api/attachments' + generate_url_key() + '&candidate_id=3').
+    success(function(data){
+      $scope.attachments = data['body'];
+      console.log($scope.attachments)
+      if( $scope.attachments.length == 0 ){
+        $scope.attachments.push("Nu exista nici un atasament");
+      }
+    }).
+    error(function(data, status, headers, config) {
+      logged(data)
+    });
+  }
+
   $scope.get_jobs = function() {
     $http.get('/api/jobs'  + generate_url_key()).
     success(function(data){
@@ -91,7 +110,18 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     });
   }
 
+  $scope.delete_attachment = function(id){
+    $http.delete('/api/attachments/' + id).
+    success(function(data){
+      $scope.get_attachments()
+    }).
+    error(function(data){
+      logged(data)
+    });
+  };
+
   $scope.get_interviews();
+  $scope.get_attachments();
   $scope.get_jobs();
 
 });
