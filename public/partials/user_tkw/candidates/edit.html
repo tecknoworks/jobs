@@ -39,7 +39,7 @@
       </tr>
       <tr align='center' ng-repeat='attachment in attachments'>
         <td>{{file_name(attachment.file.file.url)}}</td>
-        <td>{{attachment.user_id}}</td>
+        <td>{{attachment.user_name}}</td>
         <td><button type='button' class='btn btn-danger btn-sm' ng-click='delete_attachment(attachment.id)'>Delete</button></td>
       </tr>
     </table>
@@ -55,7 +55,7 @@
       </tr>
       <tr align='center' ng-repeat='interview in interviews'>
         <td>{{status_hash[interview.status]}}</td>
-        <td>{{interview.user_id}}</td>
+        <td>{{interview.user_name}}</td>
         <td><button type='button' class='btn btn-danger btn-sm' ng-click='delete_interview(interview.id)'>Delete</button></td>
       </tr>
     </table>

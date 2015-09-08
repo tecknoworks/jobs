@@ -43,7 +43,7 @@
       </tr>
       <tr align='center' ng-repeat='attachment in attachments'>
         <td><a href='{{attachment.file.file.url}}' download target="_blank">{{file_name(attachment.file.file.url)}}</a></td>
-        <td>{{attachment.user_id}}</td>
+        <td>{{attachment.user_name}}</td>
       </tr>
     </table>
   </div>
@@ -57,7 +57,7 @@
       </tr>
       <tr align='center' ng-repeat='interview in interviews'>
         <td>{{status_hash[interview.status]}}</td>
-        <td>{{interview.user_id}}</td>
+        <td>{{interview.user_name}}</td>
       </tr>
     </table>
   </div>
