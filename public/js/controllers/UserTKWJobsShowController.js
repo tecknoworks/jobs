@@ -1,10 +1,11 @@
 app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParams) {
+  $scope.job_id = $routeParams.id;
   $scope.job = {};
   $scope.attachments = [];
   $scope.attach = {};
   $scope.candidate = {};
 
-  $http.get('api/jobs/'+$routeParams.id + generate_url_key()).
+  $http.get('api/jobs/' + $scope.job_id + generate_url_key()).
   success(function(data){
     $scope.job = data['body'];
     md_content = $scope.job.description
@@ -16,7 +17,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   });
 
   get_candidates = function(){
-    $http.get('api/jobs/' + $routeParams.id + '/candidates' + generate_url_key()).
+    $http.get('api/candidates' + generate_url_key() + '&job_id=' + $scope.job_id).
     success(function(data){
       $scope.candidates = data['body'];
       console.log($scope.candidates)
@@ -26,10 +27,10 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
     });
   };
 
-  get_candidates()
-
   $scope.create_candidate = function(){
-    $http.post('/api/jobs/' + $scope.job.id + '/candidates'  + generate_url_key(), {candidate: $scope.candidate}).
+    $scope.candidate['job_id'] = $scope.job_id
+
+    $http.post('/api/candidates' + generate_url_key(), {candidate: $scope.candidate}).
     success(function(data, status, headers, config) {
       $scope.rezultat = data;
       $scope.candidate = {};
@@ -42,7 +43,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
 
   $scope.delete_candidate = function(id){
     $scope.id = id;
-    $http.delete('/api/jobs/' + $routeParams.id + '/candidates/' + id + generate_url_key()).
+    $http.delete('/api/candidates/' + id + generate_url_key()).
     success(function(data){
       get_candidates()
     }).
@@ -52,7 +53,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   };
 
   $scope.delete_job = function(id){
-    $http.delete('/api/jobs/' + $routeParams.id + generate_url_key()).
+    $http.delete('/api/jobs/' + $scope.job_id + generate_url_key()).
     success(function(data){
       window.location.replace("/user_tkw/jobs");
     }).
@@ -60,4 +61,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
       logged(data);
     });
   };
+
+  get_candidates()
+
 });

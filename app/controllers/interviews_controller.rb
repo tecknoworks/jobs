@@ -39,9 +39,7 @@ class InterviewsController < ApplicationController
   private
 
   def interview_params
-    para = params.require(:interview).permit(:user_id, :status)
-    para[:candidate_id] = params[:candidate_id]
-    para
+    params.require(:interview).permit(:candidate_id, :user_id, :status)
   end
 
   def logged(params)

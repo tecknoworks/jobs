@@ -14,6 +14,7 @@ app.controller('UserTKWJobsController', function ($scope, $http, $routeParams) {
     Cookies.remove('secret_key');
   }
 
+  //######################### JOBS ##########################################
   $scope.delete_job = function(id){
     $http.delete('/api/jobs/' + id + generate_url_key()).
     success(function(data){

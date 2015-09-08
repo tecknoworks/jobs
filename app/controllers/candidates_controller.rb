@@ -40,7 +40,7 @@ class CandidatesController < ApplicationController
   def update
     if logged(params)
       @candidate = Candidate.find(params[:id])
-      @candidate.update_attributes!(params.require(:candidate).permit(:full_name, :phone_number, :email))
+      @candidate.update_attributes!(candidate_params)
     else
       render_response('You are not logged', 400_001)
     end
@@ -49,9 +49,7 @@ class CandidatesController < ApplicationController
   private
 
   def candidate_params
-    para = params.require(:candidate).permit(:full_name, :phone_number, :email)
-    para[:job_id] = params[:job_id]
-    para
+    para = params.require(:candidate).permit(:full_name, :phone_number, :email, :job_id)
   end
 
   def logged(params)

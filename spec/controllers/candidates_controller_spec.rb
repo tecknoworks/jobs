@@ -23,7 +23,7 @@ RSpec.describe CandidatesController, type: :controller do
       expect(json[:code]).to eq(200)
       expect(json[:body].count).to eq(1)
 
-      get :index, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 111, format: :json
+      get :index, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: -1, format: :json
       expect(json[:code]).to eq(200)
       expect(json[:body].count).to eq(0)
     end
@@ -70,27 +70,33 @@ RSpec.describe CandidatesController, type: :controller do
 
   describe 'POST create' do
     it 'when user is logged' do
+      job = create :job
       key = create :key
       expect do
-        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, candidate: { full_name: 'ionut', phone_number: '0722222222', email: 'test@example.com' }, job_id: 1, format: :json
+        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, candidate: { full_name: 'ionut', phone_number: '0722222222', email: 'test@example.com', job_id: job.id }, format: :json
       end.to change { Candidate.count }.by 1
+
       expect(json[:code]).to eq(200)
       expect(json[:body][:phone_number]).to eq('0722222222')
       expect(json[:body][:full_name]).to eq('ionut')
       expect(json[:body][:email]).to eq('test@example.com')
-      expect(json[:body][:job_id]).to eq(1)
+      expect(json[:body][:job_id]).to eq(job.id)
     end
 
     it 'when user is not logged' do
-      post :create, consumer_key: '', secret_key: '', candidate: { full_name: 'ionut', phone_number: '0722222222', email: 'test@example.com' }, job_id: 1, format: :json
+      job = create :job
+
+      post :create, consumer_key: '', secret_key: '', candidate: { full_name: 'ionut', phone_number: '0722222222', email: 'test@example.com', job_id: job.id }, format: :json
       expect(json[:code]).to eq(400_001)
       expect(json[:body]).to eq('You are not logged')
     end
 
     it 'one argument not exist' do
       key = create :key
+      job = create :job
+
       expect do
-        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, candidate: { full_name: 'ionut', phone_number: '0722222222' }, job_id: 1, format: :json
+        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, candidate: { full_name: 'ionut', phone_number: '0722222222', job_id: job.id }, format: :json
       end.to raise_error ActiveRecord::RecordInvalid
     end
   end

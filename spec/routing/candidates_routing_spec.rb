@@ -2,22 +2,22 @@ require 'rails_helper'
 
 RSpec.describe Candidate, type: :routing do
   it 'routes to #index' do
-    expect(get: '/api/jobs/1/candidates').to route_to(controller: 'candidates', action: 'index', format: :json, job_id: '1')
+    expect(get: '/api/candidates').to route_to(controller: 'candidates', action: 'index', format: :json)
   end
 
   it 'routes to #show' do
-    expect(get: '/api/jobs/1/candidates/1').to route_to(controller: 'candidates', action: 'show', format: :json, job_id: '1', id: '1')
+    expect(get: '/api/candidates/1').to route_to(controller: 'candidates', action: 'show', format: :json, id: '1')
   end
 
   it 'routes to #create' do
-    expect(post: '/api/jobs/1/candidates').to route_to(controller: 'candidates', action: 'create', job_id: '1', format: :json)
+    expect(post: '/api/candidates').to route_to(controller: 'candidates', action: 'create', format: :json)
   end
 
   it 'routes to #destroy' do
-    expect(delete: '/api/jobs/1/candidates/1').to route_to(controller: 'candidates', action: 'destroy', job_id: '1', id: '1', format: :json)
+    expect(delete: '/api/candidates/1').to route_to(controller: 'candidates', action: 'destroy', id: '1', format: :json)
   end
 
   it 'routes to #update' do
-    expect(patch: '/api/jobs/1/candidates/1').to route_to(controller: 'candidates', action: 'update', job_id: '1', id: '1', format: :json)
+    expect(patch: '/api/candidates/1').to route_to(controller: 'candidates', action: 'update', id: '1', format: :json)
   end
 end

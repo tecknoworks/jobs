@@ -11,7 +11,8 @@ RSpec.describe InterviewsController, type: :controller do
 
       create :interview, candidate_id: candidate.id, user_id: user.id
       create :interview, candidate_id: candidate.id, user_id: user.id
-      get :index, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: -1, format: :json
+
+      get :index, consumer_key: key.consumer_key, secret_key: key.secret_key, candidate_id: -1, format: :json
       expect(json[:code]).to eq(200)
       expect(json[:body]).to eq([])
     end
@@ -21,15 +22,16 @@ RSpec.describe InterviewsController, type: :controller do
       candidate2 = create :candidate
       user = create :user
       key = create :key, user_id: user.id
+
       create :interview, candidate_id: candidate1.id, user_id: user.id
       create :interview, candidate_id: candidate1.id, user_id: user.id
       create :interview, candidate_id: candidate2.id, user_id: user.id
 
-      get :index, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: candidate1.id, format: :json
+      get :index, consumer_key: key.consumer_key, secret_key: key.secret_key, candidate_id: candidate1.id, format: :json
       expect(json[:code]).to eq(200)
       expect(json[:body].count).to eq(2)
 
-      get :index, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: candidate2.id, format: :json
+      get :index, consumer_key: key.consumer_key, secret_key: key.secret_key, candidate_id: candidate2.id, format: :json
       expect(json[:code]).to eq(200)
       expect(json[:body].count).to eq(1)
     end
@@ -40,7 +42,7 @@ RSpec.describe InterviewsController, type: :controller do
       user = create :user
       create :interview, candidate_id: candidate1.id, user_id: user.id
 
-      get :index, consumer_key: '', secret_key: '', job_id: 1, candidate_id: candidate1.id, format: :json
+      get :index, consumer_key: '', secret_key: '', format: :json
       expect(json[:code]).to eq(400_001)
       expect(json[:body]).to eq('You are not logged')
     end
@@ -53,7 +55,7 @@ RSpec.describe InterviewsController, type: :controller do
       key = create :key, user_id: user.id
       interview = create :interview, candidate_id: candidate.id, user_id: user.id
 
-      get :show, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: candidate.id, id: interview.id, format: :json
+      get :show, consumer_key: key.consumer_key, secret_key: key.secret_key, id: interview.id, format: :json
       expect(json[:code]).to eq(200)
       expect(json[:body][:id]).to eq(1)
       expect(json[:body][:candidate_id]).to eq(1)
@@ -65,7 +67,8 @@ RSpec.describe InterviewsController, type: :controller do
       candidate = create :candidate
       user = create :user
       interview = create :interview, candidate_id: candidate.id, user_id: user.id
-      get :show, consumer_key: '', secret_key: '', job_id: 1, candidate_id: candidate.id, id: interview.id, format: :json
+
+      get :show, consumer_key: '', secret_key: '', id: interview.id, format: :json
       expect(json[:code]).to eq(400_001)
       expect(json[:body]).to eq('You are not logged')
     end
@@ -76,7 +79,7 @@ RSpec.describe InterviewsController, type: :controller do
       key = create :key, user_id: user.id
       interview = create :interview, candidate_id: candidate.id, user_id: user.id
 
-      get :show, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: -1, id: interview.id, format: :json
+      get :show, consumer_key: key.consumer_key, secret_key: key.secret_key, id: interview.id, format: :json
       expect(json[:code]).to eq(200)
     end
 
@@ -87,7 +90,7 @@ RSpec.describe InterviewsController, type: :controller do
       interview = create :interview, candidate_id: candidate.id, user_id: user.id
 
       expect do
-        get :show, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: -1, id: -1, format: :json
+        get :show, consumer_key: key.consumer_key, secret_key: key.secret_key, id: -1, format: :json
       end.to raise_error ActiveRecord::RecordNotFound
     end
   end
@@ -99,7 +102,7 @@ RSpec.describe InterviewsController, type: :controller do
       key = create :key, user_id: user.id
 
       expect do
-        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: candidate.id, interview: { user_id: user.id, status: 1 }, format: :json
+        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, interview: { candidate_id: candidate.id, user_id: user.id, status: 1 }, format: :json
       end.to change { Interview.count }.by 1
       expect(json[:code]).to eq(200)
       expect(json[:body][:user_id]).to eq(user.id)
@@ -111,7 +114,7 @@ RSpec.describe InterviewsController, type: :controller do
       candidate = create :candidate
       user = create :user
 
-      post :create, consumer_key: '', secret_key: '', job_id: 1, candidate_id: candidate.id, interview: { user_id: user.id, status: 1 }, format: :json
+      post :create, consumer_key: '', secret_key: '', interview: { candidate_id: candidate.id, user_id: user.id, status: 1 }, format: :json
       expect(json[:code]).to eq(400_001)
       expect(json[:body]).to eq('You are not logged')
     end
@@ -122,15 +125,15 @@ RSpec.describe InterviewsController, type: :controller do
       key = create :key, user_id: user.id
 
       expect do
-        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: -1, interview: { user_id: user.id, status: 1 }, format: :json
+        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, interview: { candidate_id: -1, user_id: user.id, status: 1 }, format: :json
       end.to raise_error ActiveRecord::RecordInvalid
 
       expect do
-        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: candidate.id, interview: { user_id: user.id, status: -1 }, format: :json
+        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, interview: { candidate_id: -1, user_id: user.id, status: -1 }, format: :json
       end.to raise_error ActiveRecord::RecordInvalid
 
       expect do
-        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: candidate.id, interview: { user_id: -1, status: 1 }, format: :json
+        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, interview: { candidate_id: -1, user_id: -1, status: 1 }, format: :json
       end.to raise_error ActiveRecord::RecordInvalid
     end
   end
@@ -143,7 +146,7 @@ RSpec.describe InterviewsController, type: :controller do
       interview = create :interview, candidate_id: candidate.id, user_id: user.id
 
       expect do
-        delete :destroy, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: candidate.id, id: interview.id, format: :json
+        delete :destroy, consumer_key: key.consumer_key, secret_key: key.secret_key, id: interview.id, format: :json
       end.to change { Interview.count }.by (-1)
     end
 
@@ -152,7 +155,7 @@ RSpec.describe InterviewsController, type: :controller do
       user = create :user
       interview = create :interview, candidate_id: candidate.id, user_id: user.id
 
-      delete :destroy, consumer_key: '', secret_key: '', job_id: 1, candidate_id: candidate.id, id: interview.id, format: :json
+      delete :destroy, consumer_key: '', secret_key: '', id: interview.id, format: :json
       expect(json[:code]).to eq(400_001)
       expect(json[:body]).to eq('You are not logged')
     end
@@ -164,7 +167,7 @@ RSpec.describe InterviewsController, type: :controller do
       interview = create :interview, candidate_id: candidate.id, user_id: user.id
 
       expect do
-        delete :destroy, consumer_key: key.consumer_key, secret_key: key.secret_key, job_id: 1, candidate_id: candidate.id, id: -1, format: :json
+        delete :destroy, consumer_key: key.consumer_key, secret_key: key.secret_key, id: -1, format: :json
       end.to raise_error ActiveRecord::RecordNotFound
     end
   end
