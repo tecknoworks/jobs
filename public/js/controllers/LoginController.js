@@ -8,6 +8,7 @@ app.controller('LoginController', function ($scope, $http, $routeParams) {
       $scope.key = data['body'];
       Cookies.set('consumer_key', $scope.key['consumer_key']);
       Cookies.set('secret_key', $scope.key['secret_key']);
+      Cookies.set('user_id', $scope.key['user_id']);
       window.location.replace("/user_tkw/jobs");
     }).
     error(function(data, status, headers, config) {

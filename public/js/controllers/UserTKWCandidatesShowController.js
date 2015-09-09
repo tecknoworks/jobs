@@ -7,7 +7,7 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   $scope.job = {}
   $scope.candidate = {}
   $scope.interviews = []
-
+  $scope.your_vote = 'None'
   $scope.status_hash = {
     '0': 'FAIL',
     '1': 'PASS'
@@ -53,6 +53,15 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   };
 
   //######################### INTERVIEWS #####################################
+  select_your_vote = function() {
+    $scope.your_vote = 'None';
+    for (var i=0; i<$scope.interviews.length; i++){
+      if ($scope.interviews[i]['user_id'] == Cookies.get('user_id')){
+        $scope.your_vote = $scope.status_hash[$scope.interviews[i]['status']]
+      }
+    }
+  }
+
   $scope.get_interviews = function() {
     $http.get('api/interviews' + generate_url_key() + '&candidate_id=' + $scope.candidate_id).
     success(function(data){
@@ -61,6 +70,7 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
         $scope.interviews.push("Nu exista nici un interview");
       } else {
         create_statistics();
+        select_your_vote();
       }
     }).
     error(function(data, status, headers, config) {

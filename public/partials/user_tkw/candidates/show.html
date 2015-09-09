@@ -12,7 +12,8 @@
     <div class='row'>
       <div class='col-md-6'>
         <button type='button' class='btn btn-danger btn-block' ng-click='create_interview(0)'>Fail</button>
-        Fail: {{fail_interviews}}
+        Fail: {{fail_interviews}} <br>
+        Your vote: <span ng-class="{'text-success': your_vote=='PASS', 'text-danger': your_vote=='FAIL'}"> {{your_vote}}  </span>
       </div>
       <div class='col-md-6'>
         <button type='button' class='btn btn-success btn-block' ng-click='create_interview(1)'>Pass</button>
@@ -56,7 +57,9 @@
         <td>Voted By</td>
       </tr>
       <tr align='center' ng-repeat='interview in interviews'>
-        <td>{{status_hash[interview.status]}}</td>
+        <td ng-class="{'text-success': status_hash[interview.status]=='PASS', 'text-danger': status_hash[interview.status]=='FAIL'}">
+          {{status_hash[interview.status]}}
+        </td>
         <td>{{interview.user_name}}</td>
       </tr>
     </table>
