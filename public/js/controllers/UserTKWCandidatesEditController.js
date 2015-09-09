@@ -5,6 +5,8 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   $scope.job = {}
   $scope.candidate = {}
   $scope.interviews = []
+  $scope.dictionary_jobs = {}
+  $scope.keys = []
 
   $scope.status_hash = {
     '0': 'PASS',
@@ -21,7 +23,7 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   });
 
   $scope.save = function(){
-    $scope.candidate['job_id'] = $scope.job_id
+    $scope.candidate['job_id'] = $scope.dictionary_jobs[$scope.select]
     $http.patch('api/candidates/' + $scope.candidate_id + generate_url_key(), {candidate: $scope.candidate}).
     success(function(data, status, headers, config){
       window.location.replace("/user_tkw/jobs/" + $scope.job.id + '/candidates/' + $scope.candidate.id);
@@ -42,10 +44,19 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   };
 
   //######################## JOBS ############################################
+  generate_dictionary_jobs = function(){
+    for (var i = 0; i<$scope.jobs.length; i++){
+      $scope.dictionary_jobs[$scope.jobs[i]['title']] = $scope.jobs[i]['id']
+    }
+    $scope.keys = Object.keys($scope.dictionary_jobs)
+    console.log($scope.dictionary_jobs);
+  }
+
   $scope.get_jobs = function() {
     $http.get('/api/jobs'  + generate_url_key()).
     success(function(data){
       $scope.jobs = data['body'];
+      generate_dictionary_jobs();
     }).
     error(function(data, status, headers, config) {
       logged(data);
@@ -55,18 +66,18 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   $http.get('api/jobs/' + $scope.job_id  + generate_url_key()).
   success(function(data){
     $scope.job = data['body'];
+    $scope.select = $scope.job['title']
   }).
   error(function(data, status, headers, config) {
     logged(data);
   });
-  
+
   $scope.get_jobs();
 
   //######################## INTERVIEWS ######################################
   $scope.get_interviews = function(){
     $http.get('api/interviews' + generate_url_key() + '&candidate_id=' + $scope.candidate_id).
     success(function(data){
-      console.log(data['body'])
       $scope.interviews = data['body'];
       if( $scope.interviews.length == 0 ){
         $scope.interviews.push("Nu exista nici un interview");
@@ -99,7 +110,6 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     $http.get('api/attachments' + generate_url_key() + '&candidate_id=3').
     success(function(data){
       $scope.attachments = data['body'];
-      console.log($scope.attachments)
       if( $scope.attachments.length == 0 ){
         $scope.attachments.push("Nu exista nici un atasament");
       }
