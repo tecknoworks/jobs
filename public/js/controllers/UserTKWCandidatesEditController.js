@@ -9,8 +9,8 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   $scope.keys = []
 
   $scope.status_hash = {
-    '0': 'PASS',
-    '1': 'FAIl'
+    '0': 'FAIL',
+    '1': 'PASS'
   }
 
   //######################## CANDIDATES ######################################

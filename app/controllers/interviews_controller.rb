@@ -20,7 +20,15 @@ class InterviewsController < ApplicationController
   api :POST, '/api/jobs/:id/candidates/:id/interviews', 'Create an interview'
   def create
     if logged(params)
-      @interview = Interview.create!(interview_params)
+      key = Key.where(consumer_key: params[:consumer_key], secret_key: params[:secret_key]).first
+      create_params = interview_params
+      create_params['user_id'] = key['user_id'];
+      @interview = Interview.where(user_id: create_params[:user_id], candidate_id: create_params[:candidate_id]).first
+      if @interview == nil
+        @interview = Interview.create!(create_params)
+      else
+        @interview.update_attributes!(create_params)
+      end
     else
       render_response('You are not logged', 400_001)
     end
@@ -39,7 +47,7 @@ class InterviewsController < ApplicationController
   private
 
   def interview_params
-    params.require(:interview).permit(:candidate_id, :user_id, :status)
+    params.require(:interview).permit(:candidate_id, :status)
   end
 
   def logged(params)

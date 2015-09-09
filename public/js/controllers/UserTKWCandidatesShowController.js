@@ -9,8 +9,8 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   $scope.interviews = []
 
   $scope.status_hash = {
-    '0': 'PASS',
-    '1': 'FAIl'
+    '0': 'FAIL',
+    '1': 'PASS'
   }
   //########################## JOBS ##########################################
   $http.get('api/jobs/' + $scope.job_id + generate_url_key()).
