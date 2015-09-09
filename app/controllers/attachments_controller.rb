@@ -3,9 +3,9 @@ class AttachmentsController < ApplicationController
   def index
     if logged(params)
       @attachments = Attachment.where(
-        'created_at >= :days and candidate_id == :candidate_id',
-        days: Time.zone.now - 30.days,
-        candidate_id: params[:candidate_id]
+      'created_at >= :days and candidate_id == :candidate_id',
+      days: Time.zone.now - 30.days,
+      candidate_id: params[:candidate_id]
       )
     else
       render_response('You are not logged', 400_001)
@@ -46,8 +46,13 @@ class AttachmentsController < ApplicationController
   api :delete, 'attachments/:id', 'Detele an attachment'
   def destroy
     if logged(params)
+      key = Key.where(consumer_key: params[:consumer_key], secret_key: params[:secret_key]).first
       @attachment = Attachment.find(params[:id])
-      @attachment.delete
+      if @attachment['user_id'] == key.user_id
+        @attachment.delete
+      else
+        render_response('Permission denied', 400_002)
+      end
     else
       render_response('You are not logged', 400_001)
     end

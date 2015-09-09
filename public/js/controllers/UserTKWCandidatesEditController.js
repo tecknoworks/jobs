@@ -8,7 +8,7 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   $scope.dictionary_jobs = {}
   $scope.keys = []
   $scope.user_id = Cookies.get('user_id')
-  
+
   $scope.status_hash = {
     '0': 'FAIL',
     '1': 'PASS'
@@ -50,7 +50,6 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
       $scope.dictionary_jobs[$scope.jobs[i]['title']] = $scope.jobs[i]['id']
     }
     $scope.keys = Object.keys($scope.dictionary_jobs)
-    console.log($scope.dictionary_jobs);
   }
 
   $scope.get_jobs = function() {
@@ -80,9 +79,6 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     $http.get('api/interviews' + generate_url_key() + '&candidate_id=' + $scope.candidate_id).
     success(function(data){
       $scope.interviews = data['body'];
-      if( $scope.interviews.length == 0 ){
-        $scope.interviews.push("Nu exista nici un interview");
-      }
     }).
     error(function(data, status, headers, config) {
       logged(data);
@@ -103,17 +99,16 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
 
   //######################## ATTACHMENTS #####################################
   $scope.file_name = function(name){
-    var array = name.split('/')
-    return array[array.length-1]
+    if (name != null) {
+      var array = name.split('/')
+      return array[array.length-1]
+    }
   }
 
   $scope.get_attachments = function() {
-    $http.get('api/attachments' + generate_url_key() + '&candidate_id=3').
+    $http.get('api/attachments' + generate_url_key() + '&candidate_id=' + $scope.candidate_id).
     success(function(data){
       $scope.attachments = data['body'];
-      if( $scope.attachments.length == 0 ){
-        $scope.attachments.push("Nu exista nici un atasament");
-      }
     }).
     error(function(data, status, headers, config) {
       logged(data)
@@ -121,7 +116,7 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   }
 
   $scope.delete_attachment = function(id){
-    $http.delete('/api/attachments/' + id).
+    $http.delete('/api/attachments/' + id + generate_url_key()).
     success(function(data){
       $scope.get_attachments()
     }).

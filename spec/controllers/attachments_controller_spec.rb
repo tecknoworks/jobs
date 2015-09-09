@@ -149,11 +149,20 @@ RSpec.describe AttachmentsController, type: :controller do
 
   describe 'DELETE destroy' do
     it 'works when user is logged' do
-      key = create :key
+      key = create :key, user_id: @user1.id
       @attachment = create :attachment, candidate_id: @candidate1.id, user: @user1
       expect do
-        delete :destroy, consumer_key: key.consumer_key, secret_key: key.secret_key, candidate_id: @candidate1.id, user_id: @user1.id, attachment: Rack::Test::UploadedFile.new('spec/erd.pdf'), id: @attachment.id, format: :json
-      end.to change { Attachment.count }.by (-1)
+        delete :destroy, consumer_key: key.consumer_key, secret_key: key.secret_key, id: @attachment.id, format: :json
+      end.to change { Attachment.count }.by(-1)
+    end
+
+    it 'when another user created attachment' do
+      key = create :key, user_id: @user2.id
+
+      @attachment = create :attachment, candidate_id: @candidate1.id, user: @user1
+      delete :destroy, consumer_key: key.consumer_key, secret_key: key.secret_key, candidate_id: @candidate1.id, user_id: @user1.id, attachment: Rack::Test::UploadedFile.new('spec/erd.pdf'), id: @attachment.id, format: :json
+      expect(json[:code]).to eq(400_002)
+      expect(json[:body]).to eq('Permission denied')
     end
 
     it 'when user is not logged' do
