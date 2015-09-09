@@ -37,8 +37,13 @@ class InterviewsController < ApplicationController
   api :DELETE, '/api/jobs/:id/candidates/:id/interviews/:id', 'Delete an interview'
   def destroy
     if logged(params)
+      key = Key.where(consumer_key: params[:consumer_key], secret_key: params[:secret_key]).first
       @interview = Interview.find(params[:id])
-      @interview.delete
+      if @interview['user_id'] == key.user_id
+        @interview.delete
+      else
+        render_response('Permission denied', 400_002)
+      end
     else
       render_response('You are not logged', 400_001)
     end

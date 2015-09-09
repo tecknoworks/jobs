@@ -7,7 +7,8 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   $scope.interviews = []
   $scope.dictionary_jobs = {}
   $scope.keys = []
-
+  $scope.user_id = Cookies.get('user_id')
+  
   $scope.status_hash = {
     '0': 'FAIL',
     '1': 'PASS'

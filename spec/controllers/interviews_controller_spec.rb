@@ -233,6 +233,18 @@ RSpec.describe InterviewsController, type: :controller do
       expect(json[:body]).to eq('You are not logged')
     end
 
+    it 'when another user has created the interview' do
+      candidate = create :candidate
+      user = create :user
+      interview = create :interview, candidate_id: candidate.id, user_id: user.id
+      user2 = create :user, email: 'admin@example.com'
+      key = create :key, user_id: user2.id
+
+      delete :destroy, consumer_key: key.consumer_key, secret_key: key.secret_key, id: interview.id, format: :json
+      expect(json[:code]).to eq(400_002)
+      expect(json[:body]).to eq('Permission denied')
+    end
+
     it 'when interview not exist' do
       candidate = create :candidate
       user = create :user
