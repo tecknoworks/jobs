@@ -57,7 +57,7 @@
         <td>Options</td>
       </tr>
       <tr align='center' ng-repeat='interview in interviews'>
-        <td>{{status_hash[interview.status]}}</td>
+        <td ng-class="{'text-success': status_hash[interview.status]=='PASS', 'text-danger': status_hash[interview.status]=='FAIL'}">{{status_hash[interview.status]}}</td>
         <td>{{interview.user_name}}</td>
         <td><button type='button' class='btn btn-danger btn-sm' ng-disabled='user_id != interview.user_id' ng-click='delete_interview(interview.id)'>Delete</button></td>
       </tr>
