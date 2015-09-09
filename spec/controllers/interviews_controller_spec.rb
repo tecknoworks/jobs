@@ -206,9 +206,8 @@ RSpec.describe InterviewsController, type: :controller do
         post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, interview: { candidate_id: -1, status: -1 }, format: :json
       end.to raise_error ActiveRecord::RecordInvalid
 
-      expect do
-        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, interview: { candidate_id: -1, user_id: -1, status: 1 }, format: :json
-      end.to raise_error ActiveRecord::RecordInvalid
+      post :create, consumer_key: '', secret_key: '', interview: { candidate_id: -1, status: 1 }, format: :json
+      expect(json[:code]).to eq(400_001)
     end
   end
 
