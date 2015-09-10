@@ -1,12 +1,17 @@
 <div class='row'>
+  <div class='col-md-12'>
+    <a ng-href='/user_tkw/jobs'>View all jobs</a>
+  </div>
+
   <div class='col-md-6'>
     <button type='button' class='btn btn-danger' ng-click=delete_candidate()>Delete</button>
     <a type='button' href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}/edit' class='btn btn-warning'>Edit</a>
     <h3> Name: {{candidate.full_name}} </h3>
     <h3> Phone number: {{candidate.phone_number}} </h3>
     <h3> Email: {{candidate.email}} </h3>
-    <h3> Job: {{job.title}} </h3>
+    <h3> Job:<a ng-href='/user_tkw/jobs/{{job.id}}'> {{job.title}}</a></h3>
   </div>
+
   <div class='col-md-6'>
     <h3> Vote </h3>
     <div class='row'>
@@ -15,25 +20,26 @@
         Fail: {{fail_interviews}} <br>
         Your vote: <span ng-class="{'text-success': your_vote=='PASS', 'text-danger': your_vote=='FAIL'}"> {{your_vote}}  </span>
       </div>
+
       <div class='col-md-6'>
         <button type='button' class='btn btn-success btn-block' ng-click='create_interview(1)'>Pass</button>
         Pass: {{pass_interviews}}
       </div>
     </div>
-    <hr style="border: 1px solid #D9D9D9 ;" />
-    <h3> Add an attachment </h3>
-    <form id        =  "uploadForm"
-    enctype   =  "multipart/form-data"
-    action    =  "/api/attachments"
-    method    =  "post"
-    >
-    <input type="file" name="attachment" />
-    <input type="submit" value="Upload Image" name="submit">
-  </form>
 
+    <hr style="border: 1px solid #D9D9D9 ;" />
+
+    <h3> Add an attachment </h3>
+    <form id="uploadForm" enctype="multipart/form-data" action="/api/attachments" method="post">
+      <input type="file" name="attachment" />
+      <input type="submit" value="Upload Image" name="submit">
+    </form>
+
+  </div>
 </div>
-</div>
+
 <hr style="border: 1px solid #D9D9D9 ;" />
+
 <div class='row'>
   <div class='col-md-6'>
     <table class='table table-striped'>
@@ -64,5 +70,4 @@
       </tr>
     </table>
   </div>
-</div>
 </div>

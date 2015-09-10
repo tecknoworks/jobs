@@ -3,11 +3,13 @@
     <h2><b>JOBS</b></h2>
   </div>
 </div>
+
 <div class='row'>
   <div class='col-md-12'>
     <a type='button' ng-href='/user_tkw/jobs/new' class='btn btn-success pull-right'>Create new job</a>
   </div>
 </div>
+
 <div class="row">
   <div  class="col-md-12">
     <table class='table table-striped'>
@@ -24,11 +26,16 @@
         <td>{{status[job.status]}}</td>
         <td>{{job.candidates_count}}</td>
         <td>
-          <button type='button' ng-click='delete_job(job.id)' class='btn btn-danger '> Delete </button>
-          <a class='btn btn-warning' ng-href='/user_tkw/jobs/{{job.id}}/edit'>Edit</a>
+          <div class="dropup">
+            <span class="glyphicon glyphicon-menu-up" id="dropdownMenuJobs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            </span>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuJobs">
+              <li><a href="" ng-click='delete_job(job.id)'>Delete</a></li>
+              <li><a href="/user_tkw/jobs/{{job.id}}/edit">Edit</a></li>
+            </ul>
+          </div>
         </td>
       </tr>
     </table>
   </div>
 </div>
-<button type='button' ng-click='logout()' class='btn btn-success'>Logout</button>

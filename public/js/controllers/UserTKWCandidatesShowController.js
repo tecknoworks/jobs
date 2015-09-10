@@ -8,42 +8,36 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   $scope.candidate = {}
   $scope.interviews = []
   $scope.your_vote = 'None'
+  $scope.fail_interviews = 0;
+  $scope.pass_interviews = 0;
   $scope.status_hash = {
     '0': 'FAIL',
     '1': 'PASS'
   }
+
   //########################## JOBS ##########################################
-  $http.get('api/jobs/' + $scope.job_id + generate_url_key()).
-  success(function(data){
-    $scope.job = data['body'];
-  }).
-  error(function(data, status, headers, config) {
-    logged(data);
-  });
+  get_job = function(){
+    $http.get('api/jobs/' + $scope.candidate['job_id'] + generate_url_key()).
+    success(function(data){
+      $scope.job = data['body'];
+    }).
+    error(function(data, status, headers, config) {
+      logged(data);
+    });
+  }
 
   //########################## CANDIDATES ####################################
   $http.get('api/candidates/' + $scope.candidate_id  + generate_url_key()).
   success(function(data){
     $scope.candidate = data['body'];
+    get_job();
   }).
   error(function(data, status, headers, config) {
     logged(data)
   });
 
-  create_statistics = function(){
-    $scope.fail_interviews = 0;
-    $scope.pass_interviews = 0;
-    for(var i=0; i<$scope.interviews.length; i++){
-      if( $scope.interviews[i].status == FAIL ){
-        $scope.fail_interviews += 1;
-      } else{
-        $scope.pass_interviews += 1;
-      };
-    };
-  };
-
   $scope.delete_candidate = function(){
-    $http.delete('/api/candidates/' + $scope.candidate_id  + generate_url_key()).
+    $http.delete('/api/candidates/' + $scope.candidate.id  + generate_url_key()).
     success(function(data){
       window.location.replace("/user_tkw/jobs/" + $scope.job_id);
     }).
@@ -53,6 +47,18 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   };
 
   //######################### INTERVIEWS #####################################
+  create_statistics = function(){
+    $scope.fail_interviews = 0;
+    $scope.pass_interviews = 0;
+    for(var i = 0; i < $scope.interviews.length; i++){
+      if( $scope.interviews[i].status == FAIL ){
+        $scope.fail_interviews += 1;
+      } else{
+        $scope.pass_interviews += 1;
+      };
+    };
+  };
+
   select_your_vote = function() {
     $scope.your_vote = 'None';
     for (var i=0; i<$scope.interviews.length; i++){
@@ -66,9 +72,7 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     $http.get('api/interviews' + generate_url_key() + '&candidate_id=' + $scope.candidate_id).
     success(function(data){
       $scope.interviews = data['body'];
-      if( $scope.interviews.length == 0 ){
-        $scope.interviews.push("Nu exista nici un interview");
-      } else {
+      if( $scope.interviews.length != 0 ){
         create_statistics();
         select_your_vote();
       }
@@ -79,9 +83,9 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   }
 
   $scope.create_interview = function(id){
-    $http.post('api/interviews'  + generate_url_key(), {interview: {user_id: 1, status: id, candidate_id: $scope.candidate_id}}).
+    var interview_hash = {status: id, candidate_id: $scope.candidate.id}
+    $http.post('api/interviews'  + generate_url_key(), {interview: interview_hash}).
     success(function(data){
-      $scope.interview = data['body'];
       $scope.get_interviews();
     }).
     error(function(data, status, headers, config) {
@@ -98,12 +102,9 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   }
 
   $scope.get_attachments = function() {
-    $http.get('api/attachments' + generate_url_key() + '&candidate_id=3').
+    $http.get('api/attachments' + generate_url_key() + '&candidate_id=' + $scope.candidate.id).
     success(function(data){
       $scope.attachments = data['body'];
-      if( $scope.attachments.length == 0 ){
-        $scope.attachments.push("Nu exista nici un atasament");
-      }
     }).
     error(function(data, status, headers, config) {
       logged(data)

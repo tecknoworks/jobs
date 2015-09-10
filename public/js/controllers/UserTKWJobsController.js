@@ -9,12 +9,6 @@ app.controller('UserTKWJobsController', function ($scope, $http, $routeParams) {
     '4': 'DASHBOARD'
   };
 
-  $scope.logout = function(){
-    Cookies.remove('consumer_key');
-    Cookies.remove('secret_key');
-  }
-
-  //######################### JOBS ##########################################
   $scope.delete_job = function(id){
     $http.delete('/api/jobs/' + id + generate_url_key()).
     success(function(data){
@@ -32,7 +26,6 @@ app.controller('UserTKWJobsController', function ($scope, $http, $routeParams) {
       $scope.numberOfJobs = $scope.jobs.length;
     }).
     error(function(data) {
-      console.log(data)
       logged(data)
     });
   };

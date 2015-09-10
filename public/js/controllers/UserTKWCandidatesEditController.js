@@ -18,16 +18,17 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   $http.get('api/candidates/' + $scope.candidate_id + generate_url_key()).
   success(function(data){
     $scope.candidate = data['body'];
+    get_job();
   }).
   error(function(data, status, headers, config) {
     logged(data);
   });
 
-  $scope.save = function(){
+  $scope.save_candidate = function(){
     $scope.candidate['job_id'] = $scope.dictionary_jobs[$scope.select]
     $http.patch('api/candidates/' + $scope.candidate_id + generate_url_key(), {candidate: $scope.candidate}).
     success(function(data, status, headers, config){
-      window.location.replace("/user_tkw/jobs/" + $scope.job.id + '/candidates/' + $scope.candidate.id);
+      window.location.replace("/user_tkw/jobs/" + data['body']['job_id'] + '/candidates/' + data['body']['id']);
     }).
     error(function(data, status, headers, config){
       logged(data);
@@ -35,7 +36,7 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   };
 
   $scope.delete_candidate = function(){
-    $http.delete('/api/jobs/' + $scope.job_id + '/candidates/' + $scope.candidate_id  + generate_url_key()).
+    $http.delete('/api/candidates/' + $scope.candidate.id  + generate_url_key()).
     success(function(data){
       window.location.replace("/user_tkw/jobs/" + $scope.job_id);
     }).
@@ -63,14 +64,16 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     });
   }
 
-  $http.get('api/jobs/' + $scope.job_id  + generate_url_key()).
-  success(function(data){
-    $scope.job = data['body'];
-    $scope.select = $scope.job['title']
-  }).
-  error(function(data, status, headers, config) {
-    logged(data);
-  });
+  get_job = function(){
+    $http.get('api/jobs/' + $scope.candidate['job_id']  + generate_url_key()).
+    success(function(data){
+      $scope.job = data['body'];
+      $scope.select = $scope.job['title']
+    }).
+    error(function(data, status, headers, config) {
+      logged(data);
+    });
+  }
 
   $scope.get_jobs();
 
@@ -86,7 +89,7 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   }
 
   $scope.delete_interview = function(id){
-    $http.delete('/api/interviews/' + id  + generate_url_key() + '&candidate_id=' + $scope.candidate_id).
+    $http.delete('/api/interviews/' + id  + generate_url_key()).
     success(function(data){
       $scope.get_interviews();
     }).

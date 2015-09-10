@@ -3,13 +3,17 @@
     <a ng-href='/user_tkw/jobs'>View all jobs</a>
     <button type='button' ng-click='delete_job(job.id)' class='btn btn-danger'>Delete</button>
     <a type='button'ng-href='/user_tkw/jobs/{{job.id}}/edit' class='btn btn-warning'>Edit</a>
+
     <hr style="border: 1px solid #D9D9D9 ;" />
+
     <div class="job_description">
       <div id="markout"> </div>
     </div>
   </div>
 </div>
+
 <hr style="border: 1px solid #D9D9D9 ;" />
+
 <div class="row">
   <div class='col-md-4'>
     <form>
@@ -29,10 +33,13 @@
         <label>Phone Number</label>
         <input class='form-control' placeholder="Phone Number" ng-model='candidate.phone_number'>
       </div>
+
       <button type='button' class='btn btn-success btn-block' ng-click='create_candidate()'>Add candidate</button>
     </form>
   </div>
+
   <div class='col-md-8'>
+
     <table class='table table-striped'>
       <caption><h2>List with candidates for this job</h2></caption>
       <tr align='center'>
@@ -45,15 +52,18 @@
         <td><a ng-href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}'>{{candidate.full_name}}</a></td>
         <td>{{candidate.email}}</td>
         <td>{{candidate.phone_number}}</td>
-        <td><div class="dropup">
-          <span class="glyphicon glyphicon-menu-up" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          </span>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="" ng-click='delete_candidate(candidate.id)'>Delete</a></li>
-            <li><a href="/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}/edit">Edit</a></li>
-          </ul>
-        </div></td>
+        <td>
+          <div class="dropup">
+            <span class="glyphicon glyphicon-menu-up" id="dropdownMenuCandidates" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            </span>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuCandidates">
+              <li><a href="" ng-click='delete_candidate(candidate.id)'>Delete</a></li>
+              <li><a href="/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}/edit">Edit</a></li>
+            </ul>
+          </div>
+        </td>
       </tr>
     </table>
+
   </div>
 </div>

@@ -1,10 +1,9 @@
 app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParams) {
   $scope.job_id = $routeParams.id;
   $scope.job = {};
-  $scope.attachments = [];
-  $scope.attach = {};
   $scope.candidate = {};
 
+  //############################## JOBS #####################################
   $http.get('api/jobs/' + $scope.job_id + generate_url_key()).
   success(function(data){
     $scope.job = data['body'];
@@ -16,19 +15,31 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
     logged(data);
   });
 
+  $scope.delete_job = function(id){
+    $http.delete('/api/jobs/' + $scope.job.id + generate_url_key()).
+    success(function(data){
+      window.location.replace("/user_tkw/jobs");
+    }).
+    error(function(data){
+      logged(data);
+    });
+  };
+
+  //############################ CANDIDATES ##################################
   get_candidates = function(){
     $http.get('api/candidates' + generate_url_key() + '&job_id=' + $scope.job_id).
     success(function(data){
       $scope.candidates = data['body'];
-      console.log($scope.candidates)
     }).
     error(function(data){
       logged(data)
     });
   };
 
+  get_candidates()
+
   $scope.create_candidate = function(){
-    $scope.candidate['job_id'] = $scope.job_id
+    $scope.candidate['job_id'] = $scope.job.id
 
     $http.post('/api/candidates' + generate_url_key(), {candidate: $scope.candidate}).
     success(function(data, status, headers, config) {
@@ -42,7 +53,6 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   }
 
   $scope.delete_candidate = function(id){
-    $scope.id = id;
     $http.delete('/api/candidates/' + id + generate_url_key()).
     success(function(data){
       get_candidates()
@@ -51,17 +61,5 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
       logged(data);
     });
   };
-
-  $scope.delete_job = function(id){
-    $http.delete('/api/jobs/' + $scope.job_id + generate_url_key()).
-    success(function(data){
-      window.location.replace("/user_tkw/jobs");
-    }).
-    error(function(data){
-      logged(data);
-    });
-  };
-
-  get_candidates()
 
 });
