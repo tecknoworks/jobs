@@ -6,14 +6,14 @@ RSpec.describe Job, type: :routing do
   end
 
   it 'routes to #show' do
-    expect(get: '/api/jobs/1').to route_to(controller: 'jobs', action: 'show', format: :json, id: '1')
+    expect(get: '/api/jobs/1').to route_to(controller: 'jobs', action: 'show', id: '1', format: :json)
   end
 
   it 'routes to #create' do
     expect(post: '/api/jobs').to route_to(controller: 'jobs', action: 'create', format: :json)
   end
 
-  it 'routes to #delete' do
+  it 'routes to #destroy' do
     expect(delete: '/api/jobs/1').to route_to(controller: 'jobs', action: 'destroy', id: '1', format: :json)
   end
 

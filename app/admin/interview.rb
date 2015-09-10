@@ -3,12 +3,12 @@ ActiveAdmin.register Interview do
 
   index do
     selectable_column
-    column :status do |job|
-      begin
-        # interview_status_select_values.find { |e| e[1] == job.status }.first
-      rescue
-        # interview.status
-      end
+    column :status do |_job|
+      # begin
+      # interview_status_select_values.find { |e| e[1] == job.status }.first
+      # rescue
+      # interview.status
+      # end
     end
     column :candidate
     column :user

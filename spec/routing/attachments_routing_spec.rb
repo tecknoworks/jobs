@@ -6,18 +6,14 @@ RSpec.describe Attachment, type: :routing do
   end
 
   it 'routes to #show' do
-    expect(get: '/api/attachments/1').to route_to(controller: 'attachments', action: 'show', format: :json, id: '1')
+    expect(get: '/api/attachments/1').to route_to(controller: 'attachments', action: 'show', id: '1', format: :json)
   end
 
   it 'routes to #create' do
     expect(post: '/api/attachments').to route_to(controller: 'attachments', action: 'create', format: :json)
   end
 
-  it 'routes to #update' do
-    expect(put: '/api/attachments/1').to route_to(controller: 'attachments', action: 'update', format: :json, id: '1')
-  end
-
-  it 'routes to #delete' do
-    expect(delete: '/api/attachments/1').to route_to(controller: 'attachments', action: 'destroy', format: :json, id: '1')
+  it 'routes to #destroy' do
+    expect(delete: '/api/attachments/1').to route_to(controller: 'attachments', action: 'destroy', id: '1', format: :json)
   end
 end

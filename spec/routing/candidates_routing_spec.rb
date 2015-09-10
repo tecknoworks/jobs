@@ -6,7 +6,7 @@ RSpec.describe Candidate, type: :routing do
   end
 
   it 'routes to #show' do
-    expect(get: '/api/candidates/1').to route_to(controller: 'candidates', action: 'show', format: :json, id: '1')
+    expect(get: '/api/candidates/1').to route_to(controller: 'candidates', action: 'show', id: '1', format: :json)
   end
 
   it 'routes to #create' do

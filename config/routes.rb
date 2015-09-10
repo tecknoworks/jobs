@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   scope :api, defaults: { format: :json } do
-    resources :attachments, only: [:index, :show, :create, :destroy, :update]
     put '/login', to: 'users#login'
     resources :jobs, only: [:index, :show, :create, :destroy, :update]
     resources :candidates, only: [:index, :show, :create, :destroy, :update]
     resources :interviews, only: [:index, :show, :create, :destroy]
+    resources :attachments, only: [:index, :show, :create, :destroy]
   end
 
   post 'test_ldap_auth', to: 'tkw_auth_tests#create' if Rails.env.test?
