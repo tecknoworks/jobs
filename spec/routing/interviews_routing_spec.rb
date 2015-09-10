@@ -6,7 +6,7 @@ RSpec.describe Interview, type: :routing do
   end
 
   it 'routes to #show' do
-    expect(get: '/api/interviews').to route_to(controller: 'interviews', action: 'index', format: :json)
+    expect(get: '/api/interviews/1').to route_to(controller: 'interviews', action: 'show', id: '1', format: :json)
   end
 
   it 'routes to #create' do

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   scope :api, defaults: { format: :json } do
+    resources :jobclient, only: [:index, :show]
     put '/login', to: 'users#login'
     delete '/logout/:id', to: 'users#logout'
     resources :jobs, only: [:index, :show, :create, :destroy, :update]

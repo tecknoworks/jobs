@@ -2,7 +2,7 @@ app.controller('JobsController', function ($scope, $http, $location) {
 
   $scope.jobs = [];
 
-  $http.get('api/jobs').success(function(data){
+  $http.get('api/jobclient').success(function(data){
     $scope.jobs = data['body'];
     $scope.numberOfJobs = $scope.jobs.length;
   });
