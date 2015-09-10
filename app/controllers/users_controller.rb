@@ -9,6 +9,12 @@ class UsersController < ApplicationController
   end
 
   def logout
+    @key = Key.find(params[:id])
+    if @key.present?
+      if @key.consumer_key == params[:consumer_key] && @key.secret_key == params[:secret_key]
+        @key.delete
+      end
+    end
   end
 
   private
