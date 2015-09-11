@@ -11,7 +11,7 @@ RSpec.describe CandidatesController, type: :controller do
 
   let(:consumer_key) { return @key.consumer_key }
   let(:secret_key) { return @key.secret_key }
-  let(:valid_candidate) { return { full_name: 'ionut', phone_number: '0722222222', email: 'test@example.com', job_id: @job.id } }
+  let(:valid_candidate) { return { full_name: 'ionut', phone_number: '0722222222', email: 'test@example.com', job_id: @job.id, source: 'user_tkw'} }
 
   describe 'GET index' do
     it 'when user is logged' do

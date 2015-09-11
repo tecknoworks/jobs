@@ -39,6 +39,6 @@ class CandidatesController < ApplicationController
   private
 
   def candidate_params
-    params.require(:candidate).permit(:full_name, :phone_number, :email, :job_id)
+    params.require(:candidate).permit(:full_name, :phone_number, :email, :job_id, :source)
   end
 end

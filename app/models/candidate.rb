@@ -7,6 +7,7 @@ class Candidate < ActiveRecord::Base
   validates :phone_number, presence: true
   validates :email, presence: true
   validates :job, presence: true
+  validates :source, presence: true
 
   validates :phone_number, phone_number: { ten_digits: true,
                                            seven_digits: true }
