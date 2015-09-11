@@ -30,7 +30,9 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   $http.get('api/candidates/' + $scope.candidate_id  + generate_url_key()).
   success(function(data){
     $scope.candidate = data['body'];
+    $scope.get_attachments();
     get_job();
+    $scope.action = '/api/attachments' + generate_url_key() + '&candidate_id=' + $scope.candidate.id
   }).
   error(function(data, status, headers, config) {
     logged(data)
@@ -105,12 +107,12 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     $http.get('api/attachments' + generate_url_key() + '&candidate_id=' + $scope.candidate.id).
     success(function(data){
       $scope.attachments = data['body'];
+    console.log($scope.attachments)
     }).
     error(function(data, status, headers, config) {
       logged(data)
     });
   }
 
-  $scope.get_attachments();
 
 });

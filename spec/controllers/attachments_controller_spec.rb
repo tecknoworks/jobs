@@ -15,10 +15,9 @@ RSpec.describe AttachmentsController, type: :controller do
 
   let(:consumer_key) { return @key.consumer_key }
   let(:secret_key) { return @key.secret_key }
-  let(:valid_attachment) { return { candidate_id: @candidate1.id, user_id: @user1.id, file: Rack::Test::UploadedFile.new('spec/erd.pdf') } }
-  let(:invalid_user_attachment) { return { candidate_id: @candidate1.id, user_id: -1, file: Rack::Test::UploadedFile.new('spec/erd.pdf') } }
-  let(:invalid_candidate_attachment) { return { candidate_id: -1, user_id: @user1.id, file: Rack::Test::UploadedFile.new('spec/erd.pdf') } }
-  let(:invalid_file_attachment) { return { candidate_id: @candidate1.id, user_id: @user1.id, file: '' } }
+  let(:valid_attachment) { return { candidate_id: @candidate1.id, file: Rack::Test::UploadedFile.new('spec/erd.pdf') } }
+  let(:invalid_candidate_attachment) { return { candidate_id: -1, file: Rack::Test::UploadedFile.new('spec/erd.pdf') } }
+  let(:invalid_file_attachment) { return { candidate_id: @candidate1.id, file: '' } }
 
   describe 'GET index' do
     it 'works when user is logged' do
@@ -76,7 +75,7 @@ RSpec.describe AttachmentsController, type: :controller do
   describe 'POST create' do
     it 'works when user is logged' do
       expect do
-        post :create, consumer_key: consumer_key, secret_key: secret_key, attachment: valid_attachment, format: :json
+        post :create, consumer_key: consumer_key, secret_key: secret_key, attachment: valid_attachment, file: Rack::Test::UploadedFile.new('spec/erd.pdf'), candidate_id: @candidate1.id, format: :json
       end.to change { Attachment.count }.by(1)
     end
 
@@ -84,12 +83,6 @@ RSpec.describe AttachmentsController, type: :controller do
       post :create, consumer_key: '', secret_key: '', attachment: valid_attachment, format: :json
       expect(json[:code]).to eq(400_001)
       expect(json[:body]).to eq('You are not logged')
-    end
-
-    it 'when user not exist' do
-      expect do
-        post :create, consumer_key: consumer_key, secret_key: secret_key, attachment: invalid_user_attachment, format: :json
-      end.to raise_error ActiveRecord::RecordInvalid
     end
 
     it 'when candidate not exist' do

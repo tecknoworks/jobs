@@ -1,1 +1,1 @@
-json.call(job, :id, :title, :description)
+json.(job, :id, :title, :description)

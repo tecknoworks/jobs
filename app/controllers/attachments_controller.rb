@@ -20,7 +20,8 @@ class AttachmentsController < ApplicationController
   api :post, '/attachments/:id', 'Create an attachment'
   def create
     if logged(params) == true
-      @attachment = Attachment.create!(attachment_params)
+      key = Key.where(consumer_key: params[:consumer_key], secret_key: params[:secret_key]).first
+      @attachment = Attachment.create!(user_id: key.user_id, candidate_id: params[:candidate_id], file: params[:file])
     end
   end
 
@@ -40,6 +41,6 @@ class AttachmentsController < ApplicationController
   private
 
   def attachment_params
-    params.require(:attachment).permit(:user_id, :candidate_id, :file)
+    params.require(:attachment).permit(:candidate_id, :file)
   end
 end

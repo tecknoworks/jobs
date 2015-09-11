@@ -30,9 +30,9 @@
     <hr style="border: 1px solid #D9D9D9 ;" />
 
     <h3> Add an attachment </h3>
-    <form id="uploadForm" enctype="multipart/form-data" action="/api/attachments" method="post">
-      <input type="file" name="attachment" />
-      <input type="submit" value="Upload Image" name="submit">
+    <form id="uploadForm" enctype="multipart/form-data" action="{{action}}" method="post">
+      <input type="file" name="file" />
+      <input type="submit" value="Upload File" name="submit">
     </form>
 
   </div>
@@ -48,6 +48,7 @@
         <td>Attachment</td>
         <td>Added</td>
       </tr>
+
       <tr align='center' ng-repeat='attachment in attachments'>
         <td><a href='{{attachment.file.file.url}}' download target="_blank">{{file_name(attachment.file.file.url)}}</a></td>
         <td>{{attachment.user_name}}</td>

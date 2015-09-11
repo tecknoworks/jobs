@@ -20,21 +20,23 @@
       <h2> Add candidate for this job </h2>
 
       <div class='form-group'>
-        <label>Name</label>
-        <input class='form-control' placeholder="Name" ng-model='candidate.full_name'>
+        <label class='control-label'>Name</label>
+        <input type='text' class='form-control' placeholder="Name" ng-model='candidate.full_name' required>
       </div>
 
       <div class='form-group'>
-        <label>Email</label>
-        <input class='form-control' placeholder="Email" ng-model='candidate.email'>
+        <label class='control-label'>Email</label>
+        <input type='email' class='form-control' placeholder="Email" ng-model='candidate.email' required>
       </div>
 
       <div class='form-group'>
-        <label>Phone Number</label>
-        <input class='form-control' placeholder="Phone Number" ng-model='candidate.phone_number'>
+        <label lass='control-label'>Phone Number</label>
+        <input type='text'class='form-control' placeholder="Phone Number" ng-model='candidate.phone_number' required>
       </div>
 
-      <button type='button' class='btn btn-success btn-block' ng-click='create_candidate()'>Add candidate</button>
+      <div class='form-group'>
+        <button type='submit' class='btn btn-success btn-block' ng-click='create_candidate()'>Add candidate</button>
+      </div>
     </form>
   </div>
 
