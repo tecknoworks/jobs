@@ -107,7 +107,6 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     $http.get('api/attachments' + generate_url_key() + '&candidate_id=' + $scope.candidate.id).
     success(function(data){
       $scope.attachments = data['body'];
-    console.log($scope.attachments)
     }).
     error(function(data, status, headers, config) {
       logged(data)

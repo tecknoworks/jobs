@@ -18,6 +18,7 @@
         <td>Title</td>
         <td>Status</td>
         <td>Candidates</td>
+        <td>Candidates without interviews</td>
         <td>Options</td>
       </tr>
       <tr align='center' ng-repeat='job in jobs'>
@@ -25,6 +26,7 @@
         <td><a ng-href='/user_tkw/jobs/{{job.id}}'>{{job.title}}</a></td>
         <td>{{status[job.status]}}</td>
         <td>{{job.candidates_count}}</td>
+        <td>{{job.candidates_without_interview}}</td>
         <td>
           <div class="dropup">
             <span class="glyphicon glyphicon-menu-up" id="dropdownMenuJobs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
