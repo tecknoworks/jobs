@@ -48,12 +48,14 @@
         <td><b>Name</b></td>
         <td><b>Email</b></td>
         <td><b>Phone Number</b></td>
+        <td><b>Interviews</b></td>
         <td>#</td>
       </tr>
       <tr align='center' ng-repeat='candidate in candidates'>
         <td><a ng-href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}'>{{candidate.full_name}}</a></td>
         <td>{{candidate.email}}</td>
         <td>{{candidate.phone_number}}</td>
+        <td>{{candidate.number_of_interviews}}</td>
         <td>
           <div class="dropup">
             <span class="glyphicon glyphicon-menu-up" id="dropdownMenuCandidates" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
