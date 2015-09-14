@@ -35,6 +35,11 @@
       </div>
 
       <div class='form-group'>
+        <label lass='control-label'>Source</label>
+        <input type='text'class='form-control' placeholder="Source" ng-model='candidate.source' required>
+      </div>
+
+      <div class='form-group'>
         <button type='submit' class='btn btn-success btn-block' ng-click='create_candidate()'>Add candidate</button>
       </div>
     </form>
@@ -48,6 +53,7 @@
         <td><b>Name</b></td>
         <td><b>Email</b></td>
         <td><b>Phone Number</b></td>
+        <td><b>Source</b></td>
         <td><b>Interviews</b></td>
         <td>#</td>
       </tr>
@@ -55,6 +61,7 @@
         <td><a ng-href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}'>{{candidate.full_name}}</a></td>
         <td>{{candidate.email}}</td>
         <td>{{candidate.phone_number}}</td>
+        <td>{{candidate.source}}</td>
         <td>{{candidate.number_of_interviews}}</td>
         <td>
           <div class="dropup">
