@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20150914111105) do
   create_table "interviews", force: :cascade do |t|
     t.integer  "candidate_id"
     t.integer  "user_id"
-    t.integer  "status"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.datetime "date_and_time"
