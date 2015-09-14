@@ -1,19 +1,11 @@
 app.controller('UserTKWCandidatesShowController', function ($scope, $http, $routeParams) {
-  var FAIL = 0
-  var PASS = 1
-
   $scope.job_id = window.location.href.split('/')[5]
   $scope.candidate_id = $routeParams.id
   $scope.job = {}
   $scope.candidate = {}
   $scope.interviews = []
-  $scope.your_vote = 'None'
-  $scope.fail_interviews = 0;
-  $scope.pass_interviews = 0;
-  $scope.status_hash = {
-    '0': 'FAIL',
-    '1': 'PASS'
-  }
+  $scope.date = ''
+  $scope.time = ''
 
   //########################## JOBS ##########################################
   get_job = function(){
@@ -49,43 +41,18 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   };
 
   //######################### INTERVIEWS #####################################
-  create_statistics = function(){
-    $scope.fail_interviews = 0;
-    $scope.pass_interviews = 0;
-    for(var i = 0; i < $scope.interviews.length; i++){
-      if( $scope.interviews[i].status == FAIL ){
-        $scope.fail_interviews += 1;
-      } else{
-        $scope.pass_interviews += 1;
-      };
-    };
-  };
-
-  select_your_vote = function() {
-    $scope.your_vote = 'None';
-    for (var i=0; i<$scope.interviews.length; i++){
-      if ($scope.interviews[i]['user_id'] == Cookies.get('user_id')){
-        $scope.your_vote = $scope.status_hash[$scope.interviews[i]['status']]
-      }
-    }
-  }
-
   $scope.get_interviews = function() {
     $http.get('api/interviews' + generate_url_key() + '&candidate_id=' + $scope.candidate_id).
     success(function(data){
       $scope.interviews = data['body'];
-      if( $scope.interviews.length != 0 ){
-        create_statistics();
-        select_your_vote();
-      }
     }).
     error(function(data, status, headers, config) {
       logged(data)
     });
   }
 
-  $scope.create_interview = function(id){
-    var interview_hash = {status: id, candidate_id: $scope.candidate.id}
+  $scope.create_interview = function(){
+    var interview_hash = {date_and_time: $scope.date + ' ' + $scope.time, candidate_id: $scope.candidate.id}
     $http.post('api/interviews'  + generate_url_key(), {interview: interview_hash}).
     success(function(data){
       $scope.get_interviews();

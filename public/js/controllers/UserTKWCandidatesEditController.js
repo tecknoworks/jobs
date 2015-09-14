@@ -9,11 +9,6 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   $scope.keys = []
   $scope.user_id = Cookies.get('user_id')
 
-  $scope.status_hash = {
-    '0': 'FAIL',
-    '1': 'PASS'
-  }
-
   //######################## CANDIDATES ######################################
   $http.get('api/candidates/' + $scope.candidate_id + generate_url_key()).
   success(function(data){

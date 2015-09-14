@@ -14,17 +14,27 @@
   </div>
 
   <div class='col-md-6'>
-    <h3> Vote </h3>
+
+    <h3> Create an interview </h3>
     <div class='row'>
-      <div class='col-md-6'>
-        <button type='button' class='btn btn-danger btn-block' ng-click='create_interview(0)'>Fail</button>
-        Fail: {{fail_interviews}} <br>
-        Your vote: <span ng-class="{'text-success': your_vote=='PASS', 'text-danger': your_vote=='FAIL'}"> {{your_vote}}  </span>
+      <div class='col-md-4'>
+        <div class='form-group'>
+          <label class='control-label'>Date</label>
+          <input type='text' class='form-control' ng-model='date' placeholder='yyyy/mm/dd'>
+        </div>
       </div>
 
-      <div class='col-md-6'>
-        <button type='button' class='btn btn-success btn-block' ng-click='create_interview(1)'>Pass</button>
-        Pass: {{pass_interviews}}
+      <div class='col-md-3'>
+        <div class='form-group'>
+          <label class='control-label'>Time</label>
+          <input type='text' class='form-control' ng-model='time' placeholder="hh:mm">
+        </div>
+      </div>
+
+      <div class='col-md-3'>
+        <div class='form-group'>
+          <button type='button' ng-click='create_interview()' class='btn btn-success'>Create an Interview </button>
+        </div>
       </div>
     </div>
 
@@ -46,8 +56,8 @@
     <table class='table table-striped'>
       <caption> List with attachments </caption>
       <tr align='center'>
-        <td>Attachment</td>
-        <td>Added</td>
+        <td><b>Attachment</b></td>
+        <td><b>Added</b></td>
       </tr>
 
       <tr align='center' ng-repeat='attachment in attachments'>
@@ -61,13 +71,11 @@
     <table class='table table-striped'>
       <caption> List with interviews </caption>
       <tr align='center'>
-        <td>Status</td>
-        <td>Voted By</td>
+        <td><b>Date & Time</b></td>
+        <td><b>Created By</b></td>
       </tr>
       <tr align='center' ng-repeat='interview in interviews'>
-        <td ng-class="{'text-success': status_hash[interview.status]=='PASS', 'text-danger': status_hash[interview.status]=='FAIL'}">
-          {{status_hash[interview.status]}}
-        </td>
+        <td> <a ng-href='user_tkw/jobs/1/candidate/1/interview'>{{interview.date}} at {{interview.time}} </a> </td>
         <td>{{interview.user_name}}</td>
       </tr>
     </table>
