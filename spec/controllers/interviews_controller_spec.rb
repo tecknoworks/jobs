@@ -11,7 +11,7 @@ RSpec.describe InterviewsController, type: :controller do
 
   let(:consumer_key) { return @key.consumer_key }
   let(:secret_key) { return @key.secret_key }
-  let(:valid_interview) { return { candidate_id: @candidate.id, status: Interview::PASS } }
+  let(:valid_interview) { return { candidate_id: @candidate.id, date_and_time: '2015-3-27 13:30', status: Interview::PASS } }
 
   describe 'GET index' do
     it 'when candidate not exist' do
@@ -59,6 +59,8 @@ RSpec.describe InterviewsController, type: :controller do
       expect(json[:body][:candidate_id]).to eq(interview.candidate_id)
       expect(json[:body][:user_id]).to eq(interview.user_id)
       expect(json[:body][:status]).to eq(interview.id)
+      expect(json[:body][:date]).to eq('01/02/2015')
+      expect(json[:body][:time]).to eq('13:30')
     end
 
     it 'when user are not logged' do
@@ -113,13 +115,15 @@ RSpec.describe InterviewsController, type: :controller do
       expect(json[:body][:candidate_id]).to eq(@candidate.id)
 
       expect do
-        post :create, consumer_key: consumer_key, secret_key: secret_key, interview: { candidate_id: @candidate.id, status: Interview::FAIL }, format: :json
+        post :create, consumer_key: consumer_key, secret_key: secret_key, interview: { candidate_id: @candidate.id, date_and_time: '2015-3-20 12:00', status: Interview::FAIL }, format: :json
       end.to change { Interview.count }.by 0
       expect(json[:code]).to eq(200)
       expect(json[:body][:id]).to eq(@interview['id'])
       expect(json[:body][:user_id]).to eq(@interview['user_id'])
       expect(json[:body][:status]).to_not eq(@interview['status'])
       expect(json[:body][:candidate_id]).to eq(@interview['candidate_id'])
+      expect(json[:body][:date]).to eq('20/03/2015')
+      expect(json[:body][:time]).to eq('12:00')
     end
 
     it 'when exist interview, the user is the same but is another key' do
@@ -158,7 +162,7 @@ RSpec.describe InterviewsController, type: :controller do
       expect(json[:body][:candidate_id]).to eq(@candidate.id)
 
       expect do
-        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, interview: { candidate_id: @candidate.id, status: Interview::FAIL }, format: :json
+        post :create, consumer_key: key.consumer_key, secret_key: key.secret_key, interview: { candidate_id: @candidate.id, date_and_time: '2015-3-15 11:59', status: Interview::FAIL }, format: :json
       end.to change { Interview.count }.by 1
       expect(json[:code]).to eq(200)
       expect(json[:body][:user_id]).to eq(user.id)
