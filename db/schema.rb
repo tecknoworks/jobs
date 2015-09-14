@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911144254) do
+ActiveRecord::Schema.define(version: 20150914111105) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -50,8 +50,9 @@ ActiveRecord::Schema.define(version: 20150911144254) do
     t.integer  "candidate_id"
     t.integer  "user_id"
     t.integer  "status"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.datetime "date_and_time"
   end
 
   create_table "jobs", force: :cascade do |t|

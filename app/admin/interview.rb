@@ -1,5 +1,5 @@
 ActiveAdmin.register Interview do
-  permit_params :candidate_id, :status, :user_id
+  permit_params :candidate_id, :status, :user_id, :date_and_time
 
   index do
     selectable_column
@@ -22,6 +22,7 @@ ActiveAdmin.register Interview do
       f.input :candidate
       f.input :user
       f.input :status
+      f.input :date_and_time
     end
     f.actions
   end
