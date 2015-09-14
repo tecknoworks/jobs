@@ -5,6 +5,7 @@ RSpec.describe Interview, type: :model do
 
   it { expect(subject).to belong_to :candidate }
   it { expect(subject).to belong_to :user }
+  it { expect(subject).to have_many :comments }
 
   it { expect(subject).to validate_presence_of :candidate }
   it { expect(subject).to validate_presence_of :user }
