@@ -56,6 +56,11 @@ app.config(['$routeProvider',
       controller: 'UserTKWCandidatesEditController',
     })
 
+    .when('/user_tkw/jobs/:id/candidates/:id/interview/:id', {
+      templateUrl: 'partials/user_tkw/interviews/show.html',
+      controller: 'UserTKWInterviewsShowController',
+    })
+
     .otherwise({
       redirectTo: function(current, path, search) {
         if(search.goto) {

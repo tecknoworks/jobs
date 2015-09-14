@@ -1,0 +1,44 @@
+<div class='row'>
+  <div class='col-md-12'>
+    <h1> Interview  </h1>
+    <h2>
+      Candidate: <a ng-href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}'>
+        {{candidate.full_name}}
+      </a> <br>
+      Job: <a href='/user_tkw/jobs/{{job.id}}'>
+        {{job.title}}
+      </a><br>
+      Date & Time: {{interview.date}} at {{interview.time}}
+    </h2>
+  </div>
+</div>
+
+<br><br><br>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <h2>Comments:</h2>
+    <hr style="border: 1px solid #D9D9D9 ;" />
+    <h4> Ionut Muresan: </h4>
+    <span>
+      This is my first comment
+    </span>
+    <hr style="border: 1px solid #D9D9D9 ;" />
+    <h4> Pop Vasile: </h4>
+    <span>
+      bla bla bla... </br>
+      i am not agree with this comment
+    </span>
+    <hr style="border: 1px solid #D9D9D9 ;" />
+    <h4> Ionut Muresan: </h4>
+    <span>
+      hehe works :D
+    </span>
+    <hr style="border: 1px solid #D9D9D9 ;" />
+  </div>
+  <div class='col-md-12'>
+    <h3> Comment </h3>
+    <textarea rows='6' class='form-control' placeholder="Write a comment. You can write in format markdown"></textarea><br>
+    <button type='button' class='btn btn-default'> Send </button>
+  </div>
+</div>
