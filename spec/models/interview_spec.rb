@@ -34,7 +34,7 @@ RSpec.describe Interview, type: :model do
     expect(@interview.date_and_time.year).to eq(2015)
     expect(@interview.date_and_time.month).to eq(2)
     expect(@interview.date_and_time.day).to eq(1)
-    expect(@interview.date_and_time.hour).to eq(11)
+    expect(@interview.date_and_time.hour).to eq(13)
     expect(@interview.date_and_time.min).to eq(30)
   end
 end
