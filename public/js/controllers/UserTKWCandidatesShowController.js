@@ -7,23 +7,13 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   $scope.date = ''
   $scope.time = ''
 
-  //########################## JOBS ##########################################
-  get_job = function(){
-    $http.get('api/jobs/' + $scope.candidate['job_id'] + generate_url_key()).
-    success(function(data){
-      $scope.job = data['body'];
-    }).
-    error(function(data, status, headers, config) {
-      logged(data);
-    });
-  }
-
   //########################## CANDIDATES ####################################
   $http.get('api/candidates/' + $scope.candidate_id  + generate_url_key()).
   success(function(data){
     $scope.candidate = data['body'];
-    $scope.get_attachments();
     get_job();
+    get_attachments();
+    get_interviews();
     $scope.action = '/api/attachments' + generate_url_key() + '&candidate_id=' + $scope.candidate.id
   }).
   error(function(data, status, headers, config) {
@@ -40,9 +30,20 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     });
   };
 
+  //########################## JOBS ##########################################
+  get_job = function(){
+    $http.get('api/jobs/' + $scope.candidate.job_id + generate_url_key()).
+    success(function(data){
+      $scope.job = data['body'];
+    }).
+    error(function(data, status, headers, config) {
+      logged(data);
+    });
+  }
+
   //######################### INTERVIEWS #####################################
-  $scope.get_interviews = function() {
-    $http.get('api/interviews' + generate_url_key() + '&candidate_id=' + $scope.candidate_id).
+  get_interviews = function() {
+    $http.get('api/interviews' + generate_url_key() + '&candidate_id=' + $scope.candidate.id).
     success(function(data){
       $scope.interviews = data['body'];
     }).
@@ -55,14 +56,12 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     var interview_hash = {date_and_time: $scope.date + ' ' + $scope.time, candidate_id: $scope.candidate.id}
     $http.post('api/interviews'  + generate_url_key(), {interview: interview_hash}).
     success(function(data){
-      $scope.get_interviews();
+      get_interviews();
     }).
     error(function(data, status, headers, config) {
       logged(data)
     });
   };
-
-  $scope.get_interviews();
 
   //######################## ATTACHMENTS ####################################
   $scope.file_name = function(name){
@@ -70,7 +69,7 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     return array[array.length-1]
   }
 
-  $scope.get_attachments = function() {
+  get_attachments = function() {
     $http.get('api/attachments' + generate_url_key() + '&candidate_id=' + $scope.candidate.id).
     success(function(data){
       $scope.attachments = data['body'];
@@ -79,6 +78,4 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
       logged(data)
     });
   }
-
-
 });

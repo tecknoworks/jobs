@@ -7,6 +7,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   $http.get('api/jobs/' + $scope.job_id + generate_url_key()).
   success(function(data){
     $scope.job = data['body'];
+    get_candidates()
     md_content = $scope.job.description
     $scope.html_content = markdown.toHTML( md_content );
     $("markout").innerHTML = $scope.html_content
@@ -27,7 +28,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
 
   //############################ CANDIDATES ##################################
   get_candidates = function(){
-    $http.get('api/candidates' + generate_url_key() + '&job_id=' + $scope.job_id).
+    $http.get('api/candidates' + generate_url_key() + '&job_id=' + $scope.job.id).
     success(function(data){
       $scope.candidates = data['body'];
     }).
@@ -36,14 +37,11 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
     });
   };
 
-  get_candidates()
-
   $scope.create_candidate = function(){
     $scope.candidate['job_id'] = $scope.job.id
 
     $http.post('/api/candidates' + generate_url_key(), {candidate: $scope.candidate}).
     success(function(data, status, headers, config) {
-      $scope.rezultat = data;
       $scope.candidate = {};
       get_candidates();
     }).
