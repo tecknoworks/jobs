@@ -38,6 +38,23 @@ RSpec.describe CommentsController, type: :controller do
       expect(json['code']).to eq(400_001)
       expect(json['body']).to eq('You are not logged')
     end
+
+    it 'return user_name from email' do
+      @comment = create :comment, interview_id: @interview.id, user_id: @user.id
+
+      get :index, consumer_key: consumer_key, secret_key: secret_key, interview_id: @interview.id, format: :json
+      expect(json['code']).to eq(200)
+      expect(json['body'][0]['user_name']).to eq('User')
+
+      Comment.delete_all
+
+      user = create :user, email: 'firstname.lastname@example.com'
+      @comment = create :comment, interview_id: @interview.id, user_id: user.id
+
+      get :index, consumer_key: consumer_key, secret_key: secret_key, interview_id: @interview.id, format: :json
+      expect(json['code']).to eq(200)
+      expect(json['body'][0]['user_name']).to eq('Lastname Firstname')
+    end
   end
 
   describe 'GET #create' do

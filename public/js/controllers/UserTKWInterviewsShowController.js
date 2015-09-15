@@ -28,10 +28,10 @@ app.controller('UserTKWInterviewsShowController', function ($scope, $http, $rout
   }
 
   $scope.create_comment = function(){
-    console.log('bla bla bal')
     $http.post('/api/comments/' + generate_url_key(), {comment: {body: $scope.comment_text, interview_id: $scope.interview_id}}).
     success(function(data){
       $scope.interviews = data['body']
+      $scope.comment_text = '';
       get_comments();
     }).
     error(function(data){
