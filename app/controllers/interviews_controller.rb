@@ -1,21 +1,25 @@
 class InterviewsController < ApplicationController
   api :GET, '/api/jobs/:id/candidates/:id/interviews', 'Return list of interviews'
   def index
-    if logged(params) == true
+    if logged(params)
       @interviews = Interview.where(candidate_id: params[:candidate_id])
+    else
+      render_response('You are not logged', 400_001)
     end
   end
 
   api :GET, '/api/jobs/:id/candidates/:id/interviews/:id', 'Return an interview'
   def show
-    if logged(params) == true
+    if logged(params)
       @interview = Interview.find(params[:id])
+    else
+      render_response('You are not logged', 400_001)
     end
   end
 
   api :POST, '/api/jobs/:id/candidates/:id/interviews', 'Create an interview'
   def create
-    if logged(params) == true
+    if logged(params)
       key = Key.where(consumer_key: params[:consumer_key], secret_key: params[:secret_key]).first
       create_params = interview_params
       create_params['user_id'] = key['user_id']
@@ -26,12 +30,14 @@ class InterviewsController < ApplicationController
       else
         @interview.update_attributes!(create_params)
       end
+    else
+      render_response('You are not logged', 400_001)
     end
   end
 
   api :DELETE, '/api/jobs/:id/candidates/:id/interviews/:id', 'Delete an interview'
   def destroy
-    if logged(params) == true
+    if logged(params)
       key = Key.where(consumer_key: params[:consumer_key], secret_key: params[:secret_key]).first
 
       @interview = Interview.find(params[:id])
@@ -40,6 +46,8 @@ class InterviewsController < ApplicationController
       else
         render_response('Permission denied', 400_002)
       end
+    else
+      render_response('You are not logged', 400_001)
     end
   end
 

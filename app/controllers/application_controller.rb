@@ -14,10 +14,6 @@ class ApplicationController < ActionController::Base
   end
 
   def logged(params)
-    if Key.where(consumer_key: params[:consumer_key], secret_key: params[:secret_key]) == []
-      render_response('You are not logged', 400_001)
-    else
-      return true
-    end
+    Key.where(consumer_key: params[:consumer_key], secret_key: params[:secret_key]) != []
   end
 end
