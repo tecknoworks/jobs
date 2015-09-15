@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :comment do
-    body "Comment..."
+    body 'Comment...'
     user_id user
     interview_id interview
   end

@@ -4,6 +4,7 @@ app.controller('UserTKWInterviewsShowController', function ($scope, $http, $rout
   $scope.candidate_id = window.location.href.split('/')[7]
   $scope.interview_id = $routeParams.id
   $scope.candidate = {}
+  $scope.comment_text = ''
 
   //########################## CANDIDATES ####################################
   $http.get('/api/candidates/' + $scope.candidate_id + generate_url_key()).
@@ -16,13 +17,28 @@ app.controller('UserTKWInterviewsShowController', function ($scope, $http, $rout
   });
 
   //########################### COMMENTS #####################################
-  $http.get('/api/comments/' + $scope.interview_id + generate_url_key()).
-  success(function(data){
+  get_comments = function(){
+    $http.get('/api/comments' + generate_url_key() + '&interview_id=' + $scope.interview_id).
+    success(function(data){
+      $scope.interviews = data['body']
+    }).
+    error(function(data){
+      logged(data);
+    });
+  }
 
-  }).
-  error(function(data){
-
-  })
+  $scope.create_comment = function(){
+    console.log('bla bla bal')
+    $http.post('/api/comments/' + generate_url_key(), {comment: {body: $scope.comment_text, interview_id: $scope.interview_id}}).
+    success(function(data){
+      $scope.interviews = data['body']
+      get_comments();
+    }).
+    error(function(data){
+      logged(data);
+    });
+  }
+  get_comments();
 
   //########################## INTERVIEWS ####################################
   $http.get('/api/interviews/' + $scope.interview_id + generate_url_key()).

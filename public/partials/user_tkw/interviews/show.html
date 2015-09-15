@@ -18,27 +18,19 @@
 <div class='row'>
   <div class='col-md-12'>
     <h2>Comments:</h2>
-    <hr style="border: 1px solid #D9D9D9 ;" />
-    <h4> Ionut Muresan: </h4>
-    <span>
-      This is my first comment
-    </span>
-    <hr style="border: 1px solid #D9D9D9 ;" />
-    <h4> Pop Vasile: </h4>
-    <span>
-      bla bla bla... </br>
-      i am not agree with this comment
-    </span>
-    <hr style="border: 1px solid #D9D9D9 ;" />
-    <h4> Ionut Muresan: </h4>
-    <span>
-      hehe works :D
-    </span>
+    <div class='form-group' ng-repeat='interview in interviews'>
+      <hr style="border: 1px solid #D9D9D9 ;" />
+      <h4> {{interview.user_id}}: </h4>
+      <span>
+        {{interview.body}}
+      </span>
+    </div>
     <hr style="border: 1px solid #D9D9D9 ;" />
   </div>
   <div class='col-md-12'>
     <h3> Comment </h3>
-    <textarea rows='6' class='form-control' placeholder="Write a comment. You can write in format markdown"></textarea><br>
-    <button type='button' class='btn btn-default'> Send </button>
+    <textarea rows='6' class='form-control' ng-model='comment_text'
+    placeholder="Write a comment. You can write in format markdown"></textarea><br>
+    <button type='button' class='btn btn-default' ng-click='create_comment()'> Send </button>
   </div>
 </div>
