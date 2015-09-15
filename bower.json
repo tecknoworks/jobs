@@ -1,6 +1,5 @@
 {
   "name": "public",
-
   "version": "0.0.0",
   "homepage": "https://github.com/Catalin1995/tecknoworks-jobs",
   "authors": [
@@ -15,17 +14,20 @@
     "tests"
   ],
   "dependencies": {
-    "markdown-js": "https://github.com/evilstreak/markdown-js.git#~0.5.0",
-    "angular-file-upload": "https://github.com/nervgh/angular-file-upload.git#~2.1.1",
     "angular": "1.4.4",
-    "angular-route": "~1.4.0",
+    "angular-file-upload": "https://github.com/nervgh/angular-file-upload.git#~2.1.1",
     "angular-resource": "~1.3.0",
-    "moment": "~2.10.6",
+    "angular-route": "~1.4.0",
+    "bootstrap": "~3.3.5",
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37",
+    "jquery-ui": "https://github.com/jquery/jquery-ui.git#~1.11.4",
+    "js-cookie": "https://github.com/js-cookie/js-cookie.git",
     "jspdf": "https://github.com/MrRio/jsPDF.git#~1.1.135",
-    "js-cookie": "https://github.com/js-cookie/js-cookie.git"
+    "markdown-js": "https://github.com/evilstreak/markdown-js.git#~0.5.0",
+    "moment": "~2.10.6"
   },
-  "directory" : "public/bower_components",
-	"resolutions": {
-	  "angular": "~1.4.5"
+  "directory": "public/bower_components",
+  "resolutions": {
+    "angular": "~1.4.5"
   }
 }
