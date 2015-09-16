@@ -3,3 +3,12 @@
 .job_description {
   text-align: justify;
 }
+
+
+#preview {
+  height: 710px;
+  width: auto;
+  display: block;
+  overflow: auto;
+  placeholder: 'bla';
+}

@@ -16,15 +16,22 @@
       </div>
     </div>
     Markdown<br>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+
     <textarea id="text-input" oninput="this.editor.update()"
-    rows='35' class='form-control'>##Write the **job** here.</textarea>
+    rows='35' class='form-control' placeholder='Write the job'
+    >##Write the **job** here.</textarea>
 
     <button type="button" class="btn btn-success" ng-click='save_job()'>Save Job</button>
     <button type="button" class="btn btn-danger" ng-click='delete_job()'>Delete Job</button>
   </div>
 
   <div class='col-md-6'>
-    Preview<br>
-    <div id="markout"></div>
+    <div id='preview' class='form-control'>
+      <div id="markout"></div>
+    </div>
   </div>
 </div>
