@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   scope :api, defaults: { format: :json } do
     resources :jobclient, only: [:index, :show]
     put '/login', to: 'users#login'
+    get '/logged/:id', to: 'users#logged'
     delete '/logout/:id', to: 'users#logout'
     resources :jobs, only: [:index, :show, :create, :destroy, :update]
     resources :candidates, only: [:index, :show, :create, :destroy, :update]

@@ -1,4 +1,15 @@
 class UsersController < ApplicationController
+  def logged
+    key = Key.find(params[:id])
+    if key.present?
+      if key.consumer_key == params[:consumer_key] && key.secret_key == params[:secret_key]
+        @key = key
+      else
+        render_response('User is not logged', 400_001)
+      end
+    end
+  end
+
   def login
     user = ldap_auth(params[:user])
     if user.present?

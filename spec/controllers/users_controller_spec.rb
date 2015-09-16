@@ -56,4 +56,29 @@ RSpec.describe UsersController, type: :controller do
       expect(json[:body]).to eq('')
     end
   end
+
+  describe 'GET #logged' do
+    it 'work' do
+      key = create :key
+      get :logged, consumer_key: key.consumer_key, secret_key: key.secret_key, id: key.id, format: :json
+      expect(json['code']).to eq(200)
+      expect(json['body']['id']).to eq(key.id)
+      expect(json['body']['consumer_key']).to eq(key.consumer_key)
+      expect(json['body']['secret_key']).to eq(key.secret_key)
+    end
+
+    it 'id is incorrect' do
+      key = create :key
+      expect do
+        get :logged, consumer_key: key.consumer_key, secret_key: key.secret_key, id: -1, format: :json
+      end.to raise_error ActiveRecord::RecordNotFound
+    end
+
+    it 'key is incorrect' do
+      key = create :key
+      get :logged, consumer_key: '', secret_key: '', id: key.id, format: :json
+      expect(json[:code]).to eq(400_001)
+      expect(json[:body]).to eq('User is not logged')
+    end
+  end
 end
