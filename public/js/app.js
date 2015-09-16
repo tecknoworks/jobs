@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'ngResource']);
+var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap.datetimepicker']);
 
 var $ = function (id) { return document.getElementById(id); };
 
