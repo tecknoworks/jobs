@@ -1,4 +1,4 @@
-app.controller('UserTKWInterviewsShowController', function ($scope, $http, $routeParams) {
+app.controller('UserTKWInterviewsShowController', function ($sce, $scope, $http, $routeParams) {
 
   $scope.job_id = window.location.href.split('/')[5];
   $scope.candidate_id = window.location.href.split('/')[7];
@@ -34,10 +34,18 @@ app.controller('UserTKWInterviewsShowController', function ($scope, $http, $rout
     $http.get('/api/comments' + generate_url_key() + '&interview_id=' + $scope.interview.id).
     success(function(data){
       $scope.interviews = data['body']
+      convert_markdown_to_html($scope.interviews)
     }).
     error(function(data){
       logged(data);
     });
+  }
+
+  convert_markdown_to_html = function(interviews){
+    for(var i = 0; i<interviews.length; i++){
+      $scope.test = []
+      interviews[i].body = markdown.toHTML(interviews[i].body);
+    }
   }
 
   $scope.create_comment = function(){
