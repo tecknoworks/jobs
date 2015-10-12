@@ -4,7 +4,7 @@
   </div>
 
   <div class='col-md-6'>
-    <button type='button' class='btn btn-danger' ng-click=delete_candidate()>Delete</button>
+    <button type='button' class='btn btn-danger' ng-click=deleteCandidate()>Delete</button>
     <a type='button' href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}/edit' class='btn btn-warning'>Edit</a>
     <h3> Name: {{candidate.full_name}} </h3>
     <h3> Phone number: {{candidate.phone_number}} </h3>
@@ -41,7 +41,7 @@
 
       <div class='col-md-3'>
         <div class='form-group'>
-          <button type='button' ng-click='create_interview()' class='btn btn-success'>Create an Interview </button>
+          <button type='button' ng-click='createInterview()' class='btn btn-success'>Create an Interview </button>
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@
       </tr>
 
       <tr align='center' ng-repeat='attachment in attachments'>
-        <td><a href='{{attachment.file.file.url}}' download target="_blank">{{file_name(attachment.file.file.url)}}</a></td>
+        <td><a href='{{attachment.file.file.url}}' download target="_blank">{{fileName(attachment.file.file.url)}}</a></td>
         <td>{{attachment.user_name}}</td>
       </tr>
     </table>

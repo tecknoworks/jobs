@@ -1,12 +1,12 @@
 app.controller('UserTKWJobsEditController', function ($scope, $http, $routeParams) {
 
-  $scope.status_hash = get_job_status_hash();
+  $scope.statusHash = getJobStatusHash();
 
-  $scope.keys = Object.keys($scope.status_hash)
+  $scope.keys = Object.keys($scope.statusHash)
 
   function Editor(title, input, preview) {
     this.update = function () {
-      title.value = set_title(input);
+      title.value = setTitle(input);
 
       preview.innerHTML = markdown.toHTML(input.value);
     };
@@ -14,8 +14,8 @@ app.controller('UserTKWJobsEditController', function ($scope, $http, $routeParam
     this.update();
   }
 
-  $scope.save_job = function(){
-    $http.put('/api/jobs/' + $scope.job.id + generate_url_key(), {job: {description: $("text-input").value, status: $scope.status_hash[$scope.select]}}).
+  $scope.saveJob = function(){
+    $http.put('/api/jobs/' + $scope.job.id + generateUrlKey(), {job: {description: $("text-input").value, status: $scope.statusHash[$scope.select]}}).
     success(function(data, status, headers, config) {
     }).
     error(function(data, status, headers, config) {
@@ -23,8 +23,8 @@ app.controller('UserTKWJobsEditController', function ($scope, $http, $routeParam
     });
   }
 
-  $scope.delete_job = function(){
-    $http.delete('/api/jobs/' + $scope.job.id + generate_url_key()).
+  $scope.deleteJob = function(){
+    $http.delete('/api/jobs/' + $scope.job.id + generateUrlKey()).
     success(function(data){
       window.location.replace("/user_tkw/jobs");
     }).
@@ -33,20 +33,20 @@ app.controller('UserTKWJobsEditController', function ($scope, $http, $routeParam
     });
   };
 
-  auto_save = function (){
-    $scope.save_job();
-    setTimeout(auto_save, 3000);
+  autoSave = function (){
+    $scope.saveJob();
+    setTimeout(autoSave, 3000);
   };
 
-  $http.get('/api/jobs/' + $routeParams.id + generate_url_key()).
-  success(function(data,status,headers, config){
+  $http.get('/api/jobs/' + $routeParams.id + generateUrlKey()).
+  success(function(data, status, headers, config){
     $scope.job = data['body']
     $scope.select = $scope.keys[$scope.job.status]
     $scope.status = $scope.job.status
 
     $("text-input").value = $scope.job.description
     new Editor($("title-output"), $("text-input"), $("markout"));
-    auto_save();
+    autoSave();
   }).
   error(function(data){
     logged(data)

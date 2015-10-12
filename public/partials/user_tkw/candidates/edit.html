@@ -31,8 +31,8 @@
       </div>
 
       <form class='form-group'>
-        <button type='submit' class='btn btn-success' ng-click='save_candidate()'>Save</button>
-        <button type='button' class='btn btn-danger' ng-click=delete_candidate()>Delete</button>
+        <button type='submit' class='btn btn-success' ng-click='saveCandidate()'>Save</button>
+        <button type='button' class='btn btn-danger' ng-click=deleteCandidate()>Delete</button>
       </form>
     </form>
   </div>
@@ -55,7 +55,7 @@
       <tr align='center' ng-repeat='attachment in attachments'>
         <td>{{file_name(attachment.file.file.url)}}</td>
         <td>{{attachment.user_name}}</td>
-        <td><button type='button' class='btn btn-danger btn-sm' ng-disabled='user_id != attachment.user_id' ng-click='delete_attachment(attachment.id)'>Delete</button></td>
+        <td><button type='button' class='btn btn-danger btn-sm' ng-disabled='userId != attachment.user_id' ng-click='deleteAttachment(attachment.id)'>Delete</button></td>
       </tr>
     </table>
   </div>
@@ -72,7 +72,7 @@
       <tr align='center' ng-repeat='interview in interviews'>
         <td>{{interview.date}} at {{interview.time}}</td>
         <td>{{interview.user_name}}</td>
-        <td><button type='button' class='btn btn-danger btn-sm' ng-disabled='user_id != interview.user_id' ng-click='delete_interview(interview.id)'>Delete</button></td>
+        <td><button type='button' class='btn btn-danger btn-sm' ng-disabled='userId != interview.user_id' ng-click='deleteInterview(interview.id)'>Delete</button></td>
       </tr>
     </table>
   </div>

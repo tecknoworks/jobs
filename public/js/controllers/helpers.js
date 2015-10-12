@@ -4,11 +4,11 @@ logged = function(data){
   }
 }
 
-generate_url_key = function(){
+generateUrlKey = function(){
   return '?consumer_key=' + Cookies.get('consumer_key') + '&secret_key=' + Cookies.get('secret_key')
 }
 
-get_job_status_hash = function(){
+getJobStatusHash = function(){
   return {
     'DRAFT': 0,
     'PUBLISHED': 1,
@@ -18,12 +18,19 @@ get_job_status_hash = function(){
   };
 }
 
-set_title = function(input){
-  var title_description = input.value.split('\n')[0]
-  last = title_description.replace(/[^0-9a-z \-\_\.\,]/i, '')
-  while(last != title_description){
-    title_description = last
-    last = title_description.replace(/[^0-9a-z \-\_\.\,]/i, '');
+setTitle = function(input){
+  var titleDescription = input.value.split('\n')[0]
+  last = titleDescription.replace(/[^0-9a-z \-\_\.\,]/i, '')
+  while(last != titleDescription){
+    titleDescription = last
+    last = titleDescription.replace(/[^0-9a-z \-\_\.\,]/i, '');
   };
-  return title_description;
+  return titleDescription;
+}
+
+setCookie = function(key){
+  Cookies.set('consumer_key', key['consumer_key']);
+  Cookies.set('secret_key', key['secret_key']);
+  Cookies.set('key_id', key['id']);
+  Cookies.set('user_id', key['user_id']);
 }

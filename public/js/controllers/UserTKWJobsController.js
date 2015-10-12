@@ -9,19 +9,20 @@ app.controller('UserTKWJobsController', function ($scope, $http, $routeParams) {
     '4': 'DASHBOARD'
   };
 
-  $scope.delete_job = function(id){
-    $http.delete('/api/jobs/' + id + generate_url_key()).
+  $scope.deleteJob = function(id){
+    $http.delete('/api/jobs/' + id + generateUrlKey()).
     success(function(data){
-      get_jobs();
+      getJobs();
     }).
     error(function(data){
       logged(data);
     });
   };
 
-  get_jobs = function(){
-    $http.get('api/jobs' + generate_url_key()).
+  getJobs = function(){
+    $http.get('api/jobs' + generateUrlKey()).
     success(function(data){
+      console.log($scope.jobs)
       $scope.jobs = data['body'];
       $scope.numberOfJobs = $scope.jobs.length;
     }).
@@ -30,6 +31,6 @@ app.controller('UserTKWJobsController', function ($scope, $http, $routeParams) {
     });
   };
 
-  get_jobs()
+  getJobs()
 
 });

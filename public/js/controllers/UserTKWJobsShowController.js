@@ -1,23 +1,23 @@
 app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParams) {
-  $scope.job_id = $routeParams.id;
+  $scope.jobId = $routeParams.id;
   $scope.job = {};
   $scope.candidate = {};
 
   //############################## JOBS #####################################
-  $http.get('api/jobs/' + $scope.job_id + generate_url_key()).
+  $http.get('api/jobs/' + $scope.jobId + generateUrlKey()).
   success(function(data){
     $scope.job = data['body'];
-    get_candidates()
-    md_content = $scope.job.description
-    $scope.html_content = markdown.toHTML( md_content );
-    $("markout").innerHTML = $scope.html_content
+    getCandidates()
+    mdContent = $scope.job.description
+    $scope.htmlContent = markdown.toHTML( mdContent );
+    $("markout").innerHTML = $scope.htmlContent
   }).
   error(function(data){
     logged(data);
   });
 
-  $scope.delete_job = function(id){
-    $http.delete('/api/jobs/' + $scope.job.id + generate_url_key()).
+  $scope.deleteJob = function(id){
+    $http.delete('/api/jobs/' + $scope.job.id + generateUrlKey()).
     success(function(data){
       window.location.replace("/user_tkw/jobs");
     }).
@@ -27,8 +27,8 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   };
 
   //############################ CANDIDATES ##################################
-  get_candidates = function(){
-    $http.get('api/candidates' + generate_url_key() + '&job_id=' + $scope.job.id).
+  getCandidates = function(){
+    $http.get('api/candidates' + generateUrlKey() + '&job_id=' + $scope.job.id).
     success(function(data){
       $scope.candidates = data['body'];
     }).
@@ -37,23 +37,23 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
     });
   };
 
-  $scope.create_candidate = function(){
+  $scope.createCandidate = function(){
     $scope.candidate['job_id'] = $scope.job.id
 
-    $http.post('/api/candidates' + generate_url_key(), {candidate: $scope.candidate}).
+    $http.post('/api/candidates' + generateUrlKey(), {candidate: $scope.candidate}).
     success(function(data, status, headers, config) {
       $scope.candidate = {};
-      get_candidates();
+      getCandidates();
     }).
     error(function(data, status, headers, config) {
       logged(data)
     });
   }
 
-  $scope.delete_candidate = function(id){
-    $http.delete('/api/candidates/' + id + generate_url_key()).
+  $scope.deleteCandidate = function(id){
+    $http.delete('/api/candidates/' + id + generateUrlKey()).
     success(function(data){
-      get_candidates()
+      getCandidates()
     }).
     error(function(data){
       logged(data);

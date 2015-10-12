@@ -1,30 +1,30 @@
 app.controller('UserTKWCandidatesEditController', function ($scope, $http, $routeParams) {
 
-  $scope.job_id = window.location.href.split('/')[5]
-  $scope.candidate_id = $routeParams.id
+  $scope.jobId = window.location.href.split('/')[5]
+  $scope.candidateId = $routeParams.id
   $scope.job = {}
   $scope.jobs = []
   $scope.candidate = {}
   $scope.interviews = []
-  $scope.dictionary_jobs = {}
+  $scope.dictionaryJobs = {}
   $scope.keys = []
-  $scope.user_id = Cookies.get('user_id')
+  $scope.userId = Cookies.get('user_id')
 
   //######################## CANDIDATES ######################################
-  $http.get('api/candidates/' + $scope.candidate_id + generate_url_key()).
+  $http.get('api/candidates/' + $scope.candidateId + generateUrlKey()).
   success(function(data){
     $scope.candidate = data['body'];
-    get_job();
-    get_interviews();
-    get_attachments();
+    getJob();
+    getInterviews();
+    getAttachments();
   }).
   error(function(data, status, headers, config) {
     logged(data);
   });
 
-  $scope.save_candidate = function(){
-    $scope.candidate['job_id'] = $scope.dictionary_jobs[$scope.select]
-    $http.patch('api/candidates/' + $scope.candidate.id + generate_url_key(), {candidate: $scope.candidate}).
+  $scope.saveCandidate = function(){
+    $scope.candidate['job_id'] = $scope.dictionaryJobs[$scope.select]
+    $http.patch('api/candidates/' + $scope.candidate.id + generateUrlKey(), {candidate: $scope.candidate}).
     success(function(data, status, headers, config){
       window.location.replace("/user_tkw/jobs/" + data['body']['job_id'] + '/candidates/' + data['body']['id']);
     }).
@@ -33,10 +33,10 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     });
   };
 
-  $scope.delete_candidate = function(){
-    $http.delete('/api/candidates/' + $scope.candidate.id  + generate_url_key()).
+  $scope.deleteCandidate = function(){
+    $http.delete('/api/candidates/' + $scope.candidate.id  + generateUrlKey()).
     success(function(data){
-      window.location.replace("/user_tkw/jobs/" + $scope.job_id);
+      window.location.replace("/user_tkw/jobs/" + $scope.jobId);
     }).
     error(function(data){
       logged(data);
@@ -44,26 +44,26 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   };
 
   //######################## JOBS ############################################
-  generate_dictionary_jobs = function(){
+  generateDictionaryJobs = function(){
     for (var i = 0; i<$scope.jobs.length; i++){
-      $scope.dictionary_jobs[$scope.jobs[i]['title']] = $scope.jobs[i]['id']
+      $scope.dictionaryJobs[$scope.jobs[i]['title']] = $scope.jobs[i]['id']
     }
-    $scope.keys = Object.keys($scope.dictionary_jobs)
+    $scope.keys = Object.keys($scope.dictionaryJobs)
   }
 
-  $scope.get_jobs = function() {
-    $http.get('/api/jobs'  + generate_url_key()).
+  $scope.getJobs = function() {
+    $http.get('/api/jobs'  + generateUrlKey()).
     success(function(data){
       $scope.jobs = data['body'];
-      generate_dictionary_jobs();
+      generateDictionaryJobs();
     }).
     error(function(data, status, headers, config) {
       logged(data);
     });
   }
 
-  get_job = function(){
-    $http.get('api/jobs/' + $scope.candidate.job_id  + generate_url_key()).
+  getJob = function(){
+    $http.get('api/jobs/' + $scope.candidate.job_id  + generateUrlKey()).
     success(function(data){
       $scope.job = data['body'];
       $scope.select = $scope.job['title']
@@ -73,11 +73,11 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     });
   }
 
-  $scope.get_jobs();
+  $scope.getJobs();
 
   //######################## INTERVIEWS ######################################
-  get_interviews = function(){
-    $http.get('api/interviews' + generate_url_key() + '&candidate_id=' + $scope.candidate.id).
+  getInterviews = function(){
+    $http.get('api/interviews' + generateUrlKey() + '&candidate_id=' + $scope.candidate.id).
     success(function(data){
       $scope.interviews = data['body'];
     }).
@@ -86,10 +86,10 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     });
   }
 
-  $scope.delete_interview = function(id){
-    $http.delete('/api/interviews/' + id  + generate_url_key()).
+  $scope.deleteInterview = function(id){
+    $http.delete('/api/interviews/' + id  + generateUrlKey()).
     success(function(data){
-      get_interviews();
+      getInterviews();
     }).
     error(function(data){
       logged(data);
@@ -98,15 +98,15 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
 
 
   //######################## ATTACHMENTS #####################################
-  $scope.file_name = function(name){
+  $scope.fileName = function(name){
     if (name != null) {
       var array = name.split('/')
       return array[array.length-1]
     }
   }
 
-  get_attachments = function() {
-    $http.get('api/attachments' + generate_url_key() + '&candidate_id=' + $scope.candidate_id).
+  getAttachments = function() {
+    $http.get('api/attachments' + generateUrlKey() + '&candidate_id=' + $scope.candidateId).
     success(function(data){
       $scope.attachments = data['body'];
     }).
@@ -115,10 +115,10 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     });
   }
 
-  $scope.delete_attachment = function(id){
-    $http.delete('/api/attachments/' + id + generate_url_key()).
+  $scope.deleteAttachment = function(id){
+    $http.delete('/api/attachments/' + id + generateUrlKey()).
     success(function(data){
-      get_attachments()
+      getAttachments()
     }).
     error(function(data){
       logged(data)

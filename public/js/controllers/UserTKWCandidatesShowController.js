@@ -1,6 +1,6 @@
 app.controller('UserTKWCandidatesShowController', function ($scope, $http, $routeParams) {
-  $scope.job_id = window.location.href.split('/')[5]
-  $scope.candidate_id = $routeParams.id
+  $scope.jobId = window.location.href.split('/')[5]
+  $scope.candidateId = $routeParams.id
   $scope.job = {}
   $scope.candidate = {}
   $scope.interviews = []
@@ -8,22 +8,22 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   $scope.time = ''
 
   //########################## CANDIDATES ####################################
-  $http.get('api/candidates/' + $scope.candidate_id  + generate_url_key()).
+  $http.get('api/candidates/' + $scope.candidateId  + generateUrlKey()).
   success(function(data){
     $scope.candidate = data['body'];
-    get_job();
-    get_attachments();
-    get_interviews();
-    $scope.action = '/api/attachments' + generate_url_key() + '&candidate_id=' + $scope.candidate.id
+    getJob();
+    getAttachments();
+    getInterviews();
+    $scope.action = '/api/attachments' + generateUrlKey() + '&candidate_id=' + $scope.candidate.id
   }).
   error(function(data, status, headers, config) {
     logged(data)
   });
 
-  $scope.delete_candidate = function(){
-    $http.delete('/api/candidates/' + $scope.candidate.id  + generate_url_key()).
+  $scope.deleteCandidate = function(){
+    $http.delete('/api/candidates/' + $scope.candidate.id  + generateUrlKey()).
     success(function(data){
-      window.location.replace("/user_tkw/jobs/" + $scope.job_id);
+      window.location.replace("/user_tkw/jobs/" + $scope.jobId);
     }).
     error(function(data){
       logged(data)
@@ -31,8 +31,8 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   };
 
   //########################## JOBS ##########################################
-  get_job = function(){
-    $http.get('api/jobs/' + $scope.candidate.job_id + generate_url_key()).
+  getJob = function(){
+    $http.get('api/jobs/' + $scope.candidate.job_id + generateUrlKey()).
     success(function(data){
       $scope.job = data['body'];
     }).
@@ -42,8 +42,8 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   }
 
   //######################### INTERVIEWS #####################################
-  get_interviews = function() {
-    $http.get('api/interviews' + generate_url_key() + '&candidate_id=' + $scope.candidate.id).
+  getInterviews = function() {
+    $http.get('api/interviews' + generateUrlKey() + '&candidate_id=' + $scope.candidate.id).
     success(function(data){
       $scope.interviews = data['body'];
     }).
@@ -52,18 +52,19 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
     });
   }
 
-  generate_time_format = function(time){
+  generateTimeFormat = function(time){
     return moment(time).year() + '-' + moment(time).month() + '-' +
     moment(time).day() + ' ' + moment(time).hour() + ':' +
     moment(time).minute()
   }
 
-  $scope.create_interview = function(){
-    var time_string = generate_time_format($scope.data.date)
-    var interview_hash = {date_and_time: time_string, candidate_id: $scope.candidate.id}
-    $http.post('api/interviews'  + generate_url_key(), {interview: interview_hash}).
+  $scope.createInterview = function(){
+    var timeString = generateTimeFormat($scope.data.date)
+    var interviewHash = {date_and_time: timeString, candidate_id: $scope.candidate.id}
+    console.log(interviewHash)
+    $http.post('api/interviews'  + generateUrlKey(), {interview: interviewHash}).
     success(function(data){
-      get_interviews();
+      getInterviews();
     }).
     error(function(data, status, headers, config) {
       logged(data)
@@ -71,13 +72,13 @@ app.controller('UserTKWCandidatesShowController', function ($scope, $http, $rout
   };
 
   //######################## ATTACHMENTS ####################################
-  $scope.file_name = function(name){
+  $scope.fileName = function(name){
     var array = name.split('/')
     return array[array.length-1]
   }
 
-  get_attachments = function() {
-    $http.get('api/attachments' + generate_url_key() + '&candidate_id=' + $scope.candidate.id).
+  getAttachments = function() {
+    $http.get('api/attachments' + generateUrlKey() + '&candidate_id=' + $scope.candidate.id).
     success(function(data){
       $scope.attachments = data['body'];
     }).

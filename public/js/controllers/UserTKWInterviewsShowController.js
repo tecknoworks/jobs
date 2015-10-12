@@ -1,28 +1,28 @@
 app.controller('UserTKWInterviewsShowController', function ($sce, $scope, $http, $routeParams) {
 
-  $scope.job_id = window.location.href.split('/')[5];
-  $scope.candidate_id = window.location.href.split('/')[7];
-  $scope.interview_id = $routeParams.id;
+  $scope.jobId = window.location.href.split('/')[5];
+  $scope.candidateId = window.location.href.split('/')[7];
+  $scope.interviewId = $routeParams.id;
   $scope.candidate = {};
-  $scope.comment_text = '';
+  $scope.commentText = '';
 
   //########################## INTERVIEWS ####################################
-  $http.get('/api/interviews/' + $scope.interview_id + generate_url_key()).
+  $http.get('/api/interviews/' + $scope.interviewId + generateUrlKey()).
   success(function(data){
     $scope.interview = data['body'];
-    get_candidate();
-    get_comments();
+    getCandidate();
+    getComments();
   }).
   error(function(data){
     logged(data);
   });
 
   //########################## CANDIDATES ####################################
-  get_candidate = function(){
-    $http.get('/api/candidates/' + $scope.interview.candidate_id + generate_url_key()).
+  getCandidate = function(){
+    $http.get('/api/candidates/' + $scope.interview.candidateId + generateUrlKey()).
     success(function(data){
       $scope.candidate = data['body'];
-      get_job();
+      getJob();
     }).
     error(function(data){
       logged(data);
@@ -30,29 +30,31 @@ app.controller('UserTKWInterviewsShowController', function ($sce, $scope, $http,
   }
 
   //########################### COMMENTS #####################################
-  get_comments = function(){
-    $http.get('/api/comments' + generate_url_key() + '&interview_id=' + $scope.interview.id).
+  getComments = function(){
+    $http.get('/api/comments' + generateUrlKey() + '&interview_id=' + $scope.interview.id).
     success(function(data){
       $scope.interviews = data['body']
-      convert_markdown_to_html($scope.interviews)
+      convertMarkdownToHtml($scope.interviews)
     }).
     error(function(data){
       logged(data);
     });
   }
 
-  convert_markdown_to_html = function(interviews){
+  convertMarkdownToHtml = function(interviews){
     for(var i = 0; i<interviews.length; i++){
       $scope.test = []
       interviews[i].body = markdown.toHTML(interviews[i].body);
     }
   }
 
-  $scope.create_comment = function(){
-    $http.post('/api/comments/' + generate_url_key(), {comment: {body: $scope.comment_text, interview_id: $scope.interview.id}}).
+  $scope.createComment = function(){
+    console.log($scope.commentText)
+    console.log($scope.interview.id)
+    $http.post('/api/comments/' + generateUrlKey(), {comment: {body: $scope.commentText, interview_id: $scope.interview.id}}).
     success(function(data){
-      $scope.comment_text = '';
-      get_comments();
+      $scope.commentText = '';
+      getComments();
     }).
     error(function(data){
       logged(data);
@@ -61,8 +63,8 @@ app.controller('UserTKWInterviewsShowController', function ($sce, $scope, $http,
 
   //############################## JOB #######################################
 
-  get_job = function(){
-    $http.get('/api/jobs/' + $scope.candidate.job_id + generate_url_key()).
+  getJob = function(){
+    $http.get('/api/jobs/' + $scope.candidate.jobId + generateUrlKey()).
     success(function(data){
       $scope.job = data['body']
     }).
