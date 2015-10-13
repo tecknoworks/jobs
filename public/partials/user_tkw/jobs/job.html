@@ -1,11 +1,16 @@
 <div class="row">
   <div class='col-md-12'>
-    <a ng-href='/user_tkw/jobs'>View all jobs</a>
+    <div class='back-box'>
+      <a ng-href='/user_tkw/jobs'>
+        <span class="glyphicon glyphicon-triangle-left"></span>
+        <b>Back to all jobs</b>
+      </a>
+    </div>
     <button type='button' ng-click='deleteJob(job.id)' class='btn btn-danger'>Delete</button>
     <a type='button' ng-href='/user_tkw/jobs/{{job.id}}/edit' class='btn btn-warning'>Edit</a>
 
     <hr style="border: 1px solid #D9D9D9 ;" />
-
+    
     <div class="job_description">
       <div id="markout"> </div>
     </div>
@@ -75,12 +80,5 @@
         </td>
       </tr>
     </table>
-    <div class='back-box'>
-      <a href='https://www.google.ro'>
-        <span class="glyphicon glyphicon-triangle-left"></span>
-        Back to all jobs
-      </a>
-    </div>
-
   </div>
 </div>

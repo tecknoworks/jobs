@@ -19,7 +19,7 @@ app.controller('UserTKWJobsNewController', function ($scope, $http, $routeParams
   $scope.create = function(){
     $http.post('/api/jobs' + generateUrlKey(), {job: {description: $("text-input").value, status: $scope.statusHash[$scope.select]}}).
     success(function(data, status, headers, config) {
-      window.location.replace("/user_tkw/jobs/" + data['body']['id']);
+      window.location.href = "/user_tkw/jobs/" + data['body']['id'];
     }).
     error(function(data, status, headers, config) {
       logged(data);

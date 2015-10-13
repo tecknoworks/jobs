@@ -26,7 +26,7 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
     $scope.candidate['job_id'] = $scope.dictionaryJobs[$scope.select]
     $http.patch('api/candidates/' + $scope.candidate.id + generateUrlKey(), {candidate: $scope.candidate}).
     success(function(data, status, headers, config){
-      window.location.replace("/user_tkw/jobs/" + data['body']['job_id'] + '/candidates/' + data['body']['id']);
+      window.location.href = "/user_tkw/jobs/" + data['body']['job_id'] + '/candidates/' + data['body']['id'];
     }).
     error(function(data, status, headers, config){
       logged(data);
@@ -36,7 +36,7 @@ app.controller('UserTKWCandidatesEditController', function ($scope, $http, $rout
   $scope.deleteCandidate = function(){
     $http.delete('/api/candidates/' + $scope.candidate.id  + generateUrlKey()).
     success(function(data){
-      window.location.replace("/user_tkw/jobs/" + $scope.jobId);
+      window.location.href = "/user_tkw/jobs/" + $scope.jobId;
     }).
     error(function(data){
       logged(data);

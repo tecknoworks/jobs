@@ -19,7 +19,7 @@ app.controller('UserTKWJobsShowController', function ($scope, $http, $routeParam
   $scope.deleteJob = function(id){
     $http.delete('/api/jobs/' + $scope.job.id + generateUrlKey()).
     success(function(data){
-      window.location.replace("/user_tkw/jobs");
+      window.location.href = "/user_tkw/jobs";
     }).
     error(function(data){
       logged(data);
