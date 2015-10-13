@@ -4,7 +4,6 @@
   text-align: justify;
 }
 
-
 #preview {
   height: 710px;
   width: auto;
@@ -12,3 +11,155 @@
   overflow: auto;
   placeholder: 'bla';
 }
+
+.back-box{
+  padding: 10px 0px;
+  position: relative;
+}
+
+.back-box a{
+  color: black;
+}
+
+.back-box a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.back-box span.glyphicon-triangle-left{
+  position: relative;
+  color: #eb3062;
+  display: inline-block;
+  right: 0px;
+  -webkit-transition: all 0.5s ease-in-out;
+     -moz-transition: all 0.5s ease-in-out;
+      -ms-transition: all 0.5s ease-in-out;
+       -o-transition: all 0.5s ease-in-out;
+          transition: all 0.5s ease-in-out;
+}
+
+a:hover span.glyphicon-triangle-left{
+  right: 10px;
+}
+
+li.job{
+  padding-left: 0px;
+  padding-right: 0px;
+  position: relative;
+  border: none;
+}
+
+li .view-box{
+  color: black;
+}
+
+li .view-box a b{
+  color: black;
+}
+
+.view-box a:hover{
+  text-decoration: none;
+  color: black;
+}
+
+.view-box span.glyphicon-triangle-right{
+  position: relative;
+  color: #eb3062;
+  display: inline-block;
+  left: 0px;
+  -webkit-transition: all 0.5s ease-in-out;
+     -moz-transition: all 0.5s ease-in-out;
+      -ms-transition: all 0.5s ease-in-out;
+       -o-transition: all 0.5s ease-in-out;
+          transition: all 0.5s ease-in-out;
+}
+
+li:hover span.glyphicon-triangle-right{
+  left: 10px;
+}
+
+li .view-box span .colored{
+  color: #686868;
+}
+
+
+.btn-tkw {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  color: #fff;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  background-color: #eb3062;
+  border-color: #eb3062; }
+
+.btn-tkw:focus,
+.btn-tkw.focus {
+  color: #fff;
+  background-color: #e91950;
+  border-color: #e91950; }
+
+.btn-tkw:hover {
+  color: #fff;
+  background-color: #e91950;
+  border-color: #e91950; }
+
+.btn-tkw:active:hover,
+.btn-tkw.active:hover,
+.open > .dropdown-toggle.btn-tkw:hover,
+.btn-tkw:active:focus,
+.btn-tkw.active:focus,
+.open > .dropdown-toggle.btn-tkw:focus,
+.btn-tkw:active.focus,
+.btn-tkw.active.focus,
+.open > .dropdown-toggle.btn-tkw.focus {
+  color: #fff;
+  background-color: #d41448;
+  border-color: #d41448; }
+
+.btn-tkw:active,
+.btn-tkw.active,
+.open > .dropdown-toggle.btn-tkw {
+  background-image: none; }
+
+.btn-tkw.disabled,
+.btn-tkw[disabled],
+fieldset[disabled] .btn-tkw,
+.btn-tkw.disabled:hover,
+.btn-tkw[disabled]:hover,
+fieldset[disabled] .btn-tkw:hover,
+.btn-tkw.disabled:focus,
+.btn-tkw[disabled]:focus,
+fieldset[disabled] .btn-tkw:focus,
+.btn-tkw.disabled.focus,
+.btn-tkw[disabled].focus,
+fieldset[disabled] .btn-tkw.focus,
+.btn-tkw.disabled:active,
+.btn-tkw[disabled]:active,
+fieldset[disabled] .btn-tkw:active,
+.btn-tkw.disabled.active,
+.btn-tkw[disabled].active,
+fieldset[disabled] .btn-tkw.active {
+  background-color: #fff;
+  border-color: #ccc; }
+
+.btn-tkw .badge {
+  color: #eb3062;
+  background-color: #fff; }
+
+.btn-tkw:active .badge {
+  color: #d41448;
+  background-color: #fff; }

@@ -1,8 +1,8 @@
 <img id="imageid" ng-click='changeImage()' width="100%" height="auto"/>
+</br></br>
 
 <div class='row'>
   <div  class="col-md-12">
-    <a type='button' ng-href='user_tkw/login' class='btn btn-info pull-right'>Login</a>
     <h2><b>JOBS</b></h2>
   </div>
 </div>
@@ -10,13 +10,18 @@
 <div class="row">
   <div  class="col-md-12">
     <ul class="list-group" >
-      <li class="list-group-item ul list-jobs" ng-repeat="job in jobs" ng-click="goTo(job)">
-        <a ng-href="/jobs/{{job.id}}">
-          <b>{{job.title}}</b>
-        </a>
-        <span class='pull-right'>
-          {{posted(job.posted_at)}}
-        </span>
+      <li class="list-group-item ul list-jobs job" ng-repeat="job in jobs" ng-click="goTo(job)">
+        <div class='view-box'>
+          <a ng-href="/jobs/{{job.id}}">
+            <b> {{job.title}} </b>
+            <span class="glyphicon glyphicon-triangle-right"></span>
+          </a>
+          <span class='pull-right'>
+            <div class='colored'>
+              {{posted(job.posted_at)}}
+            </div>
+          </span>
+        </div>
       </li>
     </ul>
   </div>
