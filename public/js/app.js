@@ -3,15 +3,55 @@ var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap.datetime
 var $ = function (id) { return document.getElementById(id); };
 
 app.controller('MainController', ['$scope', '$http', function($scope, $http, $routeParams) {
-  $scope.login = function(){
-    $http.get('/api/logged/' + Cookies.get('key_id') + generateUrlKey()).
-    success(function(data){
-      window.location.href = '/user_tkw/jobs'
-    }).
-    error(function(data){
-      window.location.href = '/user_tkw/login'
+  $http.get('/api/logged/' + Cookies.get('key_id') + generateUrlKey()).
+  success(function(data){
+    createMenu(true);
+  }).
+  error(function(data){
+    createMenu(false);
+  });
+
+  createMenu = function(logged){
+    jQuery(function($){
+      var TECKNO = window.TECKNO || {};
+      TECKNO.listenerMenu = function(){
+        if (logged == true){
+          console.log(logged)
+          $('#mobile-nav').on('click', function(e){
+            $(this).toggleClass('open');
+            $("#menu, body, header, li.logged").toggleClass('open');
+            e.preventDefault();
+          });
+          $('#menu-nav a, #menu-nav-mobile a').on('click', function(){
+            $('#mobile-nav, #menu, body, header, li.logged').removeClass('open');
+          });
+        } else {
+          console.log(logged)
+          $('#mobile-nav').on('click', function(e){
+            $(this).toggleClass('open');
+            $("#menu, body, header, li.no-logged").toggleClass('open');
+            e.preventDefault();
+          });
+          $('#menu-nav a, #menu-nav-mobile a').on('click', function(){
+            $('#mobile-nav,#menu, body, header, li.no-logged').removeClass('open');
+          });
+        }
+      }
+
+      $(document).ready(function(){
+        TECKNO.listenerMenu();
+      });
     });
   }
+
+  $scope.logout = function(){
+    Cookies.remove('consumer_key');
+    Cookies.remove('secret_key');
+    Cookies.remove('user_id');
+    Cookies.remove('key_id');
+    window.location.href = '/jobs';
+  }
+
 }]);
 
 app.config(['$locationProvider', function($locationProvider) {

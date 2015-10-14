@@ -1128,7 +1128,7 @@ $(document).ready(function(){
 	*/
 
 	// TECKNO.nav();
-	TECKNO.listenerMenu();
+	// TECKNO.listenerMenu();
 	TECKNO.goSection();
 	TECKNO.goUp();
 	TECKNO.scrollToNextPage();

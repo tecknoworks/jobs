@@ -91,6 +91,25 @@ nav#menu #menu-nav {
 
 nav#menu #menu-nav li {
   list-style: none;
+  cursor: pointer;
+  display: block;
+  text-align: center; }
+
+nav#menu #menu-nav li.logged {
+  display: none;}
+
+nav#menu #menu-nav li.no-logged {
+  display: none;}
+
+nav#menu #menu-nav li.logged.open {
+  list-style: none;
+  cursor: pointer;
+  display: block;
+  text-align: center; }
+
+nav#menu #menu-nav li.no-logged.open {
+  list-style: none;
+  cursor: pointer;
   display: block;
   text-align: center; }
 

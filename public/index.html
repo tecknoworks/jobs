@@ -28,7 +28,6 @@
             <a id='mobile-nav' class='menu-nav' href='#menu-nav'>
               <i></i>
             </a>
-
             <div id="logo">
               <a id="goUp" ng-href="/" title="Tecknoworks">Tecknoworks</a>
             </div>
@@ -38,16 +37,14 @@
     </header>
     <nav id="menu">
       <ul id="menu-nav">
-        <span>Client</span>
         <li><a ng-href="/jobs">Jobs</a></li>
-        <li><a type='button' ng-click='login()'>Login</a></li>
-        <span>Employee</span>
-        <li><a ng-href='/jbos'>Jobs</a></li>
-        <li><a ng-href='/jbos'>Create job</a></li>
-        <li><a ng-href='/jbos'>Add candidate</a></li>
+        <li class='no-logged'><a ng-href='/user_tkw/login'>Login</a></li>
+        <li class='logged'><a ng-href='/user_tkw/jobs'>Edit Jobs</a></li>
+        <li class='logged'><a ng-href='/user_tkw/jobs/new'>Create job</a></li>
+        <li class='logged'><a type='button' ng-href='' ng-click='logout()'>Logout</a></li>
       </ul>
     </nav>
-   </div>
+  </div>
 
   <div class="container">
     <div ng-view>

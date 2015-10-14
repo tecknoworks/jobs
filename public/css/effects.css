@@ -5,11 +5,10 @@
 }
 
 #preview {
-  height: 710px;
+  height: 680px;
   width: auto;
   display: block;
   overflow: auto;
-  placeholder: 'bla';
 }
 
 .back-box{
@@ -38,7 +37,7 @@
           transition: all 0.5s ease-in-out;
 }
 
-a:hover span.glyphicon-triangle-left{
+.back-box a:hover span.glyphicon-triangle-left{
   right: 10px;
 }
 
