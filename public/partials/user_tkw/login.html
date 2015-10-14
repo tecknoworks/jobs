@@ -8,13 +8,23 @@
 
       <div class='form-group form-group-lg'>
         <label class="control-label">Email</label>
-        <input type="email" class="form-control" ng-model='user.email' placeholder="Email" data-error="Bruh, that email address is invalid" required/>
+        <div class="input-group input-group-lg">
+        <span class='input-group-addon'>
+          <span class='glyphicon glyphicon-user'></span>
+        </span>
+          <input type="email" class="form-control" ng-model='user.email' placeholder="Email" data-error="Bruh, that email address is invalid" required/>
+        </div>
         <div class="help-block with-errors"></div>
       </div>
 
       <div class='form-group form-group-lg'>
         <label class="control-label">Password</label>
-        <input type="password" class="form-control" ng-model='user.password' placeholder="Password" required/>
+        <div class="input-group input-group-lg">
+          <span class='input-group-addon'>
+            <span class='glyphicon glyphicon-lock'></span>
+          </span>
+          <input type="password" class="form-control" ng-model='user.password' placeholder="Password" required/>
+        </div>
       </div>
 
       <div class='form-group'>
