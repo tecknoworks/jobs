@@ -1,16 +1,5 @@
 <div class="row">
   <div class='col-md-12'>
-    <div class='back-box'>
-      <a ng-href='/user_tkw/jobs'>
-        <span class="glyphicon glyphicon-triangle-left"></span>
-        <b>Back to all jobs</b>
-      </a>
-    </div>
-    <button type='button' ng-click='deleteJob(job.id)' class='btn btn-danger'>Delete</button>
-    <a type='button' ng-href='/user_tkw/jobs/{{job.id}}/edit' class='btn btn-warning'>Edit</a>
-
-    <hr style="border: 1px solid #D9D9D9 ;" />
-    
     <div class="job_description">
       <div id="markout"> </div>
     </div>
@@ -49,7 +38,7 @@
       </div>
     </form>
   </div>
-
+  
   <div class='col-md-8'>
 
     <table class='table table-striped'>
@@ -60,7 +49,7 @@
         <td><b>Phone Number</b></td>
         <td><b>Source</b></td>
         <td><b>Interviews</b></td>
-        <td>#</td>
+        <td><b>#</b></td>
       </tr>
       <tr align='center' ng-repeat='candidate in candidates'>
         <td><a ng-href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}'>{{candidate.full_name}}</a></td>
@@ -70,15 +59,42 @@
         <td>{{candidate.number_of_interviews}}</td>
         <td>
           <div class="dropup">
-            <span class="glyphicon glyphicon-menu-up" id="dropdownMenuCandidates" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span class="glyphicon glyphicon-cog" id="dropdownMenuCandidates" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             </span>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuCandidates">
-              <li><a href="" ng-click='deleteCandidate(candidate.id)'>Delete</a></li>
-              <li><a href="/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}/edit">Edit</a></li>
+              <li><a href="" ng-click='deleteCandidate(candidate.id)'>
+                <span class='glyphicon glyphicon-trash'> Delete</span>
+              </a></li>
+              <li><a href="/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}/edit">
+                <span class='glyphicon glyphicon-wrench'> Edit</span>
+              </a></li>
             </ul>
           </div>
         </td>
       </tr>
     </table>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <hr style="border: 1px solid #D9D9D9 ;" />
+
+    <button type='button' ng-click='deleteJob(job.id)' class='btn btn-danger'>
+      <span class='glyphicon glyphicon-trash'></span>
+      Delete Job
+    </button>
+
+    <a type='button' ng-href='/user_tkw/jobs/{{job.id}}/edit' class='btn btn-warning'>
+      <span class='glyphicon glyphicon-wrench'></span>
+      Edit Job
+    </a>
+
+    <div class='back-box'>
+      <a ng-href='/user_tkw/jobs'>
+        <span class="glyphicon glyphicon-triangle-left"></span>
+        <b>Back to all jobs</b>
+      </a>
+    </div>
   </div>
 </div>

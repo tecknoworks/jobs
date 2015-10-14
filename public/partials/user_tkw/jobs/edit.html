@@ -21,10 +21,13 @@
     style="font-family:monospace;"
     id="text-input" oninput="this.editor.update()"
     rows='35' class='form-control' placeholder='Write the job'
-    >##Write the **job** here.</textarea>
-
-    <button type="button" class="btn btn-success" ng-click='saveJob()'>Save Job</button>
-    <button type="button" class="btn btn-danger" ng-click='deleteJob()'>Delete Job</button>
+    >##Write the **job** here.</textarea></br>
+    <button type="button" class="btn btn-success" ng-click='saveJob()'>
+      <span class='glyphicon glyphicon-upload'></span> Save Job
+    </button>
+    <button type="button" class="btn btn-danger" ng-click='deleteJob()'>
+      <span class='glyphicon glyphicon-trash'></span> Delete Job
+    </button>
   </div>
 
   <div class='col-md-6'>

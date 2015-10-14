@@ -1,11 +1,5 @@
 <div class='row'>
-  <div class='col-md-12'>
-    <a ng-href='/user_tkw/jobs'>View all jobs</a>
-  </div>
-
   <div class='col-md-6'>
-    <button type='button' class='btn btn-danger' ng-click=deleteCandidate()>Delete</button>
-    <a type='button' href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}/edit' class='btn btn-warning'>Edit</a>
     <h3> Name: {{candidate.full_name}} </h3>
     <h3> Phone number: {{candidate.phone_number}} </h3>
     <h3> Email: {{candidate.email}} </h3>
@@ -50,8 +44,8 @@
 
     <h3> Add an attachment </h3>
     <form id="uploadForm" enctype="multipart/form-data" action="{{action}}" method="post">
-      <input type="file" name="file" />
-      <input type="submit" value="Upload File" name="submit">
+      <input type="file" class='btn btn-default' name="file">
+      <input type="submit" class='btn btn-default' value="Upload File" name="submit">
     </form>
 
   </div>
@@ -87,5 +81,30 @@
         <td>{{interview.user_name}}</td>
       </tr>
     </table>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <hr style="border: 1px solid #D9D9D9 ;" />
+
+    <button type='button' class='btn btn-danger' ng-click=deleteCandidate()>
+      <span class='glyphicon glyphicon-trash'></span> Delete Candidate
+    </button>
+
+    <a type='button' href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}/edit' class='btn btn-warning'>
+      <span class='glyphicon glyphicon-cog'></span> Edit Candidate
+    </a>
+
+    <div class='back-box'>
+      <a ng-href='/user_tkw/jobs/{{job.id}}'>
+        <span class='glyphicon glyphicon-triangle-left'></span>
+        <b>Back to job</b>
+      </a> </br>
+      <a ng-href='/user_tkw/jobs'>
+        <span class='glyphicon glyphicon-triangle-left'></span>
+        <b>Back to all jobs</b>
+      </a>
+    </div>
   </div>
 </div>

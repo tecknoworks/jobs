@@ -19,7 +19,7 @@ app.controller('UserTKWInterviewsShowController', function ($sce, $scope, $http,
 
   //########################## CANDIDATES ####################################
   getCandidate = function(){
-    $http.get('/api/candidates/' + $scope.interview.candidateId + generateUrlKey()).
+    $http.get('/api/candidates/' + $scope.interview.candidate_id + generateUrlKey()).
     success(function(data){
       $scope.candidate = data['body'];
       getJob();
@@ -64,7 +64,7 @@ app.controller('UserTKWInterviewsShowController', function ($sce, $scope, $http,
   //############################## JOB #######################################
 
   getJob = function(){
-    $http.get('/api/jobs/' + $scope.candidate.jobId + generateUrlKey()).
+    $http.get('/api/jobs/' + $scope.candidate.job_id + generateUrlKey()).
     success(function(data){
       $scope.job = data['body']
     }).
