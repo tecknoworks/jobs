@@ -22,7 +22,6 @@ app.controller('UserTKWJobsController', function ($scope, $http, $routeParams) {
   getJobs = function(){
     $http.get('api/jobs' + generateUrlKey()).
     success(function(data){
-      console.log($scope.jobs)
       $scope.jobs = data['body'];
       $scope.numberOfJobs = $scope.jobs.length;
     }).

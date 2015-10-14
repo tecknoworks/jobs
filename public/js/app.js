@@ -16,7 +16,6 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http, $ro
       var TECKNO = window.TECKNO || {};
       TECKNO.listenerMenu = function(){
         if (logged == true){
-          console.log(logged)
           $('#mobile-nav').on('click', function(e){
             $(this).toggleClass('open');
             $("#menu, body, header, li.logged").toggleClass('open');
@@ -25,8 +24,12 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http, $ro
           $('#menu-nav a, #menu-nav-mobile a').on('click', function(){
             $('#mobile-nav, #menu, body, header, li.logged').removeClass('open');
           });
+          $(document).keydown(function(e){
+            if(e.which == 27) {
+              $('#mobile-nav, #menu, body, header, li.logged').removeClass('open');
+            }
+          });
         } else {
-          console.log(logged)
           $('#mobile-nav').on('click', function(e){
             $(this).toggleClass('open');
             $("#menu, body, header, li.no-logged").toggleClass('open');
@@ -34,6 +37,11 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http, $ro
           });
           $('#menu-nav a, #menu-nav-mobile a').on('click', function(){
             $('#mobile-nav,#menu, body, header, li.no-logged').removeClass('open');
+          });
+          $(document).keydown(function(e){
+            if(e.which == 27) {
+              $('#mobile-nav,#menu, body, header, li.no-logged').removeClass('open');
+            }
           });
         }
       }
