@@ -3,13 +3,45 @@ var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap.datetime
 var $ = function (id) { return document.getElementById(id); };
 
 app.controller('MainController', ['$scope', '$http', function($scope, $http, $routeParams) {
+  $scope.candidate = {}
+  $scope.jobs = [];
+  $scope.dictionaryJobs = {}
+
+  generateDictionaryJobs = function(){
+    for (var i = 0; i<$scope.jobs.length; i++){
+      $scope.dictionaryJobs[$scope.jobs[i]['title']] = $scope.jobs[i]['id']
+    }
+    $scope.keys = Object.keys($scope.dictionaryJobs)
+  }
+
+  $scope.addCandidate = function(){
+    $scope.candidate['job_id'] = $scope.dictionaryJobs[$scope.select]
+    $http.post('api/candidates' + generateUrlKey(), {candidate: $scope.candidate}).
+    success(function(data, status, headers, config){
+      window.location.href = "/user_tkw/jobs/" + data['body']['job_id'] + '/candidates/' + data['body']['id'];
+    }).
+    error(function(data, status, headers, config){
+    });
+  }
+
   $http.get('/api/logged/' + Cookies.get('key_id') + generateUrlKey()).
   success(function(data){
     createMenu(true);
+    get_jobs();
   }).
   error(function(data){
     createMenu(false);
   });
+
+  get_jobs = function(){
+    $http.get('/api/jobs' + generateUrlKey()).
+    success(function(data){
+      $scope.jobs = data['body']
+      generateDictionaryJobs();
+    }).
+    error(function(data){
+    });
+  }
 
   createMenu = function(logged){
     jQuery(function($){
