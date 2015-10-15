@@ -10,6 +10,7 @@ RSpec.describe Candidate, type: :model do
   it { expect(subject).to validate_presence_of :phone_number }
   it { expect(subject).to validate_presence_of :email }
   it { expect(subject).to validate_presence_of :job }
+  it { expect(subject).to validate_presence_of :source }
 
   it 'works' do
     expect(candidate).to be_valid
@@ -22,6 +23,7 @@ RSpec.describe Candidate, type: :model do
     expect(candidate.phone_number).to eq('0755555555')
     expect(candidate.email).to eq('email@example.com')
     expect(candidate.full_name).to eq('Full Name')
+    expect(candidate.source).to eq('tkw user')
   end
 
   it 'invalid email format' do

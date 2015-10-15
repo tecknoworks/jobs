@@ -9,7 +9,9 @@ gem 'ValidateEmail', '~> 1.0.1'
 
 gem 'capistrano-rvm'
 
-#gem 'whenever', require: false
+# gem 'whenever', require: false
+
+gem 'config'
 
 gem 'travis'
 

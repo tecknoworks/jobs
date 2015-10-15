@@ -2,16 +2,20 @@ app.controller('JobsController', function ($scope, $http, $location) {
 
   $scope.jobs = [];
 
-  $http.get('api/jobs').success(function(data){
+  $http.get('api/jobclient').success(function(data){
     $scope.jobs = data['body'];
     $scope.numberOfJobs = $scope.jobs.length;
   });
+
+  $scope.posted = function(time){
+    return moment(time, "YYYYMMDD").fromNow();
+  }
 
   $scope.goTo = function (job) {
     $location.url('/jobs/' + job.id);
   }
 
-  images_name = ['career-business-analyst',
+  imagesName = ['career-business-analyst',
   'career-business-domain-expert',
   'career-data-modeller',
   'career-developer',
@@ -25,23 +29,22 @@ app.controller('JobsController', function ($scope, $http, $location) {
   'career-tester',
   'career-ux-designer']
 
-  last_number = -1
+  lastNumber = -1
 
   function rec (){
-    $scope.change_image = function (){
+    $scope.changeImage = function (){
       var randomNumber = Math.floor(Math.random() * 12);
-      while (randomNumber == last_number){
+      while (randomNumber == lastNumber){
         var randomNumber = Math.floor(Math.random() * 12);
       }
-      last_number = randomNumber
-      var imgName = images_name[randomNumber] + '.jpg';
+      lastNumber = randomNumber
+      var imgName = imagesName[randomNumber] + '.jpg';
       $scope.number = imgName
       document.getElementById("imageid").src = '/img/' + imgName ;
     }
-    $scope.change_image()
+    $scope.changeImage()
     setTimeout(rec, 5000);
   }
-
   rec()
 
 });

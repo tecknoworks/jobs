@@ -1,0 +1,110 @@
+<div class='row'>
+  <div class='col-md-6'>
+    <h3> Name: {{candidate.full_name}} </h3>
+    <h3> Phone number: {{candidate.phone_number}} </h3>
+    <h3> Email: {{candidate.email}} </h3>
+    <h3> Job:<a ng-href='/user_tkw/jobs/{{job.id}}'> {{job.title}}</a></h3>
+    <h3> Source: {{candidate.source}} </h3>
+  </div>
+
+  <div class='col-md-6'>
+
+    <h3> Create an interview </h3>
+    <div class='row'>
+      <div class='col-md-12'>
+        Set date and time
+      </div>
+      <div class='col-md-8'>
+        <div class="dropdown">
+          <div class="input-append">
+            <div class="input-group">
+              <input type="text" class="form-control" data-ng-model="data.date">
+              <span class="input-group-addon">
+                <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <datetimepicker data-ng-model="data.date"
+                  data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select', startView:'year'}"></datetimepicker>
+                </ul>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-3'>
+        <div class='form-group'>
+          <button type='button' ng-click='createInterview()' class='btn btn-success'>Create an Interview </button>
+        </div>
+      </div>
+    </div>
+
+    <hr style="border: 1px solid #D9D9D9 ;" />
+
+    <h3> Add an attachment </h3>
+    <form id="uploadForm" enctype="multipart/form-data" action="{{action}}" method="post">
+      <input type="file" class='btn btn-default' name="file">
+      <input type="submit" class='btn btn-default' value="Upload File" name="submit">
+    </form>
+
+  </div>
+</div>
+
+<hr style="border: 1px solid #D9D9D9 ;" />
+
+<div class='row'>
+  <div class='col-md-6'>
+    <table class='table table-striped'>
+      <caption> List with attachments </caption>
+      <tr align='center'>
+        <td><b>Attachment</b></td>
+        <td><b>Added</b></td>
+      </tr>
+
+      <tr align='center' ng-repeat='attachment in attachments'>
+        <td><a href='{{attachment.file.file.url}}' download target="_blank">{{fileName(attachment.file.file.url)}}</a></td>
+        <td>{{attachment.user_name}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class = 'col-md-6'>
+    <table class='table table-striped'>
+      <caption> List with interviews </caption>
+      <tr align='center'>
+        <td><b>Date & Time</b></td>
+        <td><b>Created By</b></td>
+      </tr>
+      <tr align='center' ng-repeat='interview in interviews'>
+        <td> <a ng-href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}/interview/{{interview.id}}'>{{interview.date}} at {{interview.time}} </a> </td>
+        <td>{{interview.user_name}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <hr style="border: 1px solid #D9D9D9 ;" />
+
+    <button type='button' class='btn btn-danger' ng-click=deleteCandidate()>
+      <span class='glyphicon glyphicon-trash'></span> Delete Candidate
+    </button>
+
+    <a type='button' href='/user_tkw/jobs/{{job.id}}/candidates/{{candidate.id}}/edit' class='btn btn-warning'>
+      <span class='glyphicon glyphicon-cog'></span> Edit Candidate
+    </a>
+
+    <div class='back-box'>
+      <a ng-href='/user_tkw/jobs/{{job.id}}'>
+        <span class='glyphicon glyphicon-triangle-left'></span>
+        <b>Back to job</b>
+      </a> </br>
+      <a ng-href='/user_tkw/jobs'>
+        <span class='glyphicon glyphicon-triangle-left'></span>
+        <b>Back to all jobs</b>
+      </a>
+    </div>
+  </div>
+</div>

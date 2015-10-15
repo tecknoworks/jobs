@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
 
     render json: body, status: code
   end
+
+  def logged(params)
+    Key.where(consumer_key: params[:consumer_key], secret_key: params[:secret_key]) != []
+  end
 end

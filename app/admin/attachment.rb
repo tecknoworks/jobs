@@ -3,7 +3,7 @@ ActiveAdmin.register Attachment do
 
   form do |f|
     f.inputs 'Admin Details' do
-      f.input :user_id, :as => :select, :collection => User.all.map{|u| ["#{u.email}", u.id]}
+      f.input :user_id, as: :select, collection: User.all.map { |u| ["#{u.email}", u.id] }
       f.input :candidate
       f.input :file,  as: :file
     end
